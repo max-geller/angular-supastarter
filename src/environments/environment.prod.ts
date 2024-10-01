@@ -1,5 +1,7 @@
 export const environment = {
-    production: true,
-    staging: false,
-    development: false
-  };
+  name: 'production',
+  production: true,
+  staging: false,
+  development: false,
+  showDevFooter: false,
+};
