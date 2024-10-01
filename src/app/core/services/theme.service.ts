@@ -15,20 +15,9 @@ export class ThemeService {
   private currentTheme = new BehaviorSubject<'light' | 'dark'>('light');
 
   constructor() {
-    this.initSystemThemeDetection();
     this.authService.signOut$.subscribe(() => {
       this.resetToDefaultTheme();
     });
-  }
-
-  private initSystemThemeDetection() {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    this.setSystemTheme(mediaQuery.matches);
-    mediaQuery.addListener((e) => this.setSystemTheme(e.matches));
-  }
-
-  private setSystemTheme(isDark: boolean) {
-    this.systemTheme.next(isDark ? 'dark' : 'light');
   }
 
   async initializeTheme() {
