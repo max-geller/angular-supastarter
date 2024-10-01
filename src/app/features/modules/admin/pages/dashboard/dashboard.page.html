@@ -1,10 +1,8 @@
 <div class="grid-container">
-  <div style="display: flex; justify-content: space-between; gap: 1rem">
-    <button mat-flat-button>Production Site</button>
+  <div style="display: flex;  gap: 1rem">
+    <button mat-flat-button (click)="openProduction()" >Production Site</button>
     <button mat-flat-button (click)="openStaging()">Staging Site</button>
-    <button mat-flat-button>Repository</button>
-    <button mat-flat-button>Permission Management</button>
-    <button mat-flat-button>Settings</button>
+    <button mat-flat-button (click)="openRepository()">Repository</button>
     <button mat-flat-button>Integrations</button>
     <button mat-flat-button>Templates</button>
     <button mat-flat-button>Reports</button>

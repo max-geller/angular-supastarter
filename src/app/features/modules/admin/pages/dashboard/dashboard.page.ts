@@ -38,4 +38,12 @@ export class DashboardPage implements OnInit {
   openStaging(): void {
     window.open('https://angular-18-staging.netlify.app/', '_blank');
   }
+
+  openProduction(): void {
+    window.open('https://angular-18.netlify.app/', '_blank');
+  }
+
+  openRepository(): void {
+    window.open('https://github.com/max-geller/angular-18-starter', '_blank');
+  }
 }

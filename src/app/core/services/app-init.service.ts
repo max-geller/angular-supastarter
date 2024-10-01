@@ -8,15 +8,11 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class AppInitService {
-  isDevMode: boolean;
-  isStaging: boolean;
   private supabaseService = inject(SupabaseService);
   private authService = inject(AuthService);
   private themeService = inject(ThemeService);
 
-  constructor(@Inject('ENVIRONMENT') private env: any) {
-    this.isDevMode = !env.production;
-    this.isStaging = env.staging;
+  constructor( ) {
   }
 
   async initializeApp(): Promise<void> {
@@ -34,7 +30,5 @@ export class AppInitService {
 
     // Obtain Basic User Information
 
-    // Log Environment
-    console.log('Environment:', environment);
   }
 }
