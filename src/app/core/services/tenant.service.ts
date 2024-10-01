@@ -11,7 +11,7 @@ import { TenantInterface } from '../models/tenant.model';
 @Injectable({
   providedIn: 'root',
 })
-export class TenantsService {
+export class TenantService {
   constructor(private supabase: SupabaseService) {}
 
   getAllTenants(): Observable<TenantInterface[]> {
@@ -52,6 +52,29 @@ export class TenantsService {
       }),
       catchError((error) => {
         console.error('Error creating tenant:', error);
+        throw error;
+      })
+    );
+  }
+
+  updateTenant(tenant: Partial<TenantInterface>): Observable<TenantInterface> {
+    return from(
+      this.supabase
+        .getClient()
+        .from('tenants')
+        .update(tenant)
+        .eq('id', tenant.id)
+        .select()
+        .single()
+    ).pipe(
+      map((response) => {
+        if (response.error) {
+          throw new Error(response.error.message);
+        }
+        return response.data as TenantInterface;
+      }),
+      catchError((error) => {
+        console.error('Error updating tenant:', error);
         throw error;
       })
     );

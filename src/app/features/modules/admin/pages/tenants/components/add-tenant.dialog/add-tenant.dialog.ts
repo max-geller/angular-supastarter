@@ -1,25 +1,23 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
-  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
   MatDialogTitle,
-  MatDialogRef
+  MatDialogRef,
+  MatDialogModule,
 } from '@angular/material/dialog';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Import Angular Material Components
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatButtonModule } from '@angular/material/button';
 // Import Services
-import { TenantsService } from '../../../../../../../core/services/tenants.service';
+import { TenantService } from '../../../../../../../core/services/tenant.service';
 
 // Import Models
 import { TenantInterface } from '../../../../../../../core/models/tenant.model';
@@ -27,15 +25,17 @@ import { TenantInterface } from '../../../../../../../core/models/tenant.model';
 @Component({
   standalone: true,
   imports: [
-    MatButton,
+    CommonModule,
     MatDialogActions,
     MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
+    MatDialogModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatButtonModule,
   ],
   templateUrl: './add-tenant.dialog.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,7 +44,7 @@ export class AddTenantDialogDialog {
   addTenantForm: FormGroup;
 
   constructor(
-    private tenantsService: TenantsService,
+    private tenantService: TenantService,
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddTenantDialogDialog>
   ) {
@@ -61,14 +61,18 @@ export class AddTenantDialogDialog {
         logo_url: this.addTenantForm.get('logo_url')?.value,
       };
 
-      this.tenantsService.createTenant(newTenant).subscribe({
+      this.tenantService.createTenant(newTenant).subscribe({
         next: (createdTenant) => {
           this.dialogRef.close(true);
         },
         error: (error) => {
           console.error('Error creating tenant:', error);
-        }
+        },
       });
     }
+  }
+
+  onCancel() {
+    this.dialogRef.close(false);
   }
 }

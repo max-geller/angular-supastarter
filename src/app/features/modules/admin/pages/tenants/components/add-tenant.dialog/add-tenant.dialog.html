@@ -1,7 +1,5 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Add New Tenant</mat-card-title>
-  </mat-card-header>
+<mat-dialog-content>
+  <mat-card-title>Add Tenant</mat-card-title>
   <form [formGroup]="addTenantForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Tenant Name</mat-label>
@@ -14,7 +12,18 @@
       <mat-label>Logo URL</mat-label>
       <input matInput formControlName="logo_url" />
     </mat-form-field>
-
-    <button mat-flat-button color="primary" type="submit" [disabled]="addTenantForm.invalid">Add Tenant</button>
+    <mat-dialog-actions>
+      <button mat-flat-button color="warn" type="button" (click)="onCancel()">
+        Cancel
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="addTenantForm.invalid"
+      >
+        Add Tenant
+      </button>
+    </mat-dialog-actions>
   </form>
-</mat-card>
+</mat-dialog-content>

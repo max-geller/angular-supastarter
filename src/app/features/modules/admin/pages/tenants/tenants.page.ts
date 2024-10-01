@@ -17,7 +17,6 @@ import {
 // Import Components
 import { TenantsTableComponent } from './components/tenants.table/tenants.table';
 import { AddTenantDialogDialog } from './components/add-tenant.dialog/add-tenant.dialog';
-import { TenantsService } from '../../../../../core/services/tenants.service';
 
 @Component({
   standalone: true,
@@ -34,7 +33,6 @@ export class TenantsPage implements OnInit {
   @ViewChild(TenantsTableComponent) tenantsTable!: TenantsTableComponent;
 
   private dialog = inject(MatDialog);
-  constructor(private tenantsService: TenantsService) {}
 
   ngOnInit(): void {}
 
