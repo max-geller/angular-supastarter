@@ -25,7 +25,7 @@ import { TenantInterface } from '../../../../../../../core/models/tenant.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TenantsTableComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'created_at', 'is_active'];
+  displayedColumns: string[] = ['id', 'logo_url', 'name', 'created_at',  'is_active'];
   dataSource = new MatTableDataSource<TenantInterface>([]);
 
   constructor(
