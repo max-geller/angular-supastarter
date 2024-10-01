@@ -34,4 +34,26 @@ export class TenantsService {
       })
     );
   }
+  // Create New Tenant from Admin Dashboard
+  createTenant(tenant: Partial<TenantInterface>): Observable<TenantInterface> {
+    return from(
+      this.supabase
+        .getClient()
+        .from('tenants')
+        .insert(tenant)
+        .select()
+        .single()
+    ).pipe(
+      map((response) => {
+        if (response.error) {
+          throw new Error(response.error.message);
+        }
+        return response.data as TenantInterface;
+      }),
+      catchError((error) => {
+        console.error('Error creating tenant:', error);
+        throw error;
+      })
+    );
+  }
 }

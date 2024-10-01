@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Add New Tenant</mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="addTenantForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Tenant Name</mat-label>
+      <input matInput formControlName="name" required />
+      <mat-error *ngIf="addTenantForm.get('name')?.hasError('required')">
+        Tenant name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Logo URL</mat-label>
+      <input matInput formControlName="logo_url" />
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" type="submit" [disabled]="addTenantForm.invalid">Add Tenant</button>
+  </form>
+</mat-card>

@@ -25,7 +25,13 @@ import { TenantInterface } from '../../../../../../../core/models/tenant.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TenantsTableComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'logo_url', 'name', 'created_at',  'is_active'];
+  displayedColumns: string[] = [
+    'id',
+    'logo_url',
+    'name',
+    'created_at',
+    'is_active',
+  ];
   dataSource = new MatTableDataSource<TenantInterface>([]);
 
   constructor(
@@ -34,10 +40,10 @@ export class TenantsTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadRoles();
+    this.loadTenants();
   }
 
-  loadRoles() {
+  loadTenants() {
     this.tenantService.getAllTenants().subscribe({
       next: (roles) => {
         console.log('Tenants received:', roles);
@@ -48,5 +54,9 @@ export class TenantsTableComponent implements OnInit {
         console.error('Error fetching tenants:', error);
       },
     });
+  }
+
+  refreshTenants() {
+    this.loadTenants();
   }
 }
