@@ -6,9 +6,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { TenantService } from '../../../../../../../core/services/tenant.service';
+
+// Import Services
 import { ToastService } from '../../../../../../../core/services/toast.service';
+import { AdminService } from '../../../../../../../core/services/admin.service';
+
+// Import Models
 import { TenantInterface } from '../../../../../../../core/models/tenant.model';
+
 
 @Component({
   selector: 'app-edit-tenant-dialog',
@@ -31,7 +36,7 @@ export class EditTenantDialog {
     private dialogRef: MatDialogRef<EditTenantDialog>,
     @Inject(MAT_DIALOG_DATA) public data: TenantInterface,
     private fb: FormBuilder,
-    private tenantService: TenantService,
+    private adminService: AdminService,
     private toastService: ToastService
   ) {
     this.editTenantForm = this.fb.group({
@@ -48,7 +53,7 @@ export class EditTenantDialog {
         id: this.data.id
       };
 
-      this.tenantService.updateTenant(updatedTenant).subscribe({
+      this.adminService.updateTenant(updatedTenant).subscribe({
         next: () => {
           this.toastService.showToast('Tenant Details Updated');
           this.dialogRef.close(true);

@@ -16,9 +16,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+
 // Import Services
-import { TenantService } from '../../../../../../../core/services/tenant.service';
 import { ToastService } from '../../../../../../../core/services/toast.service';
+import { AdminService } from '../../../../../../../core/services/admin.service';
 
 // Import Models
 import { TenantInterface } from '../../../../../../../core/models/tenant.model';
@@ -45,10 +46,10 @@ export class AddTenantDialogDialog {
   addTenantForm: FormGroup;
 
   constructor(
-    private tenantService: TenantService,
+    private adminSerivce: AdminService,
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<AddTenantDialogDialog>,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {
     this.addTenantForm = this.fb.group({
       name: ['', Validators.required],
@@ -63,7 +64,7 @@ export class AddTenantDialogDialog {
         logo_url: this.addTenantForm.get('logo_url')?.value,
       };
 
-      this.tenantService.createTenant(newTenant).subscribe({
+      this.adminSerivce.createTenant(newTenant).subscribe({
         next: (createdTenant) => {
           this.toastService.showToast('Tenant Created Successfully');
           this.dialogRef.close(true);

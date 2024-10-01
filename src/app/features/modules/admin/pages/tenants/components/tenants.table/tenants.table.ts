@@ -14,9 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 
 // Import Services
-import { TenantService } from '../../../../../../../core/services/tenant.service';
 import { ConfirmDeleteService } from '../../../../../../../core/services/confirm-delete.service';
 import { ToastService } from '../../../../../../../core/services/toast.service';
+import { AdminService } from '../../../../../../../core/services/admin.service';
 
 // Import Models
 import { TenantInterface } from '../../../../../../../core/models/tenant.model';
@@ -25,7 +25,13 @@ import { EditTenantDialog } from '../edit-tenant/edit-tenant.dialog';
 @Component({
   selector: 'admin-tenants-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule,
+  ],
   templateUrl: './tenants.table.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,7 +48,7 @@ export class TenantsTableComponent implements OnInit {
   dataSource = new MatTableDataSource<TenantInterface>([]);
 
   constructor(
-    private tenantService: TenantService,
+    private adminService: AdminService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
     private confirmDeleteService: ConfirmDeleteService,
@@ -54,7 +60,7 @@ export class TenantsTableComponent implements OnInit {
   }
 
   loadTenants() {
-    this.tenantService.getAllTenants().subscribe({
+    this.adminService.getAllTenants().subscribe({
       next: (tenants) => {
         console.log('Tenants received:', tenants);
         this.dataSource.data = tenants;
@@ -73,10 +79,10 @@ export class TenantsTableComponent implements OnInit {
   editTenant(tenant: TenantInterface) {
     const dialogRef = this.dialog.open(EditTenantDialog, {
       width: '400px',
-      data: tenant
+      data: tenant,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.refreshTenants();
       }
@@ -88,14 +94,16 @@ export class TenantsTableComponent implements OnInit {
       .openAdvancedConfirmDialog(tenant.name, 'tenant')
       .subscribe((confirmed) => {
         if (confirmed) {
-          this.tenantService.deleteTenant(tenant.id).subscribe({
+          this.adminService.deleteTenant(tenant.id).subscribe({
             next: () => {
               this.toastService.showToast('Tenant deleted successfully');
               this.refreshTenants();
             },
             error: (error) => {
               console.error('Error deleting tenant:', error);
-              this.toastService.showToast('Error deleting tenant. Please try again.');
+              this.toastService.showToast(
+                'Error deleting tenant. Please try again.'
+              );
             },
           });
         }

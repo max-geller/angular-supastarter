@@ -8,11 +8,7 @@ import {
 
 // Import Angular Material Components
 import { MatButtonModule } from '@angular/material/button';
-import {
-  MatDialogModule,
-  MatDialogRef,
-  MatDialog,
-} from '@angular/material/dialog';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 
 // Import Components
 import { TenantsTableComponent } from './components/tenants.table/tenants.table';
@@ -23,7 +19,6 @@ import { AddTenantDialogDialog } from './components/add-tenant/add-tenant.dialog
   imports: [
     TenantsTableComponent,
     MatButtonModule,
-    AddTenantDialogDialog,
     MatDialogModule,
   ],
   templateUrl: './tenants.page.html',
@@ -41,7 +36,7 @@ export class TenantsPage implements OnInit {
       width: '400px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.refreshTenants();
       }

@@ -11,6 +11,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 
+// Import Services
+import { UserService } from '../../../../../core/services/user.service';
+
 @Component({
   standalone: true,
   imports: [
@@ -28,8 +31,11 @@ import { MatSortModule } from '@angular/material/sort';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardPage implements OnInit {
+  constructor(private userService: UserService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.logCurrentUser();
+   }
 
   openInNewTab(url: string): void {
     window.open(url, '_blank');
@@ -45,5 +51,11 @@ export class DashboardPage implements OnInit {
 
   openRepository(): void {
     window.open('https://github.com/max-geller/angular-18-starter', '_blank');
+  }
+
+  logCurrentUser(): void {
+    this.userService.getUserProfile().subscribe((user) => {
+      console.log(user);
+    });
   }
 }
