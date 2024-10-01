@@ -16,7 +16,7 @@ import {
 
 // Import Components
 import { TenantsTableComponent } from './components/tenants.table/tenants.table';
-import { AddTenantDialogDialog } from './components/add-tenant.dialog/add-tenant.dialog';
+import { AddTenantDialogDialog } from './components/add-tenant/add-tenant.dialog';
 
 @Component({
   standalone: true,

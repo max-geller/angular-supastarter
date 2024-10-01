@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 // Import Services
 import { TenantService } from '../../../../../../../core/services/tenant.service';
+import { ToastService } from '../../../../../../../core/services/toast.service';
 
 // Import Models
 import { TenantInterface } from '../../../../../../../core/models/tenant.model';
@@ -46,7 +47,8 @@ export class AddTenantDialogDialog {
   constructor(
     private tenantService: TenantService,
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<AddTenantDialogDialog>
+    private dialogRef: MatDialogRef<AddTenantDialogDialog>,
+    private toastService: ToastService
   ) {
     this.addTenantForm = this.fb.group({
       name: ['', Validators.required],
@@ -63,10 +65,12 @@ export class AddTenantDialogDialog {
 
       this.tenantService.createTenant(newTenant).subscribe({
         next: (createdTenant) => {
+          this.toastService.showToast('Tenant Created Successfully');
           this.dialogRef.close(true);
         },
         error: (error) => {
           console.error('Error creating tenant:', error);
+          this.toastService.showToast('Error creating tenant. Please try again.');
         },
       });
     }

@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { TenantService } from '../../../../../../../core/services/tenant.service';
+import { ToastService } from '../../../../../../../core/services/toast.service';
 import { TenantInterface } from '../../../../../../../core/models/tenant.model';
 
 @Component({
@@ -28,7 +29,8 @@ export class EditTenantDialog {
     private dialogRef: MatDialogRef<EditTenantDialog>,
     @Inject(MAT_DIALOG_DATA) public data: TenantInterface,
     private fb: FormBuilder,
-    private tenantService: TenantService
+    private tenantService: TenantService,
+    private toastService: ToastService
   ) {
     this.editTenantForm = this.fb.group({
       name: [data.name, Validators.required],
@@ -46,10 +48,12 @@ export class EditTenantDialog {
 
       this.tenantService.updateTenant(updatedTenant).subscribe({
         next: () => {
+          this.toastService.showToast('Tenant Details Updated');
           this.dialogRef.close(true);
         },
         error: (error) => {
           console.error('Error updating tenant:', error);
+          this.toastService.showToast('Error updating tenant. Please try again.');
         }
       });
     }
