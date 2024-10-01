@@ -79,4 +79,24 @@ export class TenantService {
       })
     );
   }
+
+  deleteTenant(id: string): Observable<void> {
+    return from(
+      this.supabase
+        .getClient()
+        .from('tenants')
+        .delete()
+        .eq('id', id)
+    ).pipe(
+      map((response) => {
+        if (response.error) {
+          throw new Error(response.error.message);
+        }
+      }),
+      catchError((error) => {
+        console.error('Error deleting tenant:', error);
+        throw error;
+      })
+    );
+  }
 }

@@ -11,12 +11,15 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+
 // Import Services
 import { TenantService } from '../../../../../../../core/services/tenant.service';
+import { ConfirmDeleteService } from '../../../../../../../core/services/confirm-delete.service';
+import { ToastService } from '../../../../../../../core/services/toast.service';
 
 // Import Models
 import { TenantInterface } from '../../../../../../../core/models/tenant.model';
-import { MatDialog } from '@angular/material/dialog';
 import { EditTenantDialog } from '../edit-tenant/edit-tenant.dialog';
 
 @Component({
@@ -34,13 +37,16 @@ export class TenantsTableComponent implements OnInit {
     'created_at',
     'is_active',
     'edit',
+    'delete',
   ];
   dataSource = new MatTableDataSource<TenantInterface>([]);
 
   constructor(
     private tenantService: TenantService,
     private cdr: ChangeDetectorRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private confirmDeleteService: ConfirmDeleteService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -75,5 +81,24 @@ export class TenantsTableComponent implements OnInit {
         this.refreshTenants();
       }
     });
+  }
+
+  deleteTenant(tenant: TenantInterface) {
+    this.confirmDeleteService
+      .openAdvancedConfirmDialog(tenant.name, 'tenant')
+      .subscribe((confirmed) => {
+        if (confirmed) {
+          this.tenantService.deleteTenant(tenant.id).subscribe({
+            next: () => {
+              this.toastService.showToast('Tenant deleted successfully');
+              this.refreshTenants();
+            },
+            error: (error) => {
+              console.error('Error deleting tenant:', error);
+              this.toastService.showToast('Error deleting tenant. Please try again.');
+            },
+          });
+        }
+      });
   }
 }
