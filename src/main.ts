@@ -8,6 +8,7 @@ import { APP_INITIALIZER } from '@angular/core';
 // Import Services
 import { AppInitService } from './app/core/services/app-init.service';
 
+
 // Import Third-Party Libraries
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 

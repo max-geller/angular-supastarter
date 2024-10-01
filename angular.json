@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "project-mesa": {
+    "angular-starter": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@ngx-env/builder:application",
           "options": {
-            "outputPath": "dist/project-mesa",
+            "outputPath": "dist/angular-starter",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -64,10 +64,10 @@
           "builder": "@ngx-env/builder:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "project-mesa:build:production"
+              "buildTarget": "angular-starter:build:production"
             },
             "development": {
-              "buildTarget": "project-mesa:build:development"
+              "buildTarget": "angular-starter:build:development"
             }
           },
           "defaultConfiguration": "development"

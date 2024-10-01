@@ -18,6 +18,15 @@ This application is configured for hosting on Netlify.
 The production build is deployed to the following URL: [https://.netlify.app/](https://.netlify.app/).
 A staging build is deployed to the following URL: [https://dev.-.netlify.app/](https://dev.-.netlify.app/).
 
+Be sure to set the correct environment variables for your production and staging environments in Netlify.
+
+Use the following commands to deploy the application to Netlify:
+
+```bash
+   'build command': npm run build
+    'publish directory': 'dist/angular-starter/browser
+```
+
 ## Database
 
 This project uses a Postgres SQL database hosted on Supabase.
