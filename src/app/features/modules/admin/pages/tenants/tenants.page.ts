@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
 
+// Import Components
+import { TenantsTableComponent } from './components/tenants.table/tenants.table';
+
 @Component({
   standalone: true,
-  imports: [],
+  imports: [TenantsTableComponent],
   templateUrl: './tenants.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -54,6 +54,10 @@ export const mainMenu = [
         route: '/features/admin/dashboard',
       },
       {
+        name: 'Tenants',
+        route: '/features/admin/tenants',
+      },
+      {
         name: 'Users',
         route: '/features/admin/users',
       },
