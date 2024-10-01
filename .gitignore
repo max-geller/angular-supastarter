@@ -7,7 +7,6 @@
 /bazel-out
 
 # Environment Variables
-/src/environments/
 /.env
 
 # Node

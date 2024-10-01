@@ -18,7 +18,7 @@ This application is configured for hosting on Netlify.
 The production build is deployed to the following URL: [https://.netlify.app/](https://.netlify.app/).
 A staging build is deployed to the following URL: [Staging](https://angular-18-staging.netlify.app/).
 
-Be sure to set the correct environment variables for your production and staging environments in Netlify.
+Be sure to set the correct environment variables for production and staging environments in Netlify.
 
 Use the following commands to deploy the application to Netlify:
 
