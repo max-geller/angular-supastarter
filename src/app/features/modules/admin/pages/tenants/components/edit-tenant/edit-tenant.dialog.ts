@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 import { TenantService } from '../../../../../../../core/services/tenant.service';
 import { ToastService } from '../../../../../../../core/services/toast.service';
 import { TenantInterface } from '../../../../../../../core/models/tenant.model';
@@ -18,7 +19,8 @@ import { TenantInterface } from '../../../../../../../core/models/tenant.model';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   templateUrl: './edit-tenant.dialog.html',
 })

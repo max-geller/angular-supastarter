@@ -36,11 +36,12 @@ export class TenantService {
   }
   // Create New Tenant from Admin Dashboard
   createTenant(tenant: Partial<TenantInterface>): Observable<TenantInterface> {
+    const newTenant = { ...tenant, is_active: true };
     return from(
       this.supabase
         .getClient()
         .from('tenants')
-        .insert(tenant)
+        .insert(newTenant)
         .select()
         .single()
     ).pipe(

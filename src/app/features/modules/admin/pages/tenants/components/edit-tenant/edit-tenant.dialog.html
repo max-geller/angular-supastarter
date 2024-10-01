@@ -12,7 +12,13 @@
       <mat-label>Logo URL</mat-label>
       <input matInput formControlName="logo_url" />
     </mat-form-field>
-    <mat-checkbox formControlName="is_active">Is Active</mat-checkbox>
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="is_active">
+        <mat-option [value]="true">Active</mat-option>
+        <mat-option [value]="false">Inactive</mat-option>
+      </mat-select>
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
