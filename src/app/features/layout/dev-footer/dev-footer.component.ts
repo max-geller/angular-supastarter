@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AsyncPipe } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthService } from '../../../core/services/auth.service';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment.staging';
 
 @Component({
   selector: 'app-dev-footer',
