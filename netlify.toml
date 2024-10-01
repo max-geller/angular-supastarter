@@ -5,7 +5,7 @@
 
 [build]
   command = "npm run build:staging"
-  publish = "dist/angular-starter"
+  publish = "dist/angular-starter/browser"
 
 [context.production]
   command = "npm run build"
