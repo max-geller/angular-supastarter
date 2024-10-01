@@ -1,4 +1,4 @@
-<mat-toolbar *ngIf="isDevMode" class="dev-footer" style="display: flex; flex-direction: row">
+<mat-toolbar *ngIf="isDevMode || isStaging" class="dev-footer" style="display: flex; flex-direction: row">
   <div class="network-info"></div>
-  <div class="environment-info">{{isDevMode ? 'Staging' : 'Production'}}</div>
+  <div class="environment-info">{{isStaging ? 'Staging' : 'Development'}}</div>
 </mat-toolbar>

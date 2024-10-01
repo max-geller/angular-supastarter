@@ -3,3 +3,11 @@
   to = "/index.html"
   status = 200
 
+[build.environment]
+  NODE_VERSION = "18"  # or whichever version you're using
+
+[context.production.environment]
+  ANGULAR_ENV = "production"
+
+[context.staging.environment]
+  ANGULAR_ENV = "staging"
