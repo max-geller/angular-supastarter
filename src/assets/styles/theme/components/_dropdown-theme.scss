@@ -1,0 +1,43 @@
+@use "@angular/material" as mat;
+
+@mixin color($theme) {
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+  // If Theme is Dark:
+  @if mat.get-theme-type($theme) == dark {
+    .mdc-list-item__primary-text {
+      color: white !important;
+    }
+
+    .mat-mdc-select-panel {
+      background-color: #131313 !important;
+    }
+
+    .mdc-list-item {
+      background-color: inherit !important;
+      &:hover {
+        background-color: mat.get-theme-color($theme, primary, 10) !important;
+      }
+    }
+  } @else {
+    // If Theme is Light:
+    .mdc-list-item__primary-text {
+      color: rgb(32, 32, 32) !important;
+    }
+
+    .mat-mdc-select-panel {
+      background-color: #ffffff !important;
+    }
+
+    .mdc-list-item {
+      background-color: inherit !important;
+      &:hover {
+        background-color: mat.get-theme-color($theme, primary, 80) !important;
+      }
+    }
+  }
+}

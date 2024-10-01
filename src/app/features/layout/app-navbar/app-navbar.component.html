@@ -1,0 +1,104 @@
+<mat-toolbar class="feature-navbar">
+  <div class="left-container">
+    <button mat-icon-button (click)="toggleSidenav.emit()">
+      <mat-icon fontIcon="menu"></mat-icon>
+    </button>
+    <mat-form-field
+      class="module-selector"
+      style="margin-bottom: -20px"
+      appearance="outline"
+    >
+      <mat-label>MODULE</mat-label>
+      <mat-select [value]="currentModuleName$ | async">
+        <mat-option
+          *ngFor="let module of mainMenu"
+          [value]="module.name"
+          (click)="navigateTo(module.route)"
+          >{{ module.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <span class="spacer"></span>
+  <div class="right-container">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="notificationsMenu"
+      style="align-items: end; padding-top: 6px; height: 30px; width: 30px"
+    >
+      <mat-icon fontIcon="notifications" style="font-size: 18px"></mat-icon>
+      <div class="notifications-badge"></div>
+    </button>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <ng-container>
+          <button mat-button [matMenuTriggerFor]="profileMenu">
+            <div
+              class="user-menu-button"
+              style="display: flex; align-items: center"
+            >
+              <mat-icon fontIcon="arrow_drop_down"></mat-icon>
+            </div>
+          </button>
+        </ng-container>
+        <ng-template #pleaseLogin>
+          <button mat-stroked-button>Login</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+
+<!--User Menu-->
+<mat-menu #profileMenu="matMenu" xPosition="before">
+  <button
+    mat-menu-item
+    *ngFor="let menu of userMenu"
+    (click)="navigateTo(menu.route)"
+  >
+    {{ menu.name }}
+  </button>
+  <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>
+
+<!--Notifications Menu-->
+<mat-menu #notificationsMenu="matMenu" xPosition="before">
+  <button mat-menu-item>
+    <div
+      class="notification-item"
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      "
+    >
+      <div class="notification-left">
+        <mat-icon fontIcon="info"></mat-icon>
+      </div>
+      <div class="notification-middle" style="width: 250px">
+        <div class="notification-title"></div>
+        <div
+          class="notification-date"
+          style="font-size: 12px; font-weight: 400"
+        >
+  
+        </div>
+        <div
+          class="notification-right"
+          style="font-size: 10px; font-weight: 400"
+        >
+
+        </div>
+      </div>
+    </div>
+  </button>
+  <mat-divider></mat-divider>
+
+  <button mat-button (click)="navigateTo('/features/account/notifications')">
+    View All
+  </button>
+  <button mat-button>Clear</button>
+</mat-menu>

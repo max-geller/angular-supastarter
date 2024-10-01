@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Setting 1"
+        formControlName="setting1"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Setting 2"
+        formControlName="setting2"
+      />
+    </mat-form-field>
+    <button mat-stroked-button  (click)="saveForm()">
+      Save
+    </button>
+
+    <button mat-stroked-button  (click)="navigateAway()">Try to Nav Away</button>
+  </form>

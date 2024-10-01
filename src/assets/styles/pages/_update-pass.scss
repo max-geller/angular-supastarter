@@ -1,0 +1,28 @@
+.update-pass-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.update-pass-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+button[type="submit"] {
+  min-width: 150px;
+}

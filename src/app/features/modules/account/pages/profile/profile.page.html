@@ -1,0 +1,42 @@
+<div style="display: flex; gap: 1rem">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>User Profile</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" name="search-items" />
+      </mat-form-field>
+      <div style="display: flex; flex-direction: row; gap: 1rem">
+        <mat-form-field appearance="outline">
+          <mat-label>Fist Name</mat-label>
+          <input matInput type="text" name="search-items" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" name="search-items" />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>User Avatar</mat-card-title>
+    </mat-card-header>
+    <mat-card-content style="display: flex; gap: 1rem">
+      <div
+        style="
+          height: 120px;
+          width: 120px;
+          border-radius: 50%;
+          background-color: grey;
+        "
+      ></div>
+      <div style="display: flex; gap: 1rem">
+        <button mat-flat-button>Upload Image</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

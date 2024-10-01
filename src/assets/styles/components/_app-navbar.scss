@@ -1,0 +1,58 @@
+:host {
+  display: block;
+}
+
+.feature-navbar {
+  height: 3.2rem;
+  align-items: end;
+  padding-bottom: 0.35rem;
+}
+
+.toolbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.left-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  .module-button {
+    display: flex;
+    min-width: 200px;
+    border-radius: 0%;
+    font-size: 1.4rem;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.right-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+.user-menu-button {
+  font-weight: 450;
+}
+
+.notifications-badge {
+  background-color: #ff3300;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 1px;
+  z-index: 1000;
+}

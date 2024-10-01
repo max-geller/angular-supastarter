@@ -1,0 +1,165 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+// Import Theme-Specific Files
+@use "./theme/app.theme" as app-theme;
+@use "./theme/components/app-sidenav-theme" as sidenav-theme;
+@use "./theme/components/app-module-menu-theme" as module-menu-theme;
+@use "./theme/components/dropdown-theme" as dropdown-theme;
+@use "./theme/components/card-theme" as card-theme;
+
+// Import Style Files
+@use "./layouts/layouts.scss";
+@use "./pages/pages.scss";
+@use "./components/components.scss";
+
+@include mat.core();
+
+// Configuring Custom Theme Palettes
+$_palettes: (
+  tertiary: (
+    0: #000000,
+    10: #1a1a1a,
+    20: #333333,
+    25: #404040,
+    30: #4c4c4c,
+    35: #595959,
+    40: #666666,
+    50: #808080,
+    60: #999999,
+    70: #b3b3b3,
+    80: #cccccc,
+    90: #e6e6e6,
+    95: #ececec,
+    98: #f3f3f3,
+    99: #f9f9f9,
+    100: #ffffff,
+  ),
+  neutral: (
+    0: #000000,
+    4: #0a0c00,
+    6: #101200,
+    10: #1a1e00,
+    12: #1e2200,
+    17: #282d00,
+    20: #2e3300,
+    22: #323800,
+    24: #373d00,
+    25: #393f00,
+    30: #444b00,
+    35: #4f5700,
+    40: #5a6400,
+    50: #727e00,
+    60: #8b9900,
+    70: #a4b410,
+    80: #c0d033,
+    87: #d4e447,
+    90: #dced4f,
+    92: #e2f354,
+    94: #e7f959,
+    95: #eafc5c,
+    96: #effd7b,
+    98: #f8ffb8,
+    99: #fdffd9,
+    100: #ffffff,
+  ),
+  neutral-variant: (
+    0: #000000,
+    10: #2b1610,
+    20: #422b24,
+    25: #4e352e,
+    30: #5b4039,
+    35: #684c44,
+    40: #755850,
+    50: #8f7067,
+    60: #ab8980,
+    70: #c7a39a,
+    80: #e4beb4,
+    90: #ffdbd1,
+    95: #ffede8,
+    98: #fff8f6,
+    99: #fffbff,
+    100: #ffffff,
+  ),
+  error: (
+    0: #000000,
+    10: #410002,
+    20: #690005,
+    25: #7e0007,
+    30: #93000a,
+    35: #a80710,
+    40: #ba1a1a,
+    50: #de3730,
+    60: #ff5449,
+    70: #ff897d,
+    80: #ffb4ab,
+    90: #ffdad6,
+    95: #ffedea,
+    98: #fff8f7,
+    99: #fffbff,
+    100: #ffffff,
+  ),
+);
+
+$_rest: (
+  secondary: map.get($_palettes, secondary),
+  neutral: map.get($_palettes, neutral),
+  neutral-variant: map.get($_palettes, neutral-variant),
+  error: map.get($_palettes, error),
+);
+
+$_tertiary: map.merge(map.get($_palettes, tertiary), $_rest);
+
+// Light Theme
+$light-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: $_tertiary,
+    ),
+    typography: (
+      brand-family: "Roboto, sans-serif",
+    ),
+    density: (
+      scale: -5,
+    ),
+  )
+);
+
+// Dark Theme:
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$azure-palette,
+      tertiary: $_tertiary,
+    ),
+    typography: (
+      brand-family: "Roboto, sans-serif",
+    ),
+    density: (
+      scale: -5,
+    ),
+  )
+);
+
+html {
+  @include mat.all-component-themes($light-theme);
+  @include app-theme.theme($light-theme);
+  @include sidenav-theme.theme($light-theme);
+  @include module-menu-theme.theme($light-theme);
+  @include dropdown-theme.theme($light-theme);
+  @include card-theme.theme($light-theme);
+  background: mat.get-theme-color($light-theme, surface);
+
+  &.dark {
+    @include mat.all-component-colors($dark-theme);
+    @include app-theme.theme($dark-theme);
+    @include sidenav-theme.theme($dark-theme);
+    @include module-menu-theme.theme($dark-theme);
+    @include dropdown-theme.theme($dark-theme);
+    @include card-theme.theme($dark-theme);
+    background: mat.get-theme-color($dark-theme, surface);
+  }
+}

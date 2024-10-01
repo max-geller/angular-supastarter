@@ -1,0 +1,40 @@
+@use "@angular/material" as mat;
+
+@mixin color($theme) {
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+  // If Theme is Dark:
+  @if mat.get-theme-type($theme) == dark {
+    .mat-mdc-card {
+      background-color: mat.get-theme-color($theme, tertiary, 10) !important;
+      border-color: mat.get-theme-color($theme, tertiary, 10) !important;
+      box-shadow: 0px
+        0px
+        4px
+        mat.get-theme-color($theme, tertiary, 20) !important;
+      &:hover {
+        border-width: 1px !important;
+        margin: -1px !important;
+      }
+    }
+  } @else {
+    // If Theme is Light:
+
+    .mat-mdc-card {
+      background-color: mat.get-theme-color($theme, tertiary, 100) !important;
+      border-color: mat.get-theme-color($theme, tertiary, 90) !important;
+      box-shadow: 0px
+        0px
+        2px
+        mat.get-theme-color($theme, tertiary, 90) !important;
+      &:hover {
+        border-width: 1px !important;
+        margin: -1px !important;
+      }
+    }
+  }
+}
