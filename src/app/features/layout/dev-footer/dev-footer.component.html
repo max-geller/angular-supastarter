@@ -1,9 +1,9 @@
-<!--Replace once fixed
-<mat-toolbar *ngIf="isDevMode || isStaging" class="dev-footer" style="display: flex; flex-direction: row">
--->
+
 <mat-toolbar class="dev-footer" style="display: flex; flex-direction: row">
   <div class="network-info"></div>
-  <div class="environment-info">MODE:
-    {{ isStaging ? "Staging" : "Development" }}
+  show
+  <div class="environment-info">
+    DEV MODE:
+    {{ isDevMode }}
   </div>
 </mat-toolbar>

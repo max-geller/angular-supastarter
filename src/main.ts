@@ -6,8 +6,10 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { APP_INITIALIZER } from '@angular/core';
 import { environment } from './environments/environment';
 
+
 // Import Services
 import { AppInitService } from './app/core/services/app-init.service';
+
 
 // Import Third-Party Libraries
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
@@ -38,4 +40,4 @@ bootstrapApplication(AppComponent, {
       useValue: environment
     }
   ],
-}).catch((err) => console.error(err));
+});
