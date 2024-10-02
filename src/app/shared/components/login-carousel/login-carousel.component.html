@@ -1,11 +1,9 @@
 <div class="carousel-container">
   <div class="carousel-content" [@carouselAnimation]="currentIndex">
-    <img
-      *ngFor="let image of images; let i = index"
-      [src]="image.url"
-      [alt]="image.alt"
-      [class.active]="i === currentIndex"
-    />
+    <img *ngFor="let image of images; let i = index"
+         [src]="image.url"
+         [alt]="image.alt"
+         [class.active]="i === currentIndex">
   </div>
   <button mat-icon-button class="carousel-nav prev" (click)="prev()">
     <mat-icon>chevron_left</mat-icon>

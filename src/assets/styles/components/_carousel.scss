@@ -3,12 +3,11 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
 
   .carousel-content {
     width: 100%;
     height: 100%;
+    position: relative;
   }
 
   img {
@@ -19,7 +18,7 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.3s ease-out;
 
     &.active {
       opacity: 1;

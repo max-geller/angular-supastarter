@@ -12,14 +12,10 @@ import { interval, Subscription } from 'rxjs';
   imports: [CommonModule, MatButtonModule, MatIconModule],
   animations: [
     trigger('carouselAnimation', [
-      transition(':increment', [
-        style({ opacity: 0 }),
-        animate('300ms ease-out', style({ opacity: 1 }))
-      ]),
-      transition(':decrement', [
-        style({ opacity: 0 }),
-        animate('300ms ease-out', style({ opacity: 1 }))
-      ])
+      state('active', style({ opacity: 1 })),
+      state('inactive', style({ opacity: 0 })),
+      transition('inactive => active', animate('300ms ease-in')),
+      transition('active => inactive', animate('300ms ease-out'))
     ])
   ],
 })
