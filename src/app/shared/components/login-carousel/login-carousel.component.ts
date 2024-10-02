@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { interval, Subscription } from 'rxjs';
+import { SlideContent, slides } from './slide-content/slide-content.component';
 
 @Component({
   selector: 'login-carousel',
@@ -19,25 +20,8 @@ import { interval, Subscription } from 'rxjs';
     ])
   ],
 })
-export class LoginCarouselComponent implements OnInit, OnDestroy {
-  images = [
-    {
-      url: 'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/1.jpg?t=2024-10-02T21%3A16%3A30.717Z',
-      alt: 'Image 1',
-    },
-    {
-      url: 'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/2.jpg?t=2024-10-02T21%3A16%3A39.267Z',
-      alt: 'Image 2',
-    },
-    {
-      url: 'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/3.jpg?t=2024-10-02T21%3A16%3A45.949Z',
-      alt: 'Image 3',
-    },
-    {
-      url: 'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/4.jpg?t=2024-10-02T21%3A16%3A58.932Z',
-      alt: 'Image 4',
-    },
-  ];
+export class LoginCarouselComponent implements OnInit, OnDestroy, AfterViewInit {
+  slides: SlideContent[] = slides;
 
   currentIndex = 0;
   private timerSubscription: Subscription | undefined;
@@ -46,6 +30,7 @@ export class LoginCarouselComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('ngOnInit called');
+    console.log('Slides:', this.slides);
     this.startTimer();
   }
 
@@ -55,38 +40,43 @@ export class LoginCarouselComponent implements OnInit, OnDestroy {
   }
 
   startTimer() {
-    console.log('startTimer called');
     this.timerSubscription = interval(10000).subscribe(() => {
-      console.log('Timer tick');
       this.next();
     });
   }
 
   stopTimer() {
-    console.log('stopTimer called');
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
     }
   }
 
   next() {
-    console.log('next called, current index:', this.currentIndex);
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-    console.log('new index:', this.currentIndex);
+    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
     this.cdr.detectChanges();
   }
 
   prev() {
-    console.log('prev called, current index:', this.currentIndex);
     this.currentIndex =
-      (this.currentIndex - 1 + this.images.length) % this.images.length;
-    console.log('new index:', this.currentIndex);
+      (this.currentIndex - 1 + this.slides.length) % this.slides.length;
     this.cdr.detectChanges();
   }
 
   goToSlide(index: number) {
-    console.log('goToSlide called with index:', index);
     this.currentIndex = index;
     this.cdr.detectChanges();
+  }
+
+  onImageError(event: ErrorEvent, type: 'background' | 'header') {
+    console.error(`Failed to load ${type} image:`, (event.target as HTMLImageElement).src);
+  }
+
+  ngAfterViewInit() {
+    this.slides.forEach((slide, index) => {
+      const img = new Image();
+      img.onload = () => console.log(`Slide ${index + 1} background image loaded successfully`);
+      img.onerror = () => console.error(`Failed to load slide ${index + 1} background image`);
+      img.src = slide.backgroundImage;
+    });
   }
 }

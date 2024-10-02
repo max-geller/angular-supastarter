@@ -1,9 +1,13 @@
 <div class="carousel-container">
   <div class="carousel-content" [@carouselAnimation]="currentIndex">
-    <img *ngFor="let image of images; let i = index"
-         [src]="image.url"
-         [alt]="image.alt"
-         [class.active]="i === currentIndex">
+    <div *ngFor="let slide of slides; let i = index" class="slide" [class.active]="i === currentIndex">
+      <div class="background-image" [style.background-image]="'url(' + slide.backgroundImage + ')'"></div>
+      <div class="slide-overlay" [ngClass]="slide.alignment">
+        <img [src]="slide.headerImage" alt="Header Image" class="header-image" (error)="onImageError($event, 'header')">
+        <h2>{{ slide.title }}</h2>
+        <p>{{ slide.description }}</p>
+      </div>
+    </div>
   </div>
   <button mat-icon-button class="carousel-nav prev" (click)="prev()">
     <mat-icon>chevron_left</mat-icon>
@@ -14,7 +18,7 @@
   <div class="carousel-dots">
     <button
       mat-mini-fab
-      *ngFor="let image of images; let i = index"
+      *ngFor="let slide of slides; let i = index"
       [class.active]="i === currentIndex"
       (click)="goToSlide(i)"
     ></button>
