@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, type OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, type OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,6 +14,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../../../core/services/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
 
+// Import Components
+import { LoginCarouselComponent } from '../../../shared/components/login-carousel/login-carousel.component';
+
 @Component({
   standalone: true,
   imports: [
@@ -24,6 +27,7 @@ import { ToastService } from '../../../core/services/toast.service';
     MatButtonModule,
     MatProgressSpinnerModule,
     CommonModule,
+    LoginCarouselComponent,
   ],
   templateUrl: './login.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,6 +35,7 @@ import { ToastService } from '../../../core/services/toast.service';
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -56,7 +61,6 @@ export class LoginPage implements OnInit {
         await this.auth.signIn(email, password);
         this.router.navigate(['/features/dashboard']);
       } catch (error) {
-        console.error('Login error:', error);
         this.isLoading = false;
         this.loginForm.get('password')?.reset(); // Reset password field
         this.cdr.detectChanges(); // Trigger change detection
@@ -65,6 +69,7 @@ export class LoginPage implements OnInit {
         } else {
           this.toastService.showToast('An unexpected error occurred. Please try again.', 5000);
         }
+        this.passwordInput.nativeElement.focus();
       }
     }
   }
