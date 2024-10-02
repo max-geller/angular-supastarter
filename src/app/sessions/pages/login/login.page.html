@@ -3,10 +3,10 @@
     <login-carousel class="full-size"></login-carousel>
   </div>
   <div class="right-container">
+
     <div class="login-form">
-      <mat-card-header>
-        <mat-card-title>Login to Your Account</mat-card-title>
-      </mat-card-header>
+      <h1>Angular 18 Starter</h1>
+      <h2 class="login-title">Login to Your Account</h2>
       <mat-card-content>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="outline">
@@ -59,7 +59,7 @@
                 type="button"
                 routerLink="/sessions/forgot-password"
               >
-                Forgot Password?
+                Request Access
               </button>
             </div>
           </div>
