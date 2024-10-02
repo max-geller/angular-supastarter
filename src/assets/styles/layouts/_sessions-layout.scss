@@ -1,14 +1,19 @@
 .sessions-container {
   display: flex;
   height: 100vh;
+  flex-direction: row;
+
+  @media (max-width: 750px) {
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+  }
 
   .left-container {
     flex: 1;
     display: flex;
-    background-color: #242424;
+    background-color: #242424; // default background color
     height: 100%;
-    width: calc(100% - 450px);
-    overflow: hidden;
 
     @media (max-width: 750px) {
       display: none;
@@ -16,8 +21,6 @@
   }
 
   .right-container {
-    border-style: solid;
-    border-color: red;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,6 +31,7 @@
 
     @media (max-width: 750px) {
       width: 100%;
+      flex: 1;
     }
   }
 
@@ -36,10 +40,20 @@
     height: 100%;
   }
 
-  .sessions-page-title {
-    text-align: center;
+  mat-form-field {
+    width: 100%;
     margin-bottom: 1rem;
-    font-size: 2rem;
-    font-weight: 500;
+  }
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  button[type="submit"] {
+    min-width: 120px;
+    width: 100%;
   }
 }

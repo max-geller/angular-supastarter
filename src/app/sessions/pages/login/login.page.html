@@ -1,62 +1,63 @@
-<div class="login-form">
-  <h1>Angular 18 Starter</h1>
-  <h2 class="login-title">Login to Your Account</h2>
-  <mat-card-content>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" required />
-        <mat-error *ngIf="loginForm.get('email')?.hasError('required')"
-          >Email is required</mat-error
-        >
-        <mat-error *ngIf="loginForm.get('email')?.hasError('email')"
-          >Please enter a valid email address</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          formControlName="password"
-          type="password"
-          required
-          #passwordInput
-        />
-        <mat-error *ngIf="loginForm.get('password')?.hasError('required')"
-          >Password is required</mat-error
-        >
-        <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')"
-          >Password must be at least 6 characters long</mat-error
-        >
-      </mat-form-field>
-      <div class="button-container">
-        <button
-          mat-flat-button
-          type="submit"
-          [disabled]="loginForm.invalid || isLoading"
-        >
-          <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
-          <span *ngIf="!isLoading">Login</span>
-        </button>
+<div class="sessions-page-container">
+  <div class="sessions-form">
+    <h2 class="sessions-page-title">Login to Your Account</h2>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" required />
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')"
+            >Email is required</mat-error
+          >
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')"
+            >Please enter a valid email address</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            type="password"
+            required
+            #passwordInput
+          />
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')"
+            >Password is required</mat-error
+          >
+          <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')"
+            >Password must be at least 6 characters long</mat-error
+          >
+        </mat-form-field>
+        <div class="button-container">
+          <button
+            mat-flat-button
+            type="submit"
+            [disabled]="loginForm.invalid || isLoading"
+          >
+            <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+            <span *ngIf="!isLoading">Login</span>
+          </button>
 
-        <div>
-          <button
-            mat-button
-            type="button"
-            routerLink="/sessions/forgot-password"
-          >
-            Forgot Password?
-          </button>
-          |
-          <button
-            mat-button
-            type="button"
-            routerLink="/sessions/forgot-password"
-          >
-            Request Access
-          </button>
+          <div style="display: flex; flex-direction: row; gap: 12px;">
+            <button
+              mat-button
+              type="button"
+              routerLink="/sessions/forgot-password"
+            >
+              Forgot Password?
+            </button>
+            |
+            <button
+              mat-button
+              type="button"
+              routerLink="/sessions/forgot-password"
+            >
+              Request Access
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
-  </mat-card-content>
+      </form>
+    </mat-card-content>
+  </div>
 </div>

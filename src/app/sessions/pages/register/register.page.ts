@@ -1,10 +1,20 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+
+// Import Angular Material Components
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+
+// Import Services
 import { UserService } from '../../../core/services/user.service';
 import { AuthService } from '../../../core/services/auth.service';
 
@@ -15,7 +25,8 @@ import { AuthService } from '../../../core/services/auth.service';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
   ],
   templateUrl: './register.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,12 +42,15 @@ export class RegisterPage implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {
-    this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
-    }, { validator: this.passwordMatchValidator });
+    this.registerForm = this.fb.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+      },
+      { validator: this.passwordMatchValidator }
+    );
   }
 
   ngOnInit() {
@@ -54,29 +68,35 @@ export class RegisterPage implements OnInit {
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password');
     const confirmPassword = form.get('confirmPassword');
-    return password && confirmPassword && password.value === confirmPassword.value
-      ? null : { mismatch: true };
+    return password &&
+      confirmPassword &&
+      password.value === confirmPassword.value
+      ? null
+      : { mismatch: true };
   }
 
   async onSubmit() {
     if (this.registerForm.valid && this.currentUserId) {
-      const { password, confirmPassword, firstName, lastName } = this.registerForm.value;
+      const { password, confirmPassword, firstName, lastName } =
+        this.registerForm.value;
       const userData = {
         first_name: firstName,
-        last_name: lastName
+        last_name: lastName,
       };
-      this.userService.registerUser(this.currentUserId, userData, password).subscribe({
-        next: async (user) => {
-          console.log('User registered successfully', user);
-          await this.authService.signOut();
-          console.log('User Logged Out');
-          this.router.navigate(['/sessions/login']);
-        },
-        error: (error) => {
-          console.error('Error registering user:', error);
-          // Handle error (show message to user, etc.)
-        }
-      });
+      this.userService
+        .registerUser(this.currentUserId, userData, password)
+        .subscribe({
+          next: async (user) => {
+            console.log('User registered successfully', user);
+            await this.authService.signOut();
+            console.log('User Logged Out');
+            this.router.navigate(['/sessions/login']);
+          },
+          error: (error) => {
+            console.error('Error registering user:', error);
+            // Handle error (show message to user, etc.)
+          },
+        });
     } else {
       console.error('Form is invalid or user ID is missing');
       // Handle error (show message to user, etc.)
