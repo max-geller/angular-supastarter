@@ -57,8 +57,7 @@ export class LoginCarouselComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   prev() {
-    this.currentIndex =
-      (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+    this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
     this.cdr.detectChanges();
   }
 
