@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, type OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -36,7 +36,8 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private cdr: ChangeDetectorRef
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -49,19 +50,20 @@ export class LoginPage implements OnInit {
   async onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
+      this.cdr.detectChanges(); // Trigger change detection
       const { email, password } = this.loginForm.value;
       try {
         await this.auth.signIn(email, password);
         this.router.navigate(['/features/dashboard']);
       } catch (error) {
         console.error('Login error:', error);
+        this.isLoading = false;
+        this.cdr.detectChanges(); // Trigger change detection
         if (error instanceof Error) {
           this.toastService.showToast(error.message, 5000);
         } else {
           this.toastService.showToast('An unexpected error occurred. Please try again.', 5000);
         }
-      } finally {
-        this.isLoading = false;
       }
     }
   }
