@@ -20,7 +20,11 @@ export class UserService {
 
   getUserProfile(): Observable<UserInterface> {
     return from(
-      this.supabaseService.getClient().from('users').select('*').single()
+      this.supabaseService.getClient()
+        .from('users')
+        .select('*')
+        .eq('id', this.authService.getCurrentUser().user?.id)
+        .single()
     ).pipe(
       map(({ data, error }) => {
         if (error) throw error;
