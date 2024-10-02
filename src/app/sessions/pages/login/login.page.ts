@@ -9,10 +9,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 // Import Services
 import { AuthService } from '../../../core/services/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   standalone: true,
@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private toastService: ToastService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -45,7 +45,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit(): void {}
-// TODO: New User's Dont Need Correct Password. Reset session after submitting form?
 
   async onSubmit() {
     if (this.loginForm.valid) {
@@ -56,9 +55,11 @@ export class LoginPage implements OnInit {
         this.router.navigate(['/features/dashboard']);
       } catch (error) {
         console.error('Login error:', error);
-        this.snackBar.open('Login failed. Please check your credentials and try again.', 'Close', {
-          duration: 5000,
-        });
+        if (error instanceof Error) {
+          this.toastService.showToast(error.message, 5000);
+        } else {
+          this.toastService.showToast('An unexpected error occurred. Please try again.', 5000);
+        }
       } finally {
         this.isLoading = false;
       }

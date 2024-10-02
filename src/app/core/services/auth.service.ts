@@ -67,6 +67,10 @@ export class AuthService {
         });
 
       if (error) {
+        if (error.message === 'Invalid login credentials') {
+          throw new Error('Incorrect email or password');
+        }
+        throw error;
       }
 
       return data;
