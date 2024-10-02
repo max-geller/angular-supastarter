@@ -29,13 +29,10 @@ export class LoginCarouselComponent implements OnInit, OnDestroy, AfterViewInit 
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    console.log('ngOnInit called');
-    console.log('Slides:', this.slides);
     this.startTimer();
   }
 
   ngOnDestroy() {
-    console.log('ngOnDestroy called');
     this.stopTimer();
   }
 
@@ -73,8 +70,6 @@ export class LoginCarouselComponent implements OnInit, OnDestroy, AfterViewInit 
   ngAfterViewInit() {
     this.slides.forEach((slide, index) => {
       const img = new Image();
-      img.onload = () => console.log(`Slide ${index + 1} background image loaded successfully`);
-      img.onerror = () => console.error(`Failed to load slide ${index + 1} background image`);
       img.src = slide.backgroundImage;
     });
   }

@@ -38,7 +38,7 @@
       top: 0;
       left: 0;
       position: absolute;
-      width: 95%;
+      width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -54,6 +54,7 @@
       &.left {
         align-items: flex-start;
         text-align: left;
+        width: 100%;
       }
 
       &.right {
@@ -160,3 +161,10 @@
     }
   }
 }
+
+.slide-container {
+  max-width: 80% !important;
+  height: 100%;
+  position: relative;
+}
+
