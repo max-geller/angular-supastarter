@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, switchMap } from 'rxjs';
+import { Observable, from, switchMap, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 
@@ -173,12 +173,21 @@ export class AdminService {
         }
         if (response.data && response.data.user && response.data.user.id) {
           const userId = response.data.user.id;
+          console.log('User ID:', userId);
+          console.log('Email:', email);
+          console.log('Tenant ID:', tenantId);
           return from(
             this.supabase.getClient()
               .from('users')
-              .insert({ id: userId, email: email, tenant_id: tenantId })
+              .upsert({ id: userId, email: email, tenant_id: tenantId }, { onConflict: 'id' })
           ).pipe(
-            map(() => userId)
+            map((upsertResponse) => {
+              if (upsertResponse.error) {
+                console.error('Error upserting user data:', upsertResponse.error);
+                throw new Error(upsertResponse.error.message);
+              }
+              return userId;
+            })
           );
         } else {
           throw new Error('User ID not found in the response');
