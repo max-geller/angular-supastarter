@@ -18,14 +18,6 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Phone</mat-label>
-      <input matInput formControlName="phone" required>
-      <mat-error *ngIf="registerForm.get('phone')?.hasError('required')">
-        Phone number is required
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
       <mat-label>Password</mat-label>
       <input matInput type="password" formControlName="password" required>
       <mat-error *ngIf="registerForm.get('password')?.hasError('required')">

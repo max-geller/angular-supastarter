@@ -34,7 +34,6 @@ export class RegisterPage implements OnInit {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      phone: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     }, { validator: this.passwordMatchValidator });
@@ -62,7 +61,7 @@ export class RegisterPage implements OnInit {
   onSubmit() {
     if (this.registerForm.valid && this.currentUserId) {
       const { password, confirmPassword, ...userData } = this.registerForm.value;
-      this.userService.registerUser(userData, password).subscribe({
+      this.userService.registerUser(this.currentUserId, userData, password).subscribe({
         next: (user) => {
           console.log('User registered successfully', user);
           this.router.navigate(['/dashboard']);
@@ -72,6 +71,9 @@ export class RegisterPage implements OnInit {
           // Handle error (show message to user, etc.)
         }
       });
+    } else {
+      console.error('Form is invalid or user ID is missing');
+      // Handle error (show message to user, etc.)
     }
   }
 }
