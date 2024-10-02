@@ -58,6 +58,7 @@ export class LoginPage implements OnInit {
       } catch (error) {
         console.error('Login error:', error);
         this.isLoading = false;
+        this.loginForm.get('password')?.reset(); // Reset password field
         this.cdr.detectChanges(); // Trigger change detection
         if (error instanceof Error) {
           this.toastService.showToast(error.message, 5000);
