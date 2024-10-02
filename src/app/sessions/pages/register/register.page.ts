@@ -4,6 +4,8 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   standalone: true,
@@ -20,7 +22,11 @@ import { MatButtonModule } from '@angular/material/button';
 export class RegisterPage {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -39,8 +45,17 @@ export class RegisterPage {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log('Form submitted', this.registerForm.value);
-      // We'll implement the backend logic later
+      const { password, confirmPassword, ...userData } = this.registerForm.value;
+      this.userService.registerUser(userData, password).subscribe({
+        next: (user) => {
+          console.log('User registered successfully', user);
+          this.router.navigate(['/dashboard']); // or wherever you want to redirect after registration
+        },
+        error: (error) => {
+          console.error('Error registering user:', error);
+          // Handle error (show message to user, etc.)
+        }
+      });
     }
   }
 }

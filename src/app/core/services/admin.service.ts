@@ -164,10 +164,11 @@ export class AdminService {
   inviteUser(email: string, tenantId: string): Observable<string> {
     const redirectTo = `/sessions/register`;
     return from(
-      this.supabase.getClient().auth.admin.inviteUserByEmail(email, { redirectTo })
+      this.supabase.getClient().auth.admin.inviteUserByEmail(email)
     ).pipe(
       switchMap((response) => {
         if (response.error) {
+          console.error('Supabase error:', response.error);
           throw new Error(response.error.message);
         }
         if (response.data && response.data.user && response.data.user.id) {
