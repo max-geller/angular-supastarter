@@ -14,8 +14,10 @@ import { map } from 'rxjs/operators';
 // Import Services
 import { AuthService } from '../../../core/services/auth.service';
 import { CurrentModuleService } from '../../../core/services/current-module.service';
+import { UserService } from '../../../core/services/user.service';
 
 // Import Interfaces
+import { UserInterface } from '../../../core/models/user.model';
 
 // Import Angular Material Components
 import { MatSelectModule } from '@angular/material/select';
@@ -55,16 +57,16 @@ export class AppNavbarComponent implements OnInit, OnDestroy {
 
   currentModule$: Observable<string> | undefined;
   currentModuleName$: Observable<string> | undefined;
+  currentUser$: Observable<UserInterface | null> | undefined;
 
   constructor(
-
     private auth: AuthService,
     private router: Router,
-    private currentModuleService: CurrentModuleService
+    private currentModuleService: CurrentModuleService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
-
     this.currentModule$ = this.currentModuleService.currentModule$;
     this.currentModuleName$ = this.currentModule$.pipe(
       map((module) => {
@@ -74,6 +76,7 @@ export class AppNavbarComponent implements OnInit, OnDestroy {
         return moduleData ? moduleData.name : 'MODULE';
       })
     );
+    this.currentUser$ = this.userService.getUserProfile();
   }
 
   ngOnDestroy() {

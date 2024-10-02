@@ -32,12 +32,13 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <ng-container>
+        <ng-container *ngIf="currentUser$ | async as user; else pleaseLogin">
           <button mat-button [matMenuTriggerFor]="profileMenu">
             <div
               class="user-menu-button"
               style="display: flex; align-items: center"
             >
+              {{ user.first_name }} {{ user.last_name }}
               <mat-icon fontIcon="arrow_drop_down"></mat-icon>
             </div>
           </button>
@@ -83,15 +84,11 @@
         <div
           class="notification-date"
           style="font-size: 12px; font-weight: 400"
-        >
-  
-        </div>
+        ></div>
         <div
           class="notification-right"
           style="font-size: 10px; font-weight: 400"
-        >
-
-        </div>
+        ></div>
       </div>
     </div>
   </button>
