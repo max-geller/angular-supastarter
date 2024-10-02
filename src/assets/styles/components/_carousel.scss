@@ -37,15 +37,15 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
+      width: 90%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 2rem;
       color: white;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-      background-color: rgba(0, 0, 0, 0.3);
+//      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+//      background-color: rgba(0, 0, 0, 0.3);
 
       &.left {
         align-items: flex-start;
@@ -55,6 +55,7 @@
       &.right {
         align-items: flex-end;
         text-align: right;
+        margin-right: 950px;
       }
 
       &.center {

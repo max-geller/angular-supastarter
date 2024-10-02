@@ -12,32 +12,41 @@ export interface SlideContent {
 export const slides: SlideContent[] = [
   {
     id: 1,
-    backgroundImage: 'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/1.jpg?t=2024-10-02T21%3A16%3A30.717Z',
-    headerImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLH-gVtwIqMJXdIPMcErqrFwPFl21ZXKM1MA&s',
+    backgroundImage:
+      'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/1.jpg?t=2024-10-02T21%3A16%3A30.717Z',
+    headerImage:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLH-gVtwIqMJXdIPMcErqrFwPFl21ZXKM1MA&s',
     title: 'Angular 18 Starter',
-    description: 'Welcome to the Angular 18 Starter',
+    description:
+      'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. ',
     alignment: 'left',
   },
   {
     id: 2,
-    backgroundImage: 'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/2.jpg?t=2024-10-02T21%3A16%3A39.267Z',
-    headerImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLH-gVtwIqMJXdIPMcErqrFwPFl21ZXKM1MA&s',
+    backgroundImage:
+      'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/2.jpg?t=2024-10-02T21%3A16%3A39.267Z',
+    headerImage:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLH-gVtwIqMJXdIPMcErqrFwPFl21ZXKM1MA&s',
     title: 'Angular 18 Starter',
     description: 'Welcome to the Angular 18 Starter',
     alignment: 'right',
   },
   {
     id: 3,
-    backgroundImage: 'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/3.jpg?t=2024-10-02T21%3A16%3A45.949Z',
-    headerImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLH-gVtwIqMJXdIPMcErqrFwPFl21ZXKM1MA&s',
+    backgroundImage:
+      'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/3.jpg?t=2024-10-02T21%3A16%3A45.949Z',
+    headerImage:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLH-gVtwIqMJXdIPMcErqrFwPFl21ZXKM1MA&s',
     title: 'Angular 18 Starter',
     description: 'Welcome to the Angular 18 Starter',
     alignment: 'center',
   },
   {
     id: 4,
-    backgroundImage: 'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/4.jpg?t=2024-10-02T21%3A16%3A58.932Z',
-    headerImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLH-gVtwIqMJXdIPMcErqrFwPFl21ZXKM1MA&s',
+    backgroundImage:
+      'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/4.jpg?t=2024-10-02T21%3A16%3A58.932Z',
+    headerImage:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLH-gVtwIqMJXdIPMcErqrFwPFl21ZXKM1MA&s',
     title: 'Angular 18 Starter',
     description: 'Welcome to the Angular 18 Starter',
     alignment: 'left',
