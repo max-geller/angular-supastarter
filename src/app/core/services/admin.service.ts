@@ -176,7 +176,7 @@ export class AdminService {
           return from(
             this.supabase.getClient()
               .from('users')
-              .insert({ id: userId, tenant_id: tenantId })
+              .insert({ id: userId, email: email, tenant_id: tenantId })
           ).pipe(
             map(() => userId)
           );
