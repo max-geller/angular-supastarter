@@ -32,7 +32,6 @@ export class UserService {
       })
     );
   }
-// TODO: New User's Dont Need Correct Password. Reset session after submitting form?
   registerUser(userId: string, userData: Partial<UserInterface>, password: string): Observable<UserInterface> {
     return from(this.supabaseService.getClient().auth.updateUser({ password })).pipe(
       switchMap(() => {

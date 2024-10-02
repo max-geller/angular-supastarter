@@ -4,8 +4,8 @@ export interface UserInterface {
     created_at: string;
     updated_at: string;
     is_active: boolean;
-    first_name: string;
-    last_name: string;
+    first_name?: string;
+    last_name?: string;
     last_login?: string;
     is_registered: boolean;
 }
