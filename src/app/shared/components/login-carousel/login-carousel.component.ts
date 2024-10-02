@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +14,7 @@ import { interval, Subscription } from 'rxjs';
     trigger('carouselAnimation', [
       transition('* => *', [
         style({ opacity: 1 }),
-        animate('100ms', style({ opacity: 1 })),
+        animate('300ms', style({ opacity: 1 })),
       ]),
     ]),
   ],
@@ -35,43 +35,55 @@ export class LoginCarouselComponent implements OnInit, OnDestroy {
     },
     {
       url: 'https://trjpswwqoubcpszecyin.supabase.co/storage/v1/object/public/wallpapers/4.jpg?t=2024-10-02T21%3A16%3A58.932Z',
-      alt: 'Image 3',
+      alt: 'Image 4',
     },
   ];
 
   currentIndex = 0;
   private timerSubscription: Subscription | undefined;
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit() {
+    console.log('ngOnInit called');
     this.startTimer();
   }
 
   ngOnDestroy() {
+    console.log('ngOnDestroy called');
     this.stopTimer();
   }
 
   startTimer() {
+    console.log('startTimer called');
     this.timerSubscription = interval(5000).subscribe(() => {
+      console.log('Timer tick');
       this.next();
     });
   }
 
   stopTimer() {
+    console.log('stopTimer called');
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
     }
   }
 
   next() {
+    console.log('next called, current index:', this.currentIndex);
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
+    console.log('new index:', this.currentIndex);
   }
 
   prev() {
+    console.log('prev called, current index:', this.currentIndex);
     this.currentIndex =
       (this.currentIndex - 1 + this.images.length) % this.images.length;
+    console.log('new index:', this.currentIndex);
   }
 
   goToSlide(index: number) {
+    console.log('goToSlide called with index:', index);
     this.currentIndex = index;
   }
 }
