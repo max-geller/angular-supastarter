@@ -11,13 +11,17 @@ import {
   import { MatIconModule } from '@angular/material/icon';
   import { MatDialog } from '@angular/material/dialog';
   
-  import { ConfirmDeleteService } from '../../../../../../../core/services/confirm-delete.service';
+  // Import Services
   import { ToastService } from '../../../../../../../core/services/toast.service';
   import { AdminService } from '../../../../../../../core/services/admin.service';
   
+  // Import Models
   import { UserInterface } from '../../../../../../../core/models/user.model';
+
+  // Import Components
   import { EditUserDialog } from '../edit-user/edit-user.dialog';
-  
+  import { ConfirmDeleteService } from '../../../../../../../core/services/confirm-delete.service';
+
   @Component({
     selector: 'admin-users-table',
     standalone: true,
@@ -35,7 +39,8 @@ import {
     displayedColumns: string[] = [
       'id',
       'email',
-      'name',
+      'first_name',
+      'last_name',
       'created_at',
       'is_active',
       'edit',
@@ -87,7 +92,7 @@ import {
   
     deleteUser(user: UserInterface) {
       this.confirmDeleteService
-        .openAdvancedConfirmDialog(user.name, 'user')
+        .openAdvancedConfirmDialog(`${user.first_name} ${user.last_name}`, 'user')
         .subscribe((confirmed) => {
           if (confirmed) {
             this.adminService.deleteUser(user.id).subscribe({

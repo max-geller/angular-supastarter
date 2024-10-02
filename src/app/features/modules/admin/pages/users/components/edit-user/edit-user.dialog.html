@@ -2,10 +2,17 @@
 <mat-dialog-content>
   <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name" required />
-      <mat-error *ngIf="editUserForm.get('name')?.hasError('required')">
-        Name is required
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="first_name" required />
+      <mat-error *ngIf="editUserForm.get('first_name')?.hasError('required')">
+        First name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="last_name" required />
+      <mat-error *ngIf="editUserForm.get('last_name')?.hasError('required')">
+        Last name is required
       </mat-error>
     </mat-form-field>
     <mat-form-field>

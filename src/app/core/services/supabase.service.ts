@@ -12,7 +12,9 @@ export class SupabaseService {
   initialize(): void {
     if (!this.supabase) {
       this.supabase = createClient(this.supabaseUrl, this.supabaseKey);
+      console.log('Supabase client initialized');
     } else {
+      console.log('Supabase client already initialized');
     }
   }
 

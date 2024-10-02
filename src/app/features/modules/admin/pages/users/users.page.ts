@@ -10,7 +10,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 
 import { UsersTableComponent } from './components/users-table/users.table';
-import { AddUserDialogDialog } from './components/add-user/add-user.dialog';
+import { InviteUserDialogDialog } from './components/add-user/invite-user.dialog';
+
+// Import Services
+import { AdminService } from '../../../../../core/services/admin.service';
 
 @Component({
   standalone: true,
@@ -24,13 +27,14 @@ import { AddUserDialogDialog } from './components/add-user/add-user.dialog';
 })
 export class UsersPage implements OnInit {
   @ViewChild(UsersTableComponent) usersTable!: UsersTableComponent;
+  constructor(private adminService: AdminService) {}
 
   private dialog = inject(MatDialog);
 
   ngOnInit(): void {}
 
   addUserDialog() {
-    const dialogRef = this.dialog.open(AddUserDialogDialog, {
+    const dialogRef = this.dialog.open(InviteUserDialogDialog, {
       width: '400px',
     });
 
@@ -46,4 +50,6 @@ export class UsersPage implements OnInit {
       this.usersTable.refreshUsers();
     }
   }
+
+
 }

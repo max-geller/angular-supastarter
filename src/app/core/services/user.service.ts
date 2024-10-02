@@ -15,7 +15,6 @@ export class UserService {
     private authService: AuthService
   ) {}
 
-  // Create Observable for Current User's Basic Information
   getUserProfile(): Observable<any> {
     return from(
       this.supabaseService.getClient().from('users').select('*').single()
@@ -27,4 +26,9 @@ export class UserService {
       })
     );
   }
+
+  registerUser() {
+    
+  }
+
 }

@@ -2,7 +2,6 @@ import { Injectable, inject, Inject } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { AuthService } from './auth.service';
 import { ThemeService } from './theme.service';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +11,7 @@ export class AppInitService {
   private authService = inject(AuthService);
   private themeService = inject(ThemeService);
 
-  constructor( ) {
-  }
+  constructor() {}
 
   async initializeApp(): Promise<void> {
     // Initialize Supabase
@@ -26,9 +24,7 @@ export class AppInitService {
     await this.themeService.initializeTheme();
 
     // Obtain User Role
-    
 
     // Obtain Basic User Information
-
   }
 }

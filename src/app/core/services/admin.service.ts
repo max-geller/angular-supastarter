@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { Observable, from, switchMap } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+
 
 // Import Services
 import { SupabaseService } from './supabase.service';
@@ -9,12 +10,13 @@ import { SupabaseService } from './supabase.service';
 import { TenantInterface } from '../models/tenant.model';
 import { UserInterface } from '../models/user.model';
 
+// Import Supabase Resources
+
 @Injectable({
   providedIn: 'root',
 })
 export class AdminService {
   constructor(private supabase: SupabaseService) {}
-
 
   getAllTenants(): Observable<TenantInterface[]> {
     return from(
@@ -85,11 +87,7 @@ export class AdminService {
 
   deleteTenant(id: string): Observable<void> {
     return from(
-      this.supabase
-        .getClient()
-        .from('tenants')
-        .delete()
-        .eq('id', id)
+      this.supabase.getClient().from('tenants').delete().eq('id', id)
     ).pipe(
       map((response) => {
         if (response.error) {
@@ -124,29 +122,6 @@ export class AdminService {
     );
   }
 
-  createUser(user: Partial<UserInterface>): Observable<UserInterface> {
-    const newUser = { ...user, is_active: true };
-    return from(
-      this.supabase
-        .getClient()
-        .from('users')
-        .insert(newUser)
-        .select()
-        .single()
-    ).pipe(
-      map((response) => {
-        if (response.error) {
-          throw new Error(response.error.message);
-        }
-        return response.data as UserInterface;
-      }),
-      catchError((error) => {
-        console.error('Error creating user:', error);
-        throw error;
-      })
-    );
-  }
-
   updateUser(user: Partial<UserInterface>): Observable<UserInterface> {
     return from(
       this.supabase
@@ -172,11 +147,7 @@ export class AdminService {
 
   deleteUser(id: string): Observable<void> {
     return from(
-      this.supabase
-        .getClient()
-        .from('users')
-        .delete()
-        .eq('id', id)
+      this.supabase.getClient().from('users').delete().eq('id', id)
     ).pipe(
       map((response) => {
         if (response.error) {
@@ -189,4 +160,34 @@ export class AdminService {
       })
     );
   }
+
+  inviteUser(email: string, tenantId: string): Observable<string> {
+    const redirectTo = `/sessions/register`;
+    return from(
+      this.supabase.getClient().auth.admin.inviteUserByEmail(email, { redirectTo })
+    ).pipe(
+      switchMap((response) => {
+        if (response.error) {
+          throw new Error(response.error.message);
+        }
+        if (response.data && response.data.user && response.data.user.id) {
+          const userId = response.data.user.id;
+          return from(
+            this.supabase.getClient()
+              .from('users')
+              .insert({ id: userId, tenant_id: tenantId })
+          ).pipe(
+            map(() => userId)
+          );
+        } else {
+          throw new Error('User ID not found in the response');
+        }
+      }),
+      catchError((error) => {
+        console.error('Error inviting user:', error);
+        throw error;
+      })
+    );
+  }
 }
+

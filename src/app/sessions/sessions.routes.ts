@@ -23,5 +23,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/request/request.page').then((m) => m.RequestPage),
   },
-    { path: 'update-pass', loadComponent: () => import('./pages/update-pass/update-pass.page').then((m) => m.UpdatePassPage) },
+  {
+    path: 'update-pass',
+    loadComponent: () =>
+      import('./pages/update-pass/update-pass.page').then(
+        (m) => m.UpdatePassPage
+      ),
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register/register.page').then((m) => m.RegisterPage),
+  },
 ];

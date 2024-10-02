@@ -46,8 +46,8 @@ export class EditUserDialog {
     private toastService: ToastService
   ) {
     this.editUserForm = this.fb.group({
-      name: [data.name, Validators.required],
-      email: [data.email, [Validators.required, Validators.email]],
+      first_name: [data.first_name, Validators.required],
+      last_name: [data.last_name, Validators.required],
       is_active: [data.is_active],
     });
   }
