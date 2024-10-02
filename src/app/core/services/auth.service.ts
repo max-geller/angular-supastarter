@@ -76,9 +76,11 @@ export class AuthService {
     }
   }
 
-  signOut() {
-    this.signOut$.emit(); // Emit an event instead of directly calling ThemeService
-    return this.supabaseService.getClient().auth.signOut();
+  async signOut() {
+    await this.supabaseService.getClient().auth.signOut();
+    this._session.next(null);
+    this.signOut$.emit();
+    console.log('User Logged Out');
   }
 
   async resetPassword(email: string) {

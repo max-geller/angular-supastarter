@@ -59,12 +59,14 @@ export class RegisterPage implements OnInit {
   }
 // TODO: New User's Dont Need Correct Password. Reset session after submitting form?
 
-  onSubmit() {
+  async onSubmit() {
     if (this.registerForm.valid && this.currentUserId) {
       const { password, confirmPassword, ...userData } = this.registerForm.value;
       this.userService.registerUser(this.currentUserId, userData, password).subscribe({
-        next: (user) => {
+        next: async (user) => {
           console.log('User registered successfully', user);
+          await this.authService.signOut();
+          console.log('User Logged Out');
           this.router.navigate(['/sessions/login']);
         },
         error: (error) => {
