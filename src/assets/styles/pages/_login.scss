@@ -1,7 +1,6 @@
 .login-container {
   display: flex;
   height: 100vh;
-  background-color: #db0000;
 
   .left-container {
     flex: 1;
@@ -14,15 +13,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #00badb;
+    max-width: 450px;
     height: 100%;
+    flex: 1;
   }
   .login-form {
     width: 100%;
-    height: 100%;
-    max-width: 400px;
+
     padding: 2rem;
-    background-color: #d11db6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   mat-form-field {
     width: 100%;
