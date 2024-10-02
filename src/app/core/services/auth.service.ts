@@ -20,8 +20,12 @@ export class AuthService {
 
   constructor(private supabaseService: SupabaseService) {}
 
-  getCurrentUser(): User | null {
-    return this._session.getValue()?.user ?? null;
+  getCurrentUser(): { user: User | null, email: string | null } {
+    const session = this._session.getValue();
+    return {
+      user: session?.user ?? null,
+      email: session?.user?.email ?? null
+    };
   }
 
   async initializeAuth() {

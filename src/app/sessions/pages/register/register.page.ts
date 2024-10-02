@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   standalone: true,
@@ -19,13 +20,16 @@ import { UserService } from '../../../core/services/user.service';
   templateUrl: './register.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegisterPage {
+export class RegisterPage implements OnInit {
   registerForm: FormGroup;
+  currentUserEmail: string | null = null;
+  currentUserId: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -36,6 +40,18 @@ export class RegisterPage {
     }, { validator: this.passwordMatchValidator });
   }
 
+  ngOnInit() {
+    const { user, email } = this.authService.getCurrentUser();
+    this.currentUserEmail = email;
+    this.currentUserId = user?.id ?? null;
+
+    if (this.currentUserEmail) {
+      this.registerForm.patchValue({ email: this.currentUserEmail });
+    }
+    console.log(this.currentUserEmail);
+    console.log(this.currentUserId);
+  }
+
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password');
     const confirmPassword = form.get('confirmPassword');
@@ -44,12 +60,12 @@ export class RegisterPage {
   }
 
   onSubmit() {
-    if (this.registerForm.valid) {
+    if (this.registerForm.valid && this.currentUserId) {
       const { password, confirmPassword, ...userData } = this.registerForm.value;
       this.userService.registerUser(userData, password).subscribe({
         next: (user) => {
           console.log('User registered successfully', user);
-          this.router.navigate(['/dashboard']); // or wherever you want to redirect after registration
+          this.router.navigate(['/dashboard']);
         },
         error: (error) => {
           console.error('Error registering user:', error);

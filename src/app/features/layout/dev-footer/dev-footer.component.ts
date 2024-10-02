@@ -33,7 +33,6 @@ export class DevFooterComponent implements OnInit {
   ) {
     this.environment = this.env.name;
     this.showFooter = this.env.showDevFooter;
-    this.currentUser = this.authService.getCurrentUser();
   }
   ngOnInit() {}
 }
