@@ -35,18 +35,18 @@ export class UserService {
       switchMap(() => {
         return from(this.supabaseService.getClient()
           .from('users')
-          .update({
+          .upsert({
+            id: userId,
             first_name: userData.first_name,
             last_name: userData.last_name,
-            // Add other fields as needed
           })
-          .eq('id', userId)
           .select()
           .single()
         );
       }),
       map(({ data, error }) => {
         if (error) throw error;
+        if (!data) throw new Error('No user data returned');
         return data as UserInterface;
       })
     );

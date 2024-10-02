@@ -64,7 +64,7 @@ export class RegisterPage implements OnInit {
       this.userService.registerUser(this.currentUserId, userData, password).subscribe({
         next: (user) => {
           console.log('User registered successfully', user);
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/features/dashboard']);
         },
         error: (error) => {
           console.error('Error registering user:', error);
