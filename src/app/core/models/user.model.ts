@@ -7,4 +7,5 @@ export interface UserInterface {
     first_name: string;
     last_name: string;
     last_login?: string;
+    is_registered: boolean;
 }

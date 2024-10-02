@@ -39,6 +39,7 @@ export class UserService {
             id: userId,
             first_name: userData.first_name,
             last_name: userData.last_name,
+            is_registered: true
           })
           .select()
           .single()
