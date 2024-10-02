@@ -14,6 +14,8 @@ import {
 import { AsyncPipe } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthService } from '../../../core/services/auth.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dev-footer',
@@ -25,7 +27,7 @@ import { AuthService } from '../../../core/services/auth.service';
 export class DevFooterComponent implements OnInit {
   environment: string = '';
   showFooter: boolean = false;
-  currentUser: User | null = null;
+  currentUserEmail$: Observable<string | null>;
 
   constructor(
     @Inject('ENVIRONMENT') private env: any,
@@ -33,6 +35,10 @@ export class DevFooterComponent implements OnInit {
   ) {
     this.environment = this.env.name;
     this.showFooter = this.env.showDevFooter;
+    this.currentUserEmail$ = this.authService.session.pipe(
+      map(session => session?.user?.email ?? null)
+    );
   }
+
   ngOnInit() {}
 }

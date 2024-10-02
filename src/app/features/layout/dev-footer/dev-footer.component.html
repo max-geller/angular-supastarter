@@ -1,11 +1,13 @@
 <mat-toolbar
   *ngIf="showFooter"
   class="dev-footer"
-  style="display: flex; flex-direction: row"
+  style="display: flex; flex-direction: row; justify-content: space-between;"
 >
   <div class="network-info"></div>
   <div class="environment-info">
-    MODE:
-    {{ environment | uppercase }}
+    MODE: {{ environment | uppercase }}
+  </div>
+  <div class="user-info">
+    USER: {{ currentUserEmail$ | async }}
   </div>
 </mat-toolbar>
