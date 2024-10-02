@@ -4,7 +4,10 @@ import { Routes } from '@angular/router';
 import { AppLayout } from './features/layout/app.layout';
 import { SessionsLayout } from './sessions/layout/sessions.layout';
 
+
 // Import Guards
+import { IsRegisteredGuard } from './core/guards/is-registered.guard';
+
 
 export const routes: Routes = [
   {
@@ -15,7 +18,7 @@ export const routes: Routes = [
   {
     path: 'features',
     component: AppLayout,
-    canActivate: [],
+    canActivate: [IsRegisteredGuard],
     loadChildren: () =>
       import('./features/features.routes').then((m) => m.routes),
   },

@@ -18,14 +18,13 @@ export class UserService {
     private authService: AuthService
   ) {}
 
-  getUserProfile(): Observable<any> {
+  getUserProfile(): Observable<UserInterface> {
     return from(
       this.supabaseService.getClient().from('users').select('*').single()
     ).pipe(
       map(({ data, error }) => {
         if (error) throw error;
-        console.log(data);
-        return data;
+        return data as UserInterface;
       })
     );
   }
