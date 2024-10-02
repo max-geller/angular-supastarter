@@ -45,6 +45,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit(): void {}
+// TODO: New User's Dont Need Correct Password. Reset session after submitting form?
 
   async onSubmit() {
     if (this.loginForm.valid) {

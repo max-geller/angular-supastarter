@@ -57,6 +57,7 @@ export class RegisterPage implements OnInit {
     return password && confirmPassword && password.value === confirmPassword.value
       ? null : { mismatch: true };
   }
+// TODO: New User's Dont Need Correct Password. Reset session after submitting form?
 
   onSubmit() {
     if (this.registerForm.valid && this.currentUserId) {

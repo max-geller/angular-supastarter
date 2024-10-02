@@ -7,6 +7,7 @@ import { SessionsLayout } from './sessions/layout/sessions.layout';
 
 // Import Guards
 import { IsRegisteredGuard } from './core/guards/is-registered.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -18,7 +19,7 @@ export const routes: Routes = [
   {
     path: 'features',
     component: AppLayout,
-    canActivate: [IsRegisteredGuard],
+    canActivate: [IsRegisteredGuard, AuthGuard],
     loadChildren: () =>
       import('./features/features.routes').then((m) => m.routes),
   },
