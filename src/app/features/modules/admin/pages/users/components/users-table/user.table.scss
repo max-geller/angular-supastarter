@@ -1,0 +1,33 @@
+td.mat-column-edit,
+th.mat-column-edit {
+}
+
+
+
+td.mat-column-email,
+th.mat-column-email {
+  text-wrap: nowrap;
+}
+
+td.mat-column-id,
+th.mat-column-id {
+  text-wrap: nowrap;
+}
+
+td.mat-column-is_active,
+th.mat-column-is_active,
+td.mat-column-is_registered,
+th.mat-column-is_registered {
+  text-align: center;
+  min-width: 90px;
+}
+
+.mat-mdc-table-sticky {
+  background: #c1e0fd;
+}
+
+.table-container {
+  max-height: 95vh;
+  max-width: 100%;
+  overflow: auto;
+}

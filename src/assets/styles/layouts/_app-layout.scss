@@ -22,7 +22,13 @@ body {
 
 .module-container {
   padding: 1rem 2rem;
+
+  // media query for small screens
+  @media (max-width: 750px) {
+    padding: 0.75rem;
+  }
 }
+
 
 mat-divider {
   margin: 0;
