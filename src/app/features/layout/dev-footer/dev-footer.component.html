@@ -1,7 +1,7 @@
 <mat-toolbar
   *ngIf="showFooter"
   class="dev-footer"
-  style="display: flex; flex-direction: row; gap: 1rem"
+  style="display: flex; flex-direction: row; gap: 1rem; flex-wrap: nowrap"
 >
   <div class="app-version">v{{ environmentVersion }}</div>
   |
@@ -19,7 +19,7 @@
   <div class="tenant-info">
     TENANT: {{ currentTenantName$ | async | uppercase }}
   </div>
-  |
+  <span style="flex: 1 1 auto"></span>
   <div class="network-info">
     NETWORK:
     <ng-container *ngIf="networkSpeed$ | async as speed; else offlineNetwork">
