@@ -10,6 +10,7 @@ import { AsyncPipe } from '@angular/common';
 // Import Angular Material Components
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // Import RxJS Operators
 import { Observable } from 'rxjs';
@@ -24,15 +25,45 @@ import { NetworkService } from '../../../core/services/network.service';
 @Component({
   selector: 'app-dev-footer',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatIconModule, AsyncPipe],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTooltipModule,
+    AsyncPipe,
+  ],
   templateUrl: './dev-footer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [`
-    .network-icon {
-      transform: scale(0.75);
-      vertical-align: middle;
-    }
-  `]
+  styles: [
+    `
+      .network-icon {
+        transform: scale(0.75);
+        vertical-align: middle;
+      }
+    `,
+    `
+      .user-info {
+        position: relative;
+      }
+      .custom-tooltip {
+        position: absolute;
+        background-color: #333;
+        color: white;
+        padding: 5px;
+        border-radius: 3px;
+        font-size: 12px;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        display: none;
+        z-index: 1000;
+      }
+      .user-info:hover .custom-tooltip {
+        display: block;
+      }
+    `,
+  ],
 })
 export class DevFooterComponent implements OnInit {
   environmentMode: string = '';
@@ -43,6 +74,7 @@ export class DevFooterComponent implements OnInit {
   connectionType$: Observable<string>;
   networkSpeed$: Observable<number>;
   currentUserProvider$: Observable<string | null>;
+  currentUserId$: Observable<string | null>;
 
   constructor(
     @Inject('ENVIRONMENT') private env: any,
@@ -55,12 +87,15 @@ export class DevFooterComponent implements OnInit {
     this.environmentVersion = this.env.version;
     this.showFooter = this.env.showDevFooter;
     this.currentUserEmail$ = this.authService.session.pipe(
-      map(session => session?.user?.email ?? null)
+      map((session) => session?.user?.email ?? null)
     );
     this.currentTenantName$ = this.userService.getCurrentUserTenantName();
     this.connectionType$ = this.networkService.getConnectionTypeObservable();
     this.networkSpeed$ = this.networkService.getNetworkSpeedObservable();
     this.currentUserProvider$ = this.authService.getCurrentUserProvider();
+    this.currentUserId$ = this.authService.session.pipe(
+      map((session) => session?.user?.id ?? null)
+    );
   }
 
   ngOnInit(): void {
