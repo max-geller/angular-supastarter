@@ -18,6 +18,7 @@ import { map } from 'rxjs/operators';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserService } from '../../../core/services/user.service';
 import { TenantService } from '../../../core/services/tenant.service';
+import { NetworkService } from '../../../core/services/network.service';
 
 @Component({
   selector: 'app-dev-footer',
@@ -32,12 +33,14 @@ export class DevFooterComponent implements OnInit {
   showFooter: boolean = false;
   currentUserEmail$: Observable<string | null>;
   currentTenantName$: Observable<string>;
+  connectionType$: Observable<string>;
 
   constructor(
     @Inject('ENVIRONMENT') private env: any,
     private authService: AuthService,
     private userService: UserService,
-    private tenantService: TenantService
+    private tenantService: TenantService,
+    private networkService: NetworkService
   ) {
     this.environmentMode = this.env.name;
     this.environmentVersion = this.env.version;
@@ -46,6 +49,7 @@ export class DevFooterComponent implements OnInit {
       map(session => session?.user?.email ?? null)
     );
     this.currentTenantName$ = this.userService.getCurrentUserTenantName();
+    this.connectionType$ = this.networkService.getConnectionTypeObservable();
   }
 
   ngOnInit(): void {
