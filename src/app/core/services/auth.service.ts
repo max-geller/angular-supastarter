@@ -20,17 +20,17 @@ export class AuthService {
 
   constructor(private supabaseService: SupabaseService) {}
 
-  getCurrentUser(): { user: User | null, email: string | null } {
+  getCurrentUser(): { user: User | null; email: string | null } {
     const session = this._session.getValue();
     return {
       user: session?.user ?? null,
-      email: session?.user?.email ?? null
+      email: session?.user?.email ?? null,
     };
   }
 
   getCurrentUserProvider(): Observable<string | null> {
     return this._session.pipe(
-      map(session => session?.user?.app_metadata?.provider ?? null)
+      map((session) => session?.user?.app_metadata?.provider ?? null)
     );
   }
 
@@ -77,6 +77,15 @@ export class AuthService {
           throw new Error('Incorrect email or password');
         }
         throw error;
+      }
+      const { error: updateError } = await this.supabaseService
+        .getClient()
+        .from('users')
+        .update({ last_login: new Date().toISOString() })
+        .eq('id', data.user?.id);
+
+      if (updateError) {
+        console.error('Error updating last_login:', updateError);
       }
 
       return data;
