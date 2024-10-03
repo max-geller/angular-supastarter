@@ -37,36 +37,6 @@ import { UserInterface } from '../../../core/models/user.model';
   ],
   templateUrl: './dev-footer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      .network-icon {
-        transform: scale(0.75);
-        vertical-align: middle;
-      }
-    `,
-    `
-      .user-info {
-        position: relative;
-      }
-      .custom-tooltip {
-        position: absolute;
-        background-color: #333;
-        color: white;
-        padding: 5px;
-        border-radius: 3px;
-        font-size: 12px;
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        white-space: nowrap;
-        display: none;
-        z-index: 1000;
-      }
-      .user-info:hover .custom-tooltip {
-        display: block;
-      }
-    `,
-  ],
 })
 export class DevFooterComponent implements OnInit {
   environmentMode: string = '';

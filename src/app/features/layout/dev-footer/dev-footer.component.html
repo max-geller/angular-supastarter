@@ -1,37 +1,32 @@
-<mat-toolbar
+<div
   *ngIf="showFooter"
   class="dev-footer"
-  style="display: flex; flex-direction: row; gap: 1rem; flex-wrap: nowrap"
 >
-  <div class="app-version">v{{ environmentVersion }}</div>
-  |
-  <div class="environment-info">{{ environmentMode | uppercase }}</div>
-  |
-  <div class="user-info">
-    {{ currentUserEmail$ | async | uppercase }} ({{
-      currentUserProvider$ | async | uppercase
-    }})
-    <div class="custom-tooltip">
-      User ID:
-      {{ (currentUserId$ | async)?.toString() || "No User ID available" }}
+  <div class="footer-grid">
+    <div class="grid-item app-version" [ngClass]="{'col-span-1': true}">v{{ environmentVersion }}</div>
+    <div class="grid-item environment-info" [ngClass]="{'col-span-1': true}">{{ environmentMode | uppercase }}</div>
+    <div class="grid-item role-info" [ngClass]="{'col-span-2': true}">
+      {{ currentUser?.role_name || "N/A" | uppercase }}
+    </div>
+    <div class="grid-item user-info" [ngClass]="{'col-span-5': true}">
+      {{ currentUserEmail$ | async | uppercase }} ({{
+        currentUserProvider$ | async | uppercase
+      }})
+      <div class="custom-tooltip">
+        User ID:
+        {{ (currentUserId$ | async)?.toString() || "No User ID available" }}
+      </div>
+    </div>
+
+    <div class="grid-item tenant-info" [ngClass]="{'col-span-3': true}">
+       {{ currentTenantName$ | async | uppercase }}
+    </div>
+    <div class="grid-item network-info" [ngClass]="{'col-span-1': true}">
+      <ng-container *ngIf="networkSpeed$ | async as speed; else offlineNetwork">
+        <mat-icon class="network-icon" [style.color]="getNetworkSpeedColor(speed)">signal_cellular_alt</mat-icon>
+        ({{ speed | number : "1.1-1" }} Mbps)
+      </ng-container>
+      <ng-template #offlineNetwork> OFFLINE </ng-template>
     </div>
   </div>
-  |
-  <div class="role-info">
-    {{ currentUser?.role_name || "N/A" | uppercase }}
-  </div>
-  |
-  <div class="tenant-info">
-    TENANT: {{ currentTenantName$ | async | uppercase }}
-  </div>
-  <span style="flex: 1 1 auto"></span>
-  <div class="network-info">
-    <ng-container *ngIf="networkSpeed$ | async as speed; else offlineNetwork">
-      <mat-icon class="network-icon" [style.color]="getNetworkSpeedColor(speed)"
-        >signal_cellular_alt</mat-icon
-      >
-      ({{ speed | number : "1.1-1" }} Mbps)
-    </ng-container>
-    <ng-template #offlineNetwork> OFFLINE </ng-template>
-  </div>
-</mat-toolbar>
+</div>
