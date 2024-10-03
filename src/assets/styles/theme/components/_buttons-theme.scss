@@ -1,0 +1,30 @@
+@use "@angular/material" as mat;
+
+@mixin color($theme) {
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+  // If Theme is Dark:
+  @if mat.get-theme-type($theme) == dark {
+    .mdc-button {
+      background-color: mat.get-theme-color($theme, primary, 10) !important;
+      color: mat.get-theme-color($theme, tertiary, 100) !important;
+    }
+    .user-name-button {
+        color: mat.get-theme-color($theme, tertiary, 95) !important;
+      }
+  } @else {
+    // If Theme is Light:
+    .mdc-button {
+      background-color: mat.get-theme-color($theme, primary, 50) !important;
+      color: mat.get-theme-color($theme, tertiary, 100) !important;
+    }
+    .user-name-button {
+    
+      color: mat.get-theme-color($theme, tertiary, 30) !important;
+    }
+  }
+}

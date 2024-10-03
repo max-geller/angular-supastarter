@@ -1,4 +1,4 @@
-<mat-toolbar class="feature-navbar">
+<mat-toolbar class="app-navbar">
   <div class="left-container">
     <button mat-icon-button (click)="toggleSidenav.emit()">
       <mat-icon fontIcon="menu"></mat-icon>
@@ -33,7 +33,7 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <ng-container *ngIf="currentUser$ | async as user; else pleaseLogin">
-          <button mat-button [matMenuTriggerFor]="profileMenu">
+          <div [matMenuTriggerFor]="profileMenu" class="user-name-button">
             <div
               class="user-menu-button"
               style="display: flex; align-items: center"
@@ -41,7 +41,7 @@
               {{ user.first_name }} {{ user.last_name }}
               <mat-icon fontIcon="arrow_drop_down"></mat-icon>
             </div>
-          </button>
+          </div>
         </ng-container>
         <ng-template #pleaseLogin>
           <button mat-stroked-button>Login</button>
