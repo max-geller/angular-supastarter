@@ -15,7 +15,7 @@
     </div>
 
     <div class="grid-item provider-info" [ngClass]="{ 'col-span-1': true }">
-      ({{ currentUserProvider$ | async | uppercase }})
+      {{ currentUserProvider$ | async | uppercase }}
     </div>
     <div class="grid-item tenant-info" [ngClass]="{ 'col-span-3': true }">
       {{ currentTenantName$ | async | uppercase }}
