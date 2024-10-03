@@ -7,6 +7,7 @@
 @use "./theme/components/app-module-menu-theme" as module-menu-theme;
 @use "./theme/components/dropdown-theme" as dropdown-theme;
 @use "./theme/components/card-theme" as card-theme;
+@use "./theme/components/table-theme" as table-theme;
 
 // Import Style Files
 @use "./layouts/layouts.scss";
@@ -151,6 +152,7 @@ html {
   @include module-menu-theme.theme($light-theme);
   @include dropdown-theme.theme($light-theme);
   @include card-theme.theme($light-theme);
+  @include table-theme.theme($light-theme);
   background: mat.get-theme-color($light-theme, surface);
 
   &.dark {
@@ -160,6 +162,7 @@ html {
     @include module-menu-theme.theme($dark-theme);
     @include dropdown-theme.theme($dark-theme);
     @include card-theme.theme($dark-theme);
+    @include table-theme.theme($dark-theme);
     background: mat.get-theme-color($dark-theme, surface);
   }
 }
