@@ -22,6 +22,9 @@ import { UserService } from '../../../core/services/user.service';
 import { TenantService } from '../../../core/services/tenant.service';
 import { NetworkService } from '../../../core/services/network.service';
 
+// Import Models
+import { UserInterface } from '../../../core/models/user.model';
+
 @Component({
   selector: 'app-dev-footer',
   standalone: true,
@@ -75,6 +78,7 @@ export class DevFooterComponent implements OnInit {
   networkSpeed$: Observable<number>;
   currentUserProvider$: Observable<string | null>;
   currentUserId$: Observable<string | null>;
+  currentUser: UserInterface | null = null;
 
   constructor(
     @Inject('ENVIRONMENT') private env: any,
@@ -99,7 +103,14 @@ export class DevFooterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Any initialization logic if needed
+    this.userService.getCurrentUserWithRole().subscribe({
+      next: (user) => {
+        this.currentUser = user;
+      },
+      error: (error) => {
+        console.error('Error fetching user data:', error);
+      }
+    });
   }
 
   getNetworkSpeedColor(speed: number): string {

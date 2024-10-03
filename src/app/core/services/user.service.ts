@@ -143,4 +143,27 @@ export class UserService {
       })
     );
   }
+
+  getCurrentUserWithRole(): Observable<UserInterface> {
+    return from(
+      this.supabaseService.getClient()
+        .from('users')
+        .select(`
+          *,
+          roles (
+            name
+          )
+        `)
+        .eq('id', this.authService.getCurrentUser().user?.id)
+        .single()
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return {
+          ...data,
+          role_name: data.roles?.name
+        } as UserInterface;
+      })
+    );
+  }
 }

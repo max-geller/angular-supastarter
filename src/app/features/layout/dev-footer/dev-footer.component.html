@@ -12,9 +12,14 @@
       currentUserProvider$ | async | uppercase
     }})
     <div class="custom-tooltip">
-      User ID: {{ (currentUserId$ | async)?.toString() || 'No User ID available' }}
+      User ID:
+      {{ (currentUserId$ | async)?.toString() || "No User ID available" }}
     </div>
   </div>
+  |
+  <div class="role-info">
+    ROLE: {{ currentUser?.role_name || "N/A" | uppercase }}
+  </div> 
   |
   <div class="tenant-info">
     TENANT: {{ currentTenantName$ | async | uppercase }}
