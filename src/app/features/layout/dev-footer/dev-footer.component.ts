@@ -34,6 +34,7 @@ export class DevFooterComponent implements OnInit {
   currentUserEmail$: Observable<string | null>;
   currentTenantName$: Observable<string>;
   connectionType$: Observable<string>;
+  networkSpeed$: Observable<number>;
 
   constructor(
     @Inject('ENVIRONMENT') private env: any,
@@ -50,6 +51,7 @@ export class DevFooterComponent implements OnInit {
     );
     this.currentTenantName$ = this.userService.getCurrentUserTenantName();
     this.connectionType$ = this.networkService.getConnectionTypeObservable();
+    this.networkSpeed$ = this.networkService.getNetworkSpeedObservable();
   }
 
   ngOnInit(): void {

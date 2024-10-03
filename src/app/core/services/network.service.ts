@@ -26,6 +26,7 @@ export class NetworkService {
   private online$: Observable<boolean>;
   private connectionQuality$: BehaviorSubject<string>;
   private connectionType$: BehaviorSubject<string>;
+  private networkSpeed$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(private toastService: ToastService) {
     this.online$ = merge(
@@ -43,6 +44,7 @@ export class NetworkService {
     this.monitorOnlineStatus();
     this.monitorNetworkQualityChange();
     this.monitorConnectionTypeChange();
+    this.updateNetworkSpeed();
   }
 
   private monitorOnlineStatus(): void {
@@ -74,7 +76,14 @@ export class NetworkService {
       navigator.connection!.onchange = () => {
         const newType = this.getConnectionType();
         this.connectionType$.next(newType);
+        this.updateNetworkSpeed();
       };
+    }
+  }
+
+  private updateNetworkSpeed(): void {
+    if ('connection' in navigator && 'downlink' in navigator.connection!) {
+      this.networkSpeed$.next(navigator.connection.downlink);
     }
   }
 
@@ -119,5 +128,9 @@ export class NetworkService {
 
   getConnectionTypeObservable(): Observable<string> {
     return this.connectionType$.asObservable();
+  }
+
+  getNetworkSpeedObservable(): Observable<number> {
+    return this.networkSpeed$.asObservable();
   }
 }
