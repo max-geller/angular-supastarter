@@ -5,10 +5,10 @@
 >
   <div class="app-version">v{{ environmentVersion }}</div>
   |
-  <div class="environment-info">MODE: {{ environmentMode | uppercase }}</div>
+  <div class="environment-info">{{ environmentMode | uppercase }}</div>
   |
   <div class="user-info">
-    USER: {{ currentUserEmail$ | async | uppercase }} ({{
+    {{ currentUserEmail$ | async | uppercase }} ({{
       currentUserProvider$ | async | uppercase
     }})
     <div class="custom-tooltip">
@@ -18,17 +18,15 @@
   </div>
   |
   <div class="role-info">
-    ROLE: {{ currentUser?.role_name || "N/A" | uppercase }}
-  </div> 
+    {{ currentUser?.role_name || "N/A" | uppercase }}
+  </div>
   |
   <div class="tenant-info">
     TENANT: {{ currentTenantName$ | async | uppercase }}
   </div>
   <span style="flex: 1 1 auto"></span>
   <div class="network-info">
-    NETWORK:
     <ng-container *ngIf="networkSpeed$ | async as speed; else offlineNetwork">
-      {{ (connectionType$ | async)?.replace("unknown", "") || "Unknown" }}
       <mat-icon class="network-icon" [style.color]="getNetworkSpeedColor(speed)"
         >signal_cellular_alt</mat-icon
       >
