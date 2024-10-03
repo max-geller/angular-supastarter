@@ -51,7 +51,6 @@ import { EditUserDialog } from '../edit-user/edit-user.dialog';
 export class UsersTableComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'edit',
-
     'email',
     'tenant_name',
     'role_name',

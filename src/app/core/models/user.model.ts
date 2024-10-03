@@ -10,6 +10,8 @@ export interface UserInterface {
     last_login?: string;
     is_registered: boolean;
     teams: TeamInterface[];
+    role_id: string;
+    role_name?: string;
     role: RoleInterface[];
     is_active: boolean;
     created_at: string;

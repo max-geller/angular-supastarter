@@ -18,7 +18,9 @@ th.mat-column-created_at,
 td.mat-column-first_name,
 th.mat-column-first_name,
 td.mat-column-last_name,
-th.mat-column-last_name {
+th.mat-column-last_name,
+td.mat-column-role_name,
+th.mat-column-role_name {
   text-wrap: nowrap;
 }
 
@@ -32,9 +34,14 @@ th.mat-column-is_registered {
 
 .mat-mdc-table-sticky {
   border-right: 2px solid #e0e0e0;
+  background-color: #eff7ff;
 }
 
 .table-container {
   max-width: 100%;
   overflow: auto;
+}
+
+.table-header {
+  background-color: #ededed;
 }

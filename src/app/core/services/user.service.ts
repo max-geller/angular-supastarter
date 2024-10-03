@@ -91,4 +91,29 @@ export class UserService {
       })
     );
   }
+
+  getUsersWithTenantsAndRoles(): Observable<UserInterface[]> {
+    return from(
+      this.supabaseService.getClient()
+        .from('users')
+        .select(`
+          *,
+          tenants (
+            name
+          ),
+          roles (
+            name
+          )
+        `)
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data.map(user => ({
+          ...user,
+          tenant_name: user.tenants?.name,
+          role_name: user.roles?.name
+        })) as UserInterface[];
+      })
+    );
+  }
 }

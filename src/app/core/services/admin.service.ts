@@ -103,7 +103,7 @@ export class AdminService {
   }
 
   getAllUsers(): Observable<UserInterface[]> {
-    return this.userService.getUsersWithTenants();
+    return this.userService.getUsersWithTenantsAndRoles();
   }
 
   updateUser(user: Partial<UserInterface>): Observable<UserInterface> {
