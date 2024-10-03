@@ -5,17 +5,19 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  AuthChangeEvent,
-  AuthSession,
-  Session,
-  User,
-} from '@supabase/supabase-js';
 import { AsyncPipe } from '@angular/common';
+
+// Import Angular Material Components
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AuthService } from '../../../core/services/auth.service';
+
+// Import RxJS Operators
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
+// Import Services
+import { AuthService } from '../../../core/services/auth.service';
+import { UserService } from '../../../core/services/user.service';
+import { TenantService } from '../../../core/services/tenant.service';
 
 @Component({
   selector: 'app-dev-footer',
@@ -25,20 +27,28 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DevFooterComponent implements OnInit {
-  environment: string = '';
+  environmentMode: string = '';
+  environmentVersion: string = '';
   showFooter: boolean = false;
   currentUserEmail$: Observable<string | null>;
+  currentTenantName$: Observable<string>;
 
   constructor(
     @Inject('ENVIRONMENT') private env: any,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService,
+    private tenantService: TenantService
   ) {
-    this.environment = this.env.name;
+    this.environmentMode = this.env.name;
+    this.environmentVersion = this.env.version;
     this.showFooter = this.env.showDevFooter;
     this.currentUserEmail$ = this.authService.session.pipe(
       map(session => session?.user?.email ?? null)
     );
+    this.currentTenantName$ = this.userService.getCurrentUserTenantName();
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    // Any initialization logic if needed
+  }
 }

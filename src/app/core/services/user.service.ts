@@ -5,6 +5,7 @@ import { map, switchMap } from 'rxjs/operators';
 // Import Services
 import { SupabaseService } from './supabase.service';
 import { AuthService } from './auth.service';
+import { TenantService } from './tenant.service';
 
 // Import Models
 import { UserInterface } from '../models/user.model';
@@ -15,7 +16,8 @@ import { UserInterface } from '../models/user.model';
 export class UserService {
   constructor(
     private supabaseService: SupabaseService,
-    private authService: AuthService
+    private authService: AuthService,
+    private tenantService: TenantService
   ) {}
 
   getUserProfile(): Observable<UserInterface> {
@@ -55,4 +57,15 @@ export class UserService {
     );
   }
 
+  getCurrentUserTenantName(): Observable<string> {
+    return this.getUserProfile().pipe(
+      switchMap((user: UserInterface) => {
+        if (!user.tenant_id) {
+          throw new Error('User has no associated tenant');
+        }
+        return this.tenantService.getTenantById(user.tenant_id);
+      }),
+      map(tenant => tenant.name)
+    );
+  }
 }
