@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ViewChild } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 // Import Angular Material Components
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
@@ -44,6 +45,7 @@ import { EditUserDialog } from '../edit-user/edit-user.dialog';
     MatButtonModule,
     MatMenuModule,
     MatCardModule,
+    RouterModule,
   ],
   templateUrl: './users.table.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

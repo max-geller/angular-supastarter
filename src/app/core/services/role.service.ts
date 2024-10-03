@@ -15,6 +15,7 @@ export class RoleService {
       this.supabaseService.getClient()
         .from('roles')
         .select('*')
+        .order('id', { ascending: true })
     ).pipe(
       map(({ data, error }) => {
         if (error) throw error;

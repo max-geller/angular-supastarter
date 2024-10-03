@@ -116,4 +116,31 @@ export class UserService {
       })
     );
   }
+
+  getUserById(userId: string): Observable<UserInterface> {
+    return from(
+      this.supabaseService.getClient()
+        .from('users')
+        .select(`
+          *,
+          tenants (
+            name
+          ),
+          roles (
+            name
+          )
+        `)
+        .eq('id', userId)
+        .single()
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return {
+          ...data,
+          tenant_name: data.tenants?.name,
+          role_name: data.roles?.name
+        } as UserInterface;
+      })
+    );
+  }
 }

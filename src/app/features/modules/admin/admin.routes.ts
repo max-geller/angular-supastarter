@@ -17,6 +17,13 @@ export const routes: Routes = [
       import('./pages/users/users.page').then((m) => m.UsersPage),
   },
   {
+    path: 'users/:id',
+    loadComponent: () =>
+      import('./pages/users/pages/user-details/user-details.page').then(
+        (m) => m.UserDetailsPage
+      ),
+  },
+  {
     path: 'activity',
     loadComponent: () =>
       import('./pages/activity/activity.page').then((m) => m.ActivityPage),
@@ -26,6 +33,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/roles/roles.page').then((m) => m.RolesPage),
   },
+
   {
     path: 'settings',
     loadComponent: () =>
@@ -43,4 +51,5 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/tenants/tenants.page').then((m) => m.TenantsPage),
   },
+    { path: 'user-details', loadComponent: () => import('./pages/users/pages/user-details/user-details.page').then((m) => m.UserDetailsPage) },
 ];

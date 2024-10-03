@@ -79,7 +79,7 @@
 
         <mat-menu #userMenu="matMenu">
           <button mat-menu-item (click)="editUser(user)">Edit User</button>
-          <button mat-menu-item>View User Details</button>
+          <button mat-menu-item [routerLink]="['/features/admin/users', user.id]">View User Details</button>
           <button mat-menu-item>Send Reset Password</button>
           <button mat-menu-item>Re-Send Invitation</button>
           <button mat-menu-item (click)="deleteUser(user)">Delete User</button>
