@@ -1,5 +1,5 @@
 .dev-footer {
-  padding: 0.5rem;
+  padding: 0.25rem;
   background-color: #1d1d1d !important;
   color: #fff !important;
   font-size: 12px !important;
@@ -7,7 +7,7 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
+  grid-template-columns: repeat(20, 1fr);
   gap: 0.5rem;
 }
 
@@ -16,28 +16,19 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0.25rem;
+  padding: 0.15rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.col-span-1 {
-  grid-column: span 1;
-}
-
-.col-span-2 {
-  grid-column: span 2;
-}
-.col-span-3 {
-  grid-column: span 3;
-}
-.col-span-4 {
-  grid-column: span 4;
-}
-.col-span-5 {
-  grid-column: span 4;
-}
-
+.col-span-1 { grid-column: span 1; }
+.col-span-2 { grid-column: span 2; }
+.col-span-3 { grid-column: span 3; }
+.col-span-4 { grid-column: span 4; }
+.col-span-5 { grid-column: span 5; }
 
 .network-icon {
   transform: scale(0.75);
@@ -68,22 +59,48 @@
   display: block;
 }
 
+@media (max-width: 1200px) {
+  .footer-grid {
+    grid-template-columns: repeat(15, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .footer-grid {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .grid-item {
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 768px) {
   .footer-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.35rem;
   }
 
-  .col-span-2 {
-    grid-column: span 3;
+  .grid-item {
+    font-size: 11px;
   }
+  .provider-info {
+    display: none;
+  }
+  
+  .col-span-1, .col-span-2 { grid-column: span 2; }
+  .col-span-3,  { grid-column: span 3; }
+  .col-span-3, .col-span-4, .col-span-5 { grid-column: span 4; }
 }
 
 @media (max-width: 480px) {
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .col-span-2 {
-    grid-column: span 2;
+  .grid-item {
+    font-size: 8px;
   }
+  
+  .col-span-1, .col-span-2, .col-span-3, .col-span-4, .col-span-5 { grid-column: span 2; }
 }
