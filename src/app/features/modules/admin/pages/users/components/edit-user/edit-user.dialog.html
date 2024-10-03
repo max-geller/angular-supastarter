@@ -1,5 +1,6 @@
-<h2 mat-dialog-title>Edit User</h2>
+
 <mat-dialog-content>
+  <h2 >Edit User</h2>
   <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
       <mat-label>First Name</mat-label>
@@ -13,16 +14,6 @@
       <input matInput formControlName="last_name" required />
       <mat-error *ngIf="editUserForm.get('last_name')?.hasError('required')">
         Last name is required
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" required type="email" />
-      <mat-error *ngIf="editUserForm.get('email')?.hasError('required')">
-        Email is required
-      </mat-error>
-      <mat-error *ngIf="editUserForm.get('email')?.hasError('email')">
-        Please enter a valid email address
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
