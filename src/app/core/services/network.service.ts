@@ -135,13 +135,18 @@ export class NetworkService {
   }
 
   getNetworkSpeedColor(speed: number): string {
+    if (speed < 0.1) return 'gray'; // Offline or extremely slow
     if (speed <= 0.5) return 'red';
     if (speed <= 2) return 'orange';
     if (speed <= 5) return 'yellow';
-    if (speed <= 8.5) return 'lime';
+    if (speed <= 8.5) return 'yellow';
     if (speed > 10) return 'green';
     // Calculate color for speeds between 5 and 8
     const hue = ((speed - 5) / (8 - 5)) * 60 + 60; // 60 is yellow, 120 is green
     return `hsl(${hue}, 100%, 50%)`;
+  }
+
+  isOffline(speed: number): boolean {
+    return speed < 0.1;
   }
 }

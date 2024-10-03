@@ -68,4 +68,8 @@ export class DevFooterComponent implements OnInit {
   getNetworkSpeedColor(speed: number): string {
     return this.networkService.getNetworkSpeedColor(speed);
   }
+
+  isOffline(speed: number): boolean {
+    return this.networkService.isOffline(speed);
+  }
 }
