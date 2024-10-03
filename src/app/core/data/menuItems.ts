@@ -58,12 +58,12 @@ export const mainMenu = [
         route: '/features/admin/tenants',
       },
       {
-        name: 'Roles',
-        route: '/features/admin/roles',
-      },
-      {
         name: 'Users',
         route: '/features/admin/users',
+      },
+      {
+        name: 'Roles',
+        route: '/features/admin/roles',
       },
       {
         name: 'Activity',
