@@ -95,7 +95,10 @@ export class UsersTableComponent implements AfterViewInit {
     this.adminService.getAllUsers().subscribe({
       next: (users) => {
         console.log('Users received:', users);
-        this.dataSource.data = users;
+        this.dataSource.data = users.map(user => ({
+          ...user,
+          tenant_name: user.tenant_name || 'N/A'
+        }));
         this.cdr.detectChanges();
       },
       error: (error) => {

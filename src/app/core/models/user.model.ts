@@ -8,4 +8,5 @@ export interface UserInterface {
     last_name?: string;
     last_login?: string;
     is_registered: boolean;
+    tenant_name?: string;
 }

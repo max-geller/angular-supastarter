@@ -70,4 +70,25 @@ export class UserService {
       map(tenant => tenant.name)
     );
   }
+
+  getUsersWithTenants(): Observable<UserInterface[]> {
+    return from(
+      this.supabaseService.getClient()
+        .from('users')
+        .select(`
+          *,
+          tenants (
+            name
+          )
+        `)
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data.map(user => ({
+          ...user,
+          tenant_name: user.tenants?.name
+        })) as UserInterface[];
+      })
+    );
+  }
 }

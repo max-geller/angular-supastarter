@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 
 // Import Services
 import { SupabaseService } from './supabase.service';
+import { UserService } from './user.service';
 
 // Import Models
 import { TenantInterface } from '../models/tenant.model';
@@ -16,7 +17,7 @@ import { UserInterface } from '../models/user.model';
   providedIn: 'root',
 })
 export class AdminService {
-  constructor(private supabase: SupabaseService) {}
+  constructor(private supabase: SupabaseService, private userService: UserService) {}
 
   getAllTenants(): Observable<TenantInterface[]> {
     return from(
@@ -102,24 +103,7 @@ export class AdminService {
   }
 
   getAllUsers(): Observable<UserInterface[]> {
-    return from(
-      this.supabase
-        .getClient()
-        .from('users')
-        .select('*')
-        .order('created_at', { ascending: false })
-    ).pipe(
-      map((response) => {
-        if (response.error) {
-          throw new Error(response.error.message);
-        }
-        return response.data as UserInterface[];
-      }),
-      catchError((error) => {
-        console.error('Error fetching users:', error);
-        return [];
-      })
-    );
+    return this.userService.getUsersWithTenants();
   }
 
   updateUser(user: Partial<UserInterface>): Observable<UserInterface> {

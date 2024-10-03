@@ -9,6 +9,8 @@ th.mat-column-email {
 
 td.mat-column-id,
 th.mat-column-id,
+td.mat-column-tenant_name,
+th.mat-column-tenant_name,
 td.mat-column-last_login,
 th.mat-column-last_login,
 td.mat-column-first_name,
@@ -27,11 +29,10 @@ th.mat-column-is_registered {
 }
 
 .mat-mdc-table-sticky {
-  background: #c1e0fd;
+  border-right: 2px solid #e0e0e0;
 }
 
 .table-container {
-  max-height: 95vh;
   max-width: 100%;
   overflow: auto;
 }
