@@ -1,7 +1,7 @@
 import { Injectable, inject, Inject } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { AuthService } from './auth.service';
-import { ThemeService } from './theme.service';
+import { ThemeService } from './_drafts/theme.service';
 
 @Injectable({
   providedIn: 'root',
