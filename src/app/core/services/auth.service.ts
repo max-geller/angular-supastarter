@@ -28,6 +28,12 @@ export class AuthService {
     };
   }
 
+  getCurrentUserProvider(): Observable<string | null> {
+    return this._session.pipe(
+      map(session => session?.user?.app_metadata?.provider ?? null)
+    );
+  }
+
   async initializeAuth() {
     const { data } = await this.supabaseService.getClient().auth.getSession();
     this._session.next(data.session);

@@ -1,21 +1,31 @@
 <mat-toolbar
   *ngIf="showFooter"
   class="dev-footer"
-  style="display: flex; flex-direction: row; gap: 1rem; "
+  style="display: flex; flex-direction: row; gap: 1rem"
 >
-<div class="app-version">v{{ environmentVersion }}</div>|
-  <div class="environment-info">MODE: {{ environmentMode | uppercase }}</div>|
-  <div class="user-info">USER: {{ currentUserEmail$ | async | uppercase }}</div>|
-  <div class="tenant-info">TENANT: {{ currentTenantName$ | async | uppercase }}</div>|
+  <div class="app-version">v{{ environmentVersion }}</div>
+  |
+  <div class="environment-info">MODE: {{ environmentMode | uppercase }}</div>
+  |
+  <div class="user-info">
+    USER: {{ currentUserEmail$ | async | uppercase }} ({{
+      currentUserProvider$ | async | uppercase
+    }})
+  </div>
+  |
+  <div class="tenant-info">
+    TENANT: {{ currentTenantName$ | async | uppercase }}
+  </div>
+  |
   <div class="network-info">
-    NETWORK: 
-    <ng-container *ngIf="(networkSpeed$ | async) as speed; else offlineNetwork">
-      {{ (connectionType$ | async)?.replace('unknown', '') || 'Unknown' }}
-      <mat-icon class="network-icon" [style.color]="getNetworkSpeedColor(speed)">signal_cellular_alt</mat-icon>
-      ({{ speed | number:'1.1-1' }} Mbps)
+    NETWORK:
+    <ng-container *ngIf="networkSpeed$ | async as speed; else offlineNetwork">
+      {{ (connectionType$ | async)?.replace("unknown", "") || "Unknown" }}
+      <mat-icon class="network-icon" [style.color]="getNetworkSpeedColor(speed)"
+        >signal_cellular_alt</mat-icon
+      >
+      ({{ speed | number : "1.1-1" }} Mbps)
     </ng-container>
-    <ng-template #offlineNetwork>
-      OFFLINE
-    </ng-template>
+    <ng-template #offlineNetwork> OFFLINE </ng-template>
   </div>
 </mat-toolbar>
