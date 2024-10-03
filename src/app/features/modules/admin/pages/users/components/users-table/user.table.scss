@@ -2,15 +2,19 @@ td.mat-column-edit,
 th.mat-column-edit {
 }
 
-
-
 td.mat-column-email,
 th.mat-column-email {
   text-wrap: nowrap;
 }
 
 td.mat-column-id,
-th.mat-column-id {
+th.mat-column-id,
+td.mat-column-last_login,
+th.mat-column-last_login,
+td.mat-column-first_name,
+th.mat-column-first_name,
+td.mat-column-last_name,
+th.mat-column-last_name {
   text-wrap: nowrap;
 }
 
