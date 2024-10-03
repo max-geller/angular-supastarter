@@ -1,6 +1,6 @@
 import { PermissionInterface } from './permission.model';
 
-export interface RoleInterface {
+export interface TeamInterface {
   id: number;
   name: string;
   description: string;

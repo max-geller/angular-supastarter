@@ -1,12 +1,18 @@
+import { TeamInterface } from './team.model';
+import { RoleInterface } from './role.model';
 export interface UserInterface {
     id: string;
-    tenant_id: string;
-    created_at: string;
-    updated_at: string;
-    is_active: boolean;
     first_name?: string;
     last_name?: string;
+    email: string;
+    tenant_id: string;
+    tenant_name?: string;
     last_login?: string;
     is_registered: boolean;
-    tenant_name?: string;
+    teams: TeamInterface[];
+    role: RoleInterface[];
+    is_active: boolean;
+    created_at: string;
+    updated_at: string;
+    invited_by: string;
 }
