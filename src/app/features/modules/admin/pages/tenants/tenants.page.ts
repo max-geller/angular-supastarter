@@ -11,8 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 
 // Import Components
-import { TenantsTableComponent } from './components/tenants.table/tenants.table';
-import { AddTenantDialogDialog } from './components/add-tenant/add-tenant.dialog';
+import { TenantsTableComponent } from './components/tenants-table/tenants-table';
+import { InviteTenantDialog } from './components/invite-tenant/invite-tenant.dialog';
 
 @Component({
   standalone: true,
@@ -31,8 +31,8 @@ export class TenantsPage implements OnInit {
 
   ngOnInit(): void {}
 
-  addTenantDialog() {
-    const dialogRef = this.dialog.open(AddTenantDialogDialog, {
+  inviteTenantDialog() {
+    const dialogRef = this.dialog.open(InviteTenantDialog, {
       width: '400px',
     });
 

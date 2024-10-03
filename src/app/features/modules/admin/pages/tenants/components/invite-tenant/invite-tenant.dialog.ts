@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatIconModule } from '@angular/material/icon';
 // Import Services
 import { ToastService } from '../../../../../../../core/services/toast.service';
 import { AdminService } from '../../../../../../../core/services/admin.service';
@@ -38,30 +38,31 @@ import { TenantInterface } from '../../../../../../../core/models/tenant.model';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    MatIconModule,
   ],
-  templateUrl: './add-tenant.dialog.html',
+  templateUrl: './invite-tenant.dialog.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddTenantDialogDialog {
-  addTenantForm: FormGroup;
+export class InviteTenantDialog {
+  inviteTenantForm: FormGroup;
 
   constructor(
     private adminSerivce: AdminService,
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<AddTenantDialogDialog>,
-    private toastService: ToastService,
+    private dialogRef: MatDialogRef<InviteTenantDialog>,
+    private toastService: ToastService
   ) {
-    this.addTenantForm = this.fb.group({
+    this.inviteTenantForm = this.fb.group({
       name: ['', Validators.required],
       logo_url: [''],
     });
   }
 
   onSubmit() {
-    if (this.addTenantForm.valid) {
+    if (this.inviteTenantForm.valid) {
       const newTenant: Partial<TenantInterface> = {
-        name: this.addTenantForm.get('name')?.value,
-        logo_url: this.addTenantForm.get('logo_url')?.value,
+        name: this.inviteTenantForm.get('name')?.value,
+        logo_url: this.inviteTenantForm.get('logo_url')?.value,
       };
 
       this.adminSerivce.createTenant(newTenant).subscribe({
@@ -71,7 +72,9 @@ export class AddTenantDialogDialog {
         },
         error: (error) => {
           console.error('Error creating tenant:', error);
-          this.toastService.showToast('Error creating tenant. Please try again.');
+          this.toastService.showToast(
+            'Error creating tenant. Please try again.'
+          );
         },
       });
     }

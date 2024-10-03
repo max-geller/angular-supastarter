@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Invite User</h2>
 <mat-dialog-content>
   <form [formGroup]="inviteUserForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input
         matInput
@@ -18,7 +18,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Tenant</mat-label>
       <mat-select formControlName="tenant_id" required>
         <mat-option *ngFor="let tenant of tenants" [value]="tenant.id">

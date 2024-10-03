@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 
 import { UsersTableComponent } from './components/users-table/users.table';
-import { InviteUserDialogDialog } from './components/add-user/invite-user.dialog';
+import { InviteUserDialogDialog } from './components/invite-user/invite-user.dialog';
 
 // Import Services
 import { AdminService } from '../../../../../core/services/admin.service';
@@ -33,7 +33,7 @@ export class UsersPage implements OnInit {
 
   ngOnInit(): void {}
 
-  addUserDialog() {
+  inviteUserDialog() {
     const dialogRef = this.dialog.open(InviteUserDialogDialog, {
       width: '400px',
     });

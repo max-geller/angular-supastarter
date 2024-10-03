@@ -77,8 +77,9 @@ export class UsersTableComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.loadUsers();
-    this.dataSource.paginator = this.paginator as MatPaginator;
-    this.dataSource.sort = this.sort as MatSort;
+      this.dataSource.paginator = this.paginator as MatPaginator;
+      this.dataSource.sort = this.sort as MatSort;
+      this.cdr.detectChanges();
   }
 
   applyFilter(event: Event) {
