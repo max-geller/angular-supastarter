@@ -9,6 +9,7 @@ import { AsyncPipe } from '@angular/common';
 
 // Import Angular Material Components
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 // Import RxJS Operators
 import { Observable } from 'rxjs';
@@ -23,9 +24,15 @@ import { NetworkService } from '../../../core/services/network.service';
 @Component({
   selector: 'app-dev-footer',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, AsyncPipe],
+  imports: [CommonModule, MatToolbarModule, MatIconModule, AsyncPipe],
   templateUrl: './dev-footer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styles: [`
+    .network-icon {
+      transform: scale(0.75);
+      vertical-align: middle;
+    }
+  `]
 })
 export class DevFooterComponent implements OnInit {
   environmentMode: string = '';
@@ -56,5 +63,9 @@ export class DevFooterComponent implements OnInit {
 
   ngOnInit(): void {
     // Any initialization logic if needed
+  }
+
+  getNetworkSpeedColor(speed: number): string {
+    return this.networkService.getNetworkSpeedColor(speed);
   }
 }

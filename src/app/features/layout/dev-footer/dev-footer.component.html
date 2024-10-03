@@ -7,5 +7,9 @@
   <div class="environment-info">MODE: {{ environmentMode | uppercase }}</div>
   <div class="user-info">USER: {{ currentUserEmail$ | async | uppercase }}</div>
   <div class="tenant-info">TENANT: {{ currentTenantName$ | async | uppercase }}</div>
-  <div class="network-info">NETWORK: {{ (connectionType$ | async)?.replace('unknown', '') || 'Unknown' }} ({{ networkSpeed$ | async | number:'1.1-1' }} Mbps)</div>
+  <div class="network-info">
+    NETWORK: {{ (connectionType$ | async)?.replace('unknown', '') || 'Unknown' }}
+    <mat-icon class="network-icon" [style.color]="getNetworkSpeedColor((networkSpeed$ | async) ?? 0)">signal_cellular_alt</mat-icon>
+    ({{ (networkSpeed$ | async) ?? 0 | number:'1.1-1' }} Mbps)
+  </div>
 </mat-toolbar>
