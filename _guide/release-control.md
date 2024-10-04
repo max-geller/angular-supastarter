@@ -32,12 +32,13 @@ NPM_TOKEN: Your npm token (if you're publishing to npm)
 2. Publish changes with conventional commit message to feature branch
 3. Merge changes to staging branch as needed for testing.
 4. When ready, create pull request for merge to main.
-5. Merge the pull request to main
+5. Merge the pull request to main (include semantic-release standard commit format)
 6. Netlify will automatically trigger a build, which will:
 7. Run semantic-release to determine the new version
-8. Update package.json and create/update CHANGELOG.md
-9. Create a new GitHub release and tag
-10. Build your Angular application
-11. Deploy to Netlify
+8. Update package.json and create/update CHANGELOG.md. 
+9. Script 'update-environment.js' will run and update local environment variables.
+10. Create a new GitHub release and tag
+11. Build your Angular application
+12. Deploy to Netlify
 
 ## Branching Strategy
