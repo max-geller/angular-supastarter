@@ -1,8 +1,10 @@
-# Version Control & Release Automation
+# Release Control & Automation
 
 This project uses [Semantic Versioning](https://semver.org/) to manage versioning.
 
 ## Versioning
+
+![image](https://miro.medium.com/v2/resize:fit:720/format:webp/1*_XyzR-4n2k1yXM-O4n7sMw.jpeg)
 
 Semantic Versioning is a three-number versioning scheme. The version number is broken into three parts: major, minor, and patch. The major version number is incremented when incompatible API changes are made, the minor version number is incremented when new functionality is added in a backwards-compatible manner, and the patch version number is incremented when backwards-compatible bug fixes are made.
 
