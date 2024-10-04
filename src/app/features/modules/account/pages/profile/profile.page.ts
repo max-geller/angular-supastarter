@@ -11,7 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { HttpClientModule } from '@angular/common/http';
 // Import Angular Material Components
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -22,11 +22,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserService } from '../../../../../core/services/user.service';
 import { TenantService } from '../../../../../core/services/tenant.service';
 import { AuthService } from '../../../../../core/services/auth.service';
+import { ToastService } from '../../../../../core/services/toast.service';
+import { AvatarService } from '../../../../../core/services/avatar.service';
 
 // Import Interfaces
 import { UserInterface } from '../../../../../core/models/user.model';
 import { TenantInterface } from '../../../../../core/models/tenant.model';
-import { ToastService } from '../../../../../core/services/toast.service';
+
+// Import Third-Party Resources
+import { AvatarModule } from 'ngx-avatars';
 
 @Component({
   standalone: true,
@@ -37,6 +41,8 @@ import { ToastService } from '../../../../../core/services/toast.service';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    AvatarModule,
+    HttpClientModule
   ],
   templateUrl: './profile.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,6 +52,7 @@ export class ProfilePage implements OnInit {
   passwordForm!: FormGroup;
   tenant: TenantInterface | null = null;
   userRole: string | null = null;
+  user: UserInterface | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -53,7 +60,8 @@ export class ProfilePage implements OnInit {
     private tenantService: TenantService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private avatarService: AvatarService
   ) {}
 
   ngOnInit() {
@@ -86,6 +94,7 @@ export class ProfilePage implements OnInit {
   loadUserProfile() {
     this.userService.getUserProfile().subscribe(
       (profile: UserInterface) => {
+        this.user = profile;
         this.profileForm.patchValue({
           first_name: profile.first_name,
           last_name: profile.last_name,
@@ -95,6 +104,35 @@ export class ProfilePage implements OnInit {
       },
       (error) => console.error('Error loading user profile:', error)
     );
+  }
+
+  getAvatarColor(): string {
+    return this.user?.avatar_color || this.avatarService.generateRandomColorFromList();
+  }
+
+  uploadAvatar(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.avatarService.uploadAvatar(file).subscribe(
+        (avatarUrl) => {
+          if (this.user) {
+            this.user.avatar_url = avatarUrl;
+            this.cdr.markForCheck();
+          }
+        },
+        (error) => console.error('Error uploading avatar:', error)
+      );
+    }
+  }
+
+  generateAvatar() {
+    const newColor = this.avatarService.generateRandomColorFromList();
+    if (this.user) {
+      this.avatarService.updateAvatarColor(this.user.id, newColor);
+      this.user.avatar_color = newColor;
+      this.user.avatar_url = ''; // Clear the avatar URL to show the generated avatar
+      this.cdr.markForCheck();
+    }
   }
 
   loadTenantInfo() {
