@@ -1,0 +1,43 @@
+<div class="cascade-select-container">
+  <mat-form-field>
+    <mat-label>Category I</mat-label>
+    <mat-select
+      [(ngModel)]="selectedCategoryI"
+      (selectionChange)="onCategoryIChange()"
+    >
+      <mat-option *ngFor="let category of categoriesI" [value]="category.id">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="selectedCategoryI">
+    <mat-label>Category II</mat-label>
+    <mat-select
+      [(ngModel)]="selectedCategoryII"
+      (selectionChange)="onCategoryIIChange()"
+    >
+      <mat-option *ngFor="let category of categoriesII" [value]="category.id">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="selectedCategoryII">
+    <mat-label>Category III</mat-label>
+    <mat-select [(ngModel)]="selectedCategoryIII">
+      <mat-option *ngFor="let category of categoriesIII" [value]="category.id">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="fetchItems()"
+    [disabled]="!selectedCategoryIII"
+  >
+    Fetch Items
+  </button>
+</div>

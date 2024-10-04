@@ -1,0 +1,46 @@
+@use "@angular/material" as mat;
+
+// Configure Material Theme
+@mixin color($theme) {
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+  // If Theme is Dark:
+  @if mat.get-theme-type($theme) == dark {
+    .module-tab-group {
+      background-color: inherit !important;
+      .module-tab {
+        color: mat.get-theme-color($theme, primary, 95);
+        &:hover {
+          background-color: #232323;
+        }
+        &.active {
+          color: mat.get-theme-color($theme, primary, 60);
+          &::after {
+            background-color: mat.get-theme-color($theme, primary, 60);
+          }
+        }
+      }
+    }
+  } @else {
+    // If Theme is Light:
+    .module-tab-group {
+      background-color: inherit !important;
+      .module-tab {
+        color: mat.get-theme-color($theme, primary, 0);
+        &:hover {
+          background-color: #f0f0f0;
+        }
+        &.active {
+          color: mat.get-theme-color($theme, primary, 40);
+          &::after {
+            background-color: mat.get-theme-color($theme, primary, 40);
+          }
+        }
+      }
+    }
+  }
+}

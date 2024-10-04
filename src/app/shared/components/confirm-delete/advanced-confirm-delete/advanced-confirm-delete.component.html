@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Confirm Delete {{ data.projectName }}</h2>
+<mat-dialog-content>
+  <p>
+    Deleting this {{ data.type }} will also delete all associated information.
+    Please type the {{ data.type }} name to confirm.
+  </p>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm {{data.type}} name</mat-label>
+      <input matInput formControlName="projectNameControl" placeholder="{{data.projectName}}" />
+      <mat-error *ngIf="form.get('projectNameControl')?.hasError('required')">
+        This field is required
+      </mat-error>
+      <mat-error *ngIf="form.get('projectNameControl')?.hasError('pattern')">
+        The name does not match
+      </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="confirmCheck">
+      I understand that this action cannot be undone, and I know what I'm doing.
+    </mat-checkbox>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button (click)="dialogRef.close(false)">Cancel</button>
+  <button
+    mat-flat-button
+    color="warn"
+    [disabled]="isDeleteDisabled()"
+    (click)="dialogRef.close(true)"
+  >
+    Delete
+  </button>
+</mat-dialog-actions>

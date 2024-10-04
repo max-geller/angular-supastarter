@@ -1,0 +1,31 @@
+
+<mat-dialog-content>
+  <h2 >Edit User</h2>
+  <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="first_name" required />
+      <mat-error *ngIf="editUserForm.get('first_name')?.hasError('required')">
+        First name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="last_name" required />
+      <mat-error *ngIf="editUserForm.get('last_name')?.hasError('required')">
+        Last name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="is_active">
+        <mat-option [value]="true">Active</mat-option>
+        <mat-option [value]="false">Inactive</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="editUserForm.invalid">Save</button>
+</mat-dialog-actions>

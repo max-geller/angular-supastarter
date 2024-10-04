@@ -1,0 +1,24 @@
+<!--Create Color Grid Showing Each Color in Theme-->
+<div class="grid-container">
+  <mat-grid-list cols="2" rowHeight="100px">
+    <mat-grid-tile [colspan]="1" [rowspan]="2" *ngFor="let palette of palettes">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>{{ palette.paletteName | titlecase }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="color-grid">
+            <div class="color-card" *ngFor="let color of palette.colors">
+              <div
+                class="color-box"
+                [style.backgroundColor]="color.value"
+              ></div>
+              <div class="color-name">{{ color.name | titlecase }}</div>
+              <div class="color-value">{{ color.value }}</div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -1,0 +1,45 @@
+<div class="layout-container">
+  <app-navbar (toggleSidenav)="sidenav.toggle()"></app-navbar>
+  <mat-divider></mat-divider>
+  <nav class="module-tab-group">
+    <ng-container *ngIf="(currentModuleMenuItems$ | async) as menuItems">
+      <button
+        matRipple
+        *ngFor="let link of menuItems"
+        class="module-tab"
+        [routerLink]="link.route"
+        routerLinkActive="active"
+        (click)="onTabClick(link)"
+      >
+        {{ link.name }}
+      </button>
+    </ng-container>
+  </nav>
+  <mat-sidenav-container>
+    <mat-sidenav
+      class="sidenav-container"
+      #sidenav
+      mode="side"
+      [opened]="sidenavIsOpen"
+    >
+      <mat-nav-list>
+        @if (currentModuleSidenavItems$ | async; as sidenavItems) { @for (item
+        of sidenavItems; track item) {
+        <mat-list-item
+          [routerLink]="item.route"
+          style="border-radius: 0px; min-height: 48px"
+          [ngClass]="{ active: item.isActive }"
+        >
+          {{ item.name }}
+        </mat-list-item>
+        } }
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="module-container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <app-dev-footer></app-dev-footer>
+</div>

@@ -1,0 +1,35 @@
+.dashboard-card {
+  position: absolute !important;
+  top: 15px !important;
+  left: 15px !important;
+  right: 15px !important;
+  bottom: 15px !important;
+}
+
+.more-button {
+  position: absolute !important;
+  top: 5px !important;
+  right: 10px !important;
+}
+
+.dashboard-card-content {
+  text-align: center !important;
+}
+
+.sidenav-container {
+  height: 100% !important;
+}
+
+.sidenav {
+  width: 200px !important;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit !important;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1 !important;
+}

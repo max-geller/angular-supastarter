@@ -1,0 +1,41 @@
+<div *ngIf="showFooter" class="dev-footer">
+  <div class="footer-grid">
+    <div class="grid-item app-version" [ngClass]="{ 'col-span-1': true }">
+      v{{ environmentVersion }}
+    </div>
+    <div class="grid-item environment-info" [ngClass]="{ 'col-span-2': true }">
+      {{ environmentMode | uppercase }}
+    </div>
+    
+    <div class="grid-item user-info" [ngClass]="{ 'col-span-5': true }">
+      {{ currentUserEmail$ | async | uppercase }}
+      <div class="custom-tooltip">
+        User ID:
+        {{ (currentUserId$ | async)?.toString() || "No User ID available" }}
+      </div>
+    </div>
+
+    <div class="grid-item provider-info" [ngClass]="{ 'col-span-1': true }">
+      {{ currentUserProvider$ | async | uppercase }}
+    </div>
+    <div class="grid-item tenant-info" [ngClass]="{ 'col-span-4': true }">
+      {{ currentTenantName$ | async | uppercase }}
+    </div>
+    <div class="grid-item role-info" [ngClass]="{ 'col-span-2': true }">
+      {{ currentUser?.role_name || "N/A" | uppercase }}
+    </div>
+
+
+    <div class="grid-item network-info" [ngClass]="{ 'col-span-2': true }">
+      <ng-container *ngIf="networkSpeed$ | async as speed; else offlineNetwork">
+        <mat-icon
+          class="network-icon"
+          [style.color]="getNetworkSpeedColor(speed)"
+          >signal_cellular_alt</mat-icon
+        >
+        ({{ speed | number : "1.1-1" }} Mbps)
+      </ng-container>
+      <ng-template #offlineNetwork> OFFLINE </ng-template>
+    </div>
+  </div>
+</div>

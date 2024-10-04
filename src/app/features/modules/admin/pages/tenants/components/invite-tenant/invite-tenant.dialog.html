@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Invite Tenant</h2>
+<mat-dialog-content>
+  <form [formGroup]="inviteTenantForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Tenant Name</mat-label>
+      <input matInput formControlName="name" required />
+      <mat-error *ngIf="inviteTenantForm.get('name')?.hasError('required')">
+        Tenant name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Logo URL</mat-label>
+      <input matInput formControlName="logo_url" />
+    </mat-form-field>
+    <mat-dialog-actions>
+      <button mat-flat-button color="warn" type="button" (click)="onCancel()">
+        Cancel
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="inviteTenantForm.invalid"
+      >
+        Add Tenant
+      </button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
