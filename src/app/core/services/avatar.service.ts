@@ -26,18 +26,18 @@ export class AvatarService {
     ].name;
   }
 
-  updateAvatarColor(userId: string, color: string): void {
-    // This should update the user's avatar_color in the user's table using the color name from the avatarColors array.
-    const colorName = this.avatarColors.find((c) => c.name === color)?.name;
-    if (colorName) {
-      this.userService.updateUserProfile({ avatar_color: colorName });
+  updateAvatarColor(userId: string, colorName: string): void {
+    const colorObject = this.avatarColors.find((c) => c.name === colorName);
+    if (colorObject) {
+      this.userService.updateUserProfile({ avatar_color: colorObject.color }).subscribe(() => {
+        this.toastService.showToast(
+          'Avatar color updated successfully',
+          3000,
+          'top',
+          'center'
+        );
+      });
     }
-    this.toastService.showToast(
-      'Avatar color updated successfully',
-      3000,
-      'top',
-      'center'
-    );
   }
 
   uploadAvatar(file: File): Observable<string> {

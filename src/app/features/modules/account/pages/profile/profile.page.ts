@@ -98,7 +98,13 @@ export class ProfilePage implements OnInit {
   }
 
   openAvatarDialog() {
-    this.dialog.open(AvatarDialog);
+    const dialogRef = this.dialog.open(AvatarDialog);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.user = result;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   passwordMatchValidator(form: FormGroup) {
