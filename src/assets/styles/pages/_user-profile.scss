@@ -7,36 +7,40 @@ html {
 
 .profile-container {
   display: flex;
+  flex-direction: column;
   gap: 2rem;
-  padding: 2rem;
+  padding: 1rem;
   max-width: 1200px;
   margin: 0 auto;
-  align-items: flex-start; // Add this line
 
-  .left-container {
-    flex: 0 0 300px;
-    flex-direction: column;
-    .tenant-logo {
-      max-width: 100%;
-      height: auto;
-      margin-top: 1rem;
-    }
+  @media (min-width: 768px) {
+    flex-direction: row;
   }
 
+  .left-container,
   .right-container {
-    flex: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
 
+  @media (min-width: 768px) {
+    .left-container {
+      flex: 0 0 300px;
+    }
+    .right-container {
+      flex: 1;
+    }
+  }
+
   mat-card {
     width: 100%;
+    margin-bottom: 1rem;
   }
 
   mat-form-field {
     width: 100%;
-    margin-bottom: 1rem;
   }
 
   .avatar-container {
@@ -47,8 +51,8 @@ html {
   }
 
   .avatar-preview {
-    width: 200px;
-    height: 200px;
+    width: 100px;  // Reduced from 200px
+    height: 100px; // Reduced from 200px
     border-radius: 50%;
     background-size: cover;
     background-position: center;
@@ -57,11 +61,17 @@ html {
 
   .avatar-actions {
     display: flex;
+    justify-content: center; // Center the buttons
     gap: 1rem;
     width: 100%;
   }
 
   button[type="submit"] {
     width: 100%;
+  }
+
+  .tenant-logo {
+    max-width: 100%;
+    height: auto;
   }
 }
