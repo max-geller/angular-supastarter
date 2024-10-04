@@ -31,3 +31,4 @@ If you experience or witness any abusive or unacceptable behavior, please report
 If a project maintainer doesn't enforce the Code of Conduct in good faith, they may face temporary or permanent consequences as decided by other leaders in the project.
 
 
+This Code of Conduct is adapted from the Contributor Covenant, version 1.2.0, available at http://contributor-covenant.org/version/1/2/0/
