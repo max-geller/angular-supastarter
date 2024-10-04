@@ -26,6 +26,7 @@ import { AuthService } from '../../../../../core/services/auth.service';
 // Import Interfaces
 import { UserInterface } from '../../../../../core/models/user.model';
 import { TenantInterface } from '../../../../../core/models/tenant.model';
+import { ToastService } from '../../../../../core/services/toast.service';
 
 @Component({
   standalone: true,
@@ -51,7 +52,8 @@ export class ProfilePage implements OnInit {
     private userService: UserService,
     private tenantService: TenantService,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -151,13 +153,13 @@ export class ProfilePage implements OnInit {
 
       this.authService.updateProfilePassword(currentPassword, newPassword)
         .then(() => {
-          console.log('Password updated successfully');
+          this.toastService.showToast('Password updated successfully', 3000, 'top', 'center');
           this.passwordForm.reset();
-          // You might want to show a success message to the user here
+          this.cdr.markForCheck();
         })
         .catch((error) => {
           console.error('Error updating password:', error);
-          // Handle the error, maybe show an error message to the user
+          this.toastService.showToast('Error updating password: ' + error.message, 5000, 'top', 'center');
         });
     }
   }

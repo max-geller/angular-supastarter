@@ -16,17 +16,21 @@
         </div>
       </mat-card-content>
     </mat-card>
-    <mat-card *ngIf="tenant">
-      <mat-card-header> </mat-card-header>
+    <mat-card *ngIf="tenant" class="tenant-info-card">
+      <mat-card-header>
+      </mat-card-header>
       <mat-card-content>
-        <p>{{ tenant.name }}</p>
-        <img
-          [src]="tenant.logo_url"
-          alt="Tenant Logo"
-          class="tenant-logo"
-          *ngIf="tenant.logo_url"
-        />
-        <p *ngIf="userRole">{{ userRole }}</p>
+        <div class="tenant-info-content">
+
+          <img
+            [src]="tenant.logo_url"
+            alt="Tenant Logo"
+            class="tenant-logo"
+            *ngIf="tenant.logo_url"
+          />
+          <h3>{{ tenant.name }}</h3>
+          <h4 *ngIf="userRole">{{ userRole }}</h4>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
@@ -95,7 +99,9 @@
           <mat-form-field appearance="outline">
             <mat-label>Current Password</mat-label>
             <input matInput type="password" formControlName="currentPassword" />
-            <mat-error *ngIf="passwordForm.get('currentPassword')?.hasError('required')">
+            <mat-error
+              *ngIf="passwordForm.get('currentPassword')?.hasError('required')"
+            >
               Current password is required
             </mat-error>
           </mat-form-field>
@@ -103,10 +109,14 @@
           <mat-form-field appearance="outline">
             <mat-label>New Password</mat-label>
             <input matInput type="password" formControlName="newPassword" />
-            <mat-error *ngIf="passwordForm.get('newPassword')?.hasError('required')">
+            <mat-error
+              *ngIf="passwordForm.get('newPassword')?.hasError('required')"
+            >
               New password is required
             </mat-error>
-            <mat-error *ngIf="passwordForm.get('newPassword')?.hasError('minlength')">
+            <mat-error
+              *ngIf="passwordForm.get('newPassword')?.hasError('minlength')"
+            >
               New password must be at least 6 characters long
             </mat-error>
           </mat-form-field>
@@ -114,7 +124,9 @@
           <mat-form-field appearance="outline">
             <mat-label>Confirm New Password</mat-label>
             <input matInput type="password" formControlName="confirmPassword" />
-            <mat-error *ngIf="passwordForm.get('confirmPassword')?.hasError('required')">
+            <mat-error
+              *ngIf="passwordForm.get('confirmPassword')?.hasError('required')"
+            >
               Confirm password is required
             </mat-error>
           </mat-form-field>
