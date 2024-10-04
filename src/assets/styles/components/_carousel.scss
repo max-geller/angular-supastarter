@@ -31,6 +31,7 @@
       height: 100%;
       background-size: cover;
       background-position: center;
+      
 
     }
 
@@ -55,6 +56,8 @@
         align-items: flex-start;
         text-align: left;
         width: 100%;
+        padding-right: 2rem;
+        flex-wrap: wrap;
       }
 
       &.right {
@@ -163,7 +166,7 @@
 }
 
 .slide-container {
-  max-width: 80% !important;
+  width: 100% !important;
   height: 100%;
   position: relative;
 }
