@@ -20,11 +20,15 @@
     </mat-card>
     <mat-card *ngIf="tenant">
       <mat-card-header>
-        <mat-card-title>Tenant Info</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p>Tenant Name: {{ tenant.name }}</p>
-        <img [src]="tenant.logo_url" alt="Tenant Logo" class="tenant-logo" *ngIf="tenant.logo_url">
+        <p>{{ tenant.name }}</p>
+        <img
+          [src]="tenant.logo_url"
+          alt="Tenant Logo"
+          class="tenant-logo"
+          *ngIf="tenant.logo_url"
+        />
       </mat-card-content>
     </mat-card>
   </div>
@@ -89,7 +93,7 @@
         <mat-card-title>Update Password</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form>
+        <form [formGroup]="passwordForm">
           <mat-form-field appearance="outline">
             <mat-label>Current Password</mat-label>
             <input matInput type="password" formControlName="currentPassword" />
@@ -99,10 +103,20 @@
             <mat-label>New Password</mat-label>
             <input matInput type="password" formControlName="newPassword" />
           </mat-form-field>
+
           <mat-form-field appearance="outline">
-            <mat-label>Confirm Password</mat-label>
+            <mat-label>Confirm New Password</mat-label>
             <input matInput type="password" formControlName="confirmPassword" />
           </mat-form-field>
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="passwordForm.invalid"
+          >
+            Update Password
+          </button>
         </form>
       </mat-card-content>
     </mat-card>

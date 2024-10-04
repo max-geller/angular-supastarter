@@ -42,6 +42,7 @@ import { TenantInterface } from '../../../../../core/models/tenant.model';
 })
 export class ProfilePage implements OnInit {
   profileForm!: FormGroup;
+  passwordForm!: FormGroup;
   tenant: TenantInterface | null = null;
 
   constructor(
@@ -64,6 +65,12 @@ export class ProfilePage implements OnInit {
       last_name: ['', Validators.required],
       email: [{ value: '', disabled: true }],
     });
+
+    this.passwordForm = this.fb.group({
+      currentPassword: ['', Validators.required],
+      newPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    });
   }
 
   loadUserProfile() {
@@ -82,14 +89,24 @@ export class ProfilePage implements OnInit {
 
   loadTenantInfo() {
     const userId = this.authService.getCurrentUser().user?.id;
+    console.log('Current user ID:', userId);
     if (userId) {
       this.tenantService.getUserTenant(userId).subscribe(
         (tenant: TenantInterface) => {
+          console.log('Tenant data received:', tenant);
           this.tenant = tenant;
           this.cdr.markForCheck();
         },
-        (error) => console.error('Error loading tenant info:', error)
+        (error) => {
+          console.error('Error loading tenant info:', error);
+          this.tenant = null;
+          this.cdr.markForCheck();
+        }
       );
+    } else {
+      console.log('No user ID available');
+      this.tenant = null;
+      this.cdr.markForCheck();
     }
   }
 
