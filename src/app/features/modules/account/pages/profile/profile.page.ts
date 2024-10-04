@@ -70,9 +70,15 @@ export class ProfilePage implements OnInit {
 
     this.passwordForm = this.fb.group({
       currentPassword: ['', Validators.required],
-      newPassword: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-    });
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
+    }, { validator: this.passwordMatchValidator });
+  }
+
+  passwordMatchValidator(form: FormGroup) {
+    const newPassword = form.get('newPassword')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    return newPassword === confirmPassword ? null : { passwordMismatch: true };
   }
 
   loadUserProfile() {
@@ -112,7 +118,7 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  onSubmit() {
+  onProfileSubmit() {
     if (this.profileForm.valid) {
       const updatedProfile: Partial<UserInterface> = {
         first_name: this.profileForm.get('first_name')?.value,

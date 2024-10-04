@@ -39,7 +39,7 @@
         <mat-card-title>User Profile</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
           <mat-form-field appearance="outline">
             <mat-label>First Name</mat-label>
             <input
@@ -95,23 +95,39 @@
           <mat-form-field appearance="outline">
             <mat-label>Current Password</mat-label>
             <input matInput type="password" formControlName="currentPassword" />
+            <mat-error *ngIf="passwordForm.get('currentPassword')?.hasError('required')">
+              Current password is required
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>New Password</mat-label>
             <input matInput type="password" formControlName="newPassword" />
+            <mat-error *ngIf="passwordForm.get('newPassword')?.hasError('required')">
+              New password is required
+            </mat-error>
+            <mat-error *ngIf="passwordForm.get('newPassword')?.hasError('minlength')">
+              New password must be at least 6 characters long
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Confirm New Password</mat-label>
             <input matInput type="password" formControlName="confirmPassword" />
+            <mat-error *ngIf="passwordForm.get('confirmPassword')?.hasError('required')">
+              Confirm password is required
+            </mat-error>
           </mat-form-field>
+
+          <mat-error *ngIf="passwordForm.hasError('passwordMismatch')">
+            Passwords do not match
+          </mat-error>
 
           <button
             mat-raised-button
             color="primary"
             type="submit"
-            [disabled]="passwordForm.invalid"
+            [disabled]="passwordForm.invalid || passwordForm.hasError('passwordMismatch')"
           >
             Update Password
           </button>
