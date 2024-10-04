@@ -8,9 +8,12 @@
 }
 
 .app-navbar {
-  height: 3.2rem;
-  align-items: end;
-  padding-bottom: 0.35rem;
+  height: 3.2rem !important;
+  align-items: end !important;
+  padding-bottom: 0.35rem !important;
+  .mdc-floating-label {
+    font-size: 0.75rem !important;
+  }
 }
 
 .toolbar-container {
@@ -44,20 +47,72 @@
   gap: 0.25rem;
 }
 
+.notifications-button {
+  mat-icon {
+    font-size: 1.1rem !important;
+  }
+}
+
 .user-menu-button {
   font-weight: 450;
+  font-size: 0.8rem;
 }
 
 .notifications-badge {
   background-color: #ff3300;
   border-radius: 50%;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0;
-  right: 1px;
+  top: 4px;
+  right: 4px;
   z-index: 1000;
+}
+
+@media (max-width: 480px) {
+  .user-menu-button {
+    font-weight: 450;
+    font-size: 0.7rem;
+    padding-top: 0rem !important;
+    margin: 0px !important;
+  }
+  .notifications-button {
+    mat-icon {
+      font-size: 1rem !important;
+    }
+  }
+  .right-container {
+    gap: 0rem !important;
+    margin-right: -1rem !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .left-container {
+    padding-bottom: 5px;
+    .mdc-floating-label {
+      font-size: 0.68rem !important;
+      margin-bottom: 2px !important;
+    }
+    .mat-mdc-select-value {
+      font-size: 0.7rem !important;
+    }
+
+    .mat-mdc-form-field {
+      height: 25px !important;
+      margin-top: -35px !important;
+      max-width: 150px !important;
+    }
+
+    .mdc-list-item__primary-text {
+      font-size: 0.5rem !important;
+    }
+  }
+  .mdc-notched-outline {
+    height: 25px !important;
+    margin-top: 7px !important;
+  }
 }
