@@ -44,6 +44,7 @@ export class ProfilePage implements OnInit {
   profileForm!: FormGroup;
   passwordForm!: FormGroup;
   tenant: TenantInterface | null = null;
+  userRole: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +58,7 @@ export class ProfilePage implements OnInit {
     this.initForm();
     this.loadUserProfile();
     this.loadTenantInfo();
+    this.loadUserRole();
   }
 
   initForm() {
@@ -124,5 +126,15 @@ export class ProfilePage implements OnInit {
         (error) => console.error('Error updating profile:', error)
       );
     }
+  }
+
+  loadUserRole() {
+    this.userService.getCurrentUserWithRole().subscribe(
+      (user: UserInterface) => {
+        this.userRole = user.role_name || null;
+        this.cdr.markForCheck();
+      },
+      (error) => console.error('Error loading user role:', error)
+    );
   }
 }

@@ -2,8 +2,7 @@
   <!-- Left Container: User Avatar and Tenant Info -->
   <div class="left-container">
     <mat-card>
-      <mat-card-header>
-      </mat-card-header>
+      <mat-card-header> </mat-card-header>
       <mat-card-content>
         <div class="avatar-container">
           <div
@@ -18,8 +17,7 @@
       </mat-card-content>
     </mat-card>
     <mat-card *ngIf="tenant">
-      <mat-card-header>
-      </mat-card-header>
+      <mat-card-header> </mat-card-header>
       <mat-card-content>
         <p>{{ tenant.name }}</p>
         <img
@@ -28,6 +26,7 @@
           class="tenant-logo"
           *ngIf="tenant.logo_url"
         />
+        <p *ngIf="userRole">{{ userRole }}</p>
       </mat-card-content>
     </mat-card>
   </div>
