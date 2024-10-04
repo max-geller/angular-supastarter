@@ -35,19 +35,33 @@
     width: 100%;
   }
   .avatar-container-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 20px;
+    
     .avatar-container {
-      gap: 1rem;
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 1rem;
     }
+
+    .avatar-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
     .avatar-preview {
-      width: 100px;
-      height: 100px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       background-size: cover;
       background-position: center;
     }
+
     .avatar-actions {
       display: flex;
       justify-content: center;
@@ -90,7 +104,17 @@
   }
 }
 
-// Add this to ensure ngx-avatar is circular
+// Ensure ngx-avatar is circular and centered
 ::ng-deep .avatar-wrapper .ngx-avatar {
-  border-radius: 50% !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+::ng-deep .avatar-wrapper .ngx-avatar .avatar-content {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  font-size: 60px !important;
 }

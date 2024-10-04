@@ -5,39 +5,36 @@
       <mat-card-content class="avatar-container-card">
         <div class="avatar-container">
           <!-- Show ngx-avatar if no avatar_url -->
-          <div *ngIf="!user?.avatar_url">
+          <div *ngIf="!user?.avatar_url" class="avatar-wrapper">
             <ngx-avatars
               [name]="user?.first_name + ' ' + user?.last_name"
-              [size]="100"
+              [size]="130"
+              [round]="true"
               [bgColor]="getAvatarColor()"
             ></ngx-avatars>
           </div>
-
+          
           <!-- Show uploaded avatar if avatar_url exists -->
           <div
             *ngIf="user?.avatar_url"
             class="avatar-preview"
             [style.backgroundImage]="'url(' + user?.avatar_url + ')'"
           ></div>
-          <div class="avatar-actions">
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="fileInput.click()"
-            >
-              Upload
-            </button>
-            <input
-              #fileInput
-              type="file"
-              (change)="uploadAvatar($event)"
-              style="display: none"
-              accept="image/*"
-            />
-            <button mat-raised-button color="accent" (click)="generateAvatar()">
-              Generate
-            </button>
-          </div>
+        </div>
+        <div class="avatar-actions">
+          <button mat-raised-button color="primary" (click)="fileInput.click()">
+            Upload
+          </button>
+          <input
+            #fileInput
+            type="file"
+            (change)="uploadAvatar($event)"
+            style="display: none"
+            accept="image/*"
+          />
+          <button mat-raised-button color="accent" (click)="generateAvatar()">
+            Generate
+          </button>
         </div>
       </mat-card-content>
     </mat-card>
