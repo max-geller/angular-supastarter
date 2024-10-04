@@ -22,7 +22,8 @@ export class UserService {
 
   getUserProfile(): Observable<UserInterface> {
     return from(
-      this.supabaseService.getClient()
+      this.supabaseService
+        .getClient()
         .from('users')
         .select('*')
         .eq('id', this.authService.getCurrentUser().user?.id)
@@ -34,21 +35,29 @@ export class UserService {
       })
     );
   }
-  registerUser(userId: string, userData: Partial<UserInterface>, password: string): Observable<UserInterface> {
-    return from(this.supabaseService.getClient().auth.updateUser({ password })).pipe(
+  registerUser(
+    userId: string,
+    userData: Partial<UserInterface>,
+    password: string
+  ): Observable<UserInterface> {
+    return from(
+      this.supabaseService.getClient().auth.updateUser({ password })
+    ).pipe(
       switchMap(() => {
-        return from(this.supabaseService.getClient()
-          .from('users')
-          .upsert({
-            id: userId,
-            first_name: userData.first_name,
-            last_name: userData.last_name,
-            is_registered: true,
-            is_active: true,
-            created_at: new Date().toISOString(),
-          })
-          .select()
-          .single()
+        return from(
+          this.supabaseService
+            .getClient()
+            .from('users')
+            .upsert({
+              id: userId,
+              first_name: userData.first_name,
+              last_name: userData.last_name,
+              is_registered: true,
+              is_active: true,
+              created_at: new Date().toISOString(),
+            })
+            .select()
+            .single()
         );
       }),
       map(({ data, error }) => {
@@ -67,15 +76,13 @@ export class UserService {
         }
         return this.tenantService.getTenantById(user.tenant_id);
       }),
-      map(tenant => tenant.name)
+      map((tenant) => tenant.name)
     );
   }
 
   getUsersWithTenants(): Observable<UserInterface[]> {
     return from(
-      this.supabaseService.getClient()
-        .from('users')
-        .select(`
+      this.supabaseService.getClient().from('users').select(`
           *,
           tenants (
             name
@@ -84,9 +91,9 @@ export class UserService {
     ).pipe(
       map(({ data, error }) => {
         if (error) throw error;
-        return data.map(user => ({
+        return data.map((user) => ({
           ...user,
-          tenant_name: user.tenants?.name
+          tenant_name: user.tenants?.name,
         })) as UserInterface[];
       })
     );
@@ -94,9 +101,7 @@ export class UserService {
 
   getUsersWithTenantsAndRoles(): Observable<UserInterface[]> {
     return from(
-      this.supabaseService.getClient()
-        .from('users')
-        .select(`
+      this.supabaseService.getClient().from('users').select(`
           *,
           tenants (
             name
@@ -108,10 +113,10 @@ export class UserService {
     ).pipe(
       map(({ data, error }) => {
         if (error) throw error;
-        return data.map(user => ({
+        return data.map((user) => ({
           ...user,
           tenant_name: user.tenants?.name,
-          role_name: user.roles?.name
+          role_name: user.roles?.name,
         })) as UserInterface[];
       })
     );
@@ -119,9 +124,11 @@ export class UserService {
 
   getUserById(userId: string): Observable<UserInterface> {
     return from(
-      this.supabaseService.getClient()
+      this.supabaseService
+        .getClient()
         .from('users')
-        .select(`
+        .select(
+          `
           *,
           tenants (
             name
@@ -129,7 +136,8 @@ export class UserService {
           roles (
             name
           )
-        `)
+        `
+        )
         .eq('id', userId)
         .single()
     ).pipe(
@@ -138,7 +146,7 @@ export class UserService {
         return {
           ...data,
           tenant_name: data.tenants?.name,
-          role_name: data.roles?.name
+          role_name: data.roles?.name,
         } as UserInterface;
       })
     );
@@ -146,14 +154,17 @@ export class UserService {
 
   getCurrentUserWithRole(): Observable<UserInterface> {
     return from(
-      this.supabaseService.getClient()
+      this.supabaseService
+        .getClient()
         .from('users')
-        .select(`
+        .select(
+          `
           *,
           roles (
             name
           )
-        `)
+        `
+        )
         .eq('id', this.authService.getCurrentUser().user?.id)
         .single()
     ).pipe(
@@ -161,9 +172,30 @@ export class UserService {
         if (error) throw error;
         return {
           ...data,
-          role_name: data.roles?.name
+          role_name: data.roles?.name,
         } as UserInterface;
       })
     );
   }
+
+  updateUserProfile(
+    userData: Partial<UserInterface>
+  ): Observable<UserInterface> {
+    return from(
+      this.supabaseService
+        .getClient()
+        .from('users')
+        .update(userData)
+        .eq('id', this.authService.getCurrentUser().user?.id)
+        .select()
+        .single()
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data as UserInterface;
+      })
+    );
+  }
+
+  uploadAvatar(file: File): void {}
 }

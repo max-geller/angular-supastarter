@@ -1,0 +1,67 @@
+body,
+html {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: flex-start; // Add this line
+
+  .left-container {
+    flex: 0 0 300px;
+    flex-direction: column;
+    .tenant-logo {
+      max-width: 100%;
+      height: auto;
+      margin-top: 1rem;
+    }
+  }
+
+  .right-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  mat-card {
+    width: 100%;
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .avatar-preview {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #ccc;
+  }
+
+  .avatar-actions {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+  }
+}
