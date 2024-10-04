@@ -143,4 +143,22 @@ export class ProfilePage implements OnInit {
       (error) => console.error('Error loading user role:', error)
     );
   }
+
+  onPasswordSubmit() {
+    if (this.passwordForm.valid) {
+      const currentPassword = this.passwordForm.get('currentPassword')?.value;
+      const newPassword = this.passwordForm.get('newPassword')?.value;
+
+      this.authService.updateProfilePassword(currentPassword, newPassword)
+        .then(() => {
+          console.log('Password updated successfully');
+          this.passwordForm.reset();
+          // You might want to show a success message to the user here
+        })
+        .catch((error) => {
+          console.error('Error updating password:', error);
+          // Handle the error, maybe show an error message to the user
+        });
+    }
+  }
 }

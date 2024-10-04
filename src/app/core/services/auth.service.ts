@@ -130,4 +130,26 @@ export class AuthService {
 
     return data;
   }
+
+  async updateProfilePassword(currentPassword: string, newPassword: string): Promise<void> {
+    try {
+      const { data: { user }, error: signInError } = await this.supabaseService.getClient().auth.signInWithPassword({
+        email: this.getCurrentUser().email!,
+        password: currentPassword,
+      });
+
+      if (signInError) {
+        throw new Error('Current password is incorrect');
+      }
+
+      const { error: updateError } = await this.supabaseService.getClient().auth.updateUser({ password: newPassword });
+
+      if (updateError) {
+        throw updateError;
+      }
+    } catch (error) {
+      console.error('Error updating password:', error);
+      throw error;
+    }
+  }
 }
