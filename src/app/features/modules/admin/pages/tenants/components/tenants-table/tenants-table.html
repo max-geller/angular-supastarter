@@ -18,7 +18,7 @@
     </ng-container>
 
     <ng-container matColumnDef="logo_url">
-      <th mat-header-cell *matHeaderCellDef>Logo</th>
+      <th mat-header-cell *matHeaderCellDef>Name</th>
       <td mat-cell *matCellDef="let tenant">
         <img
           [src]="tenant.logo_url"
@@ -29,7 +29,7 @@
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
       <td mat-cell *matCellDef="let tenant">{{ tenant.name }}</td>
     </ng-container>
 
@@ -41,7 +41,7 @@
     </ng-container>
 
     <ng-container matColumnDef="is_active">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Is Active</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Active</th>
       <td mat-cell *matCellDef="let tenant">
         {{ tenant.is_active ? 'Yes' : 'No' }}
       </td>
