@@ -55,7 +55,6 @@ export class RolesTableComponent implements AfterViewInit {
     'created_by',
     'updated_by',
     'is_active',
-    'id',
   ];
   dataSource = new MatTableDataSource<RoleInterface>([]);
 

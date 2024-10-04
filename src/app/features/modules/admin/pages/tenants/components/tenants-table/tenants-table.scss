@@ -6,21 +6,32 @@ th.mat-column-edit {
 
 td.mat-column-id,
 th.mat-column-id,
-td.mat-column-name,
-th.mat-column-name,
 td.mat-column-created_at,
 th.mat-column-created_at,
 td.mat-column-role_name,
 th.mat-column-role_name {
   text-wrap: nowrap;
+  width: 110px;
 }
 
 td.mat-column-is_active,
-th.mat-column-is_active,
-td.mat-column-is_registered,
-th.mat-column-is_registered {
-  text-align: center;
-  min-width: 90px;
+th.mat-column-is_active {
+  min-width: 30px !important;
+}
+
+td.mat-column-logo_url,
+th.mat-column-logo_url {
+  width: 60px;
+  border-right: none;
+
+}
+
+td.mat-column-name,
+th.mat-column-name {
+  min-width: 80px;
+  text-align: left;
+  text-wrap: nowrap;
+
 }
 
 .mat-mdc-table-sticky {

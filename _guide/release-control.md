@@ -26,10 +26,19 @@ NPM_TOKEN: Your npm token (if you're publishing to npm)
 
 ```
 
+## Release Commit Formatting
+
+| Commit Message                                                                          | Change Type | Release Type            |
+| --------------------------------------------------------------------------------------- | ----------- | ----------------------- |
+| fix(pencil): stop graphite breaking when too much pressure applied                      | Patch       | Fix Release             |
+| feat(pencil): add 'graphiteWidth' option                                                | Minor       | Feature Release         |
+| perf(pencil): remove graphiteWidth option                                               | Major       | Performance Improvement |
+| perf(pencil): remove feature BREAKING CHANGE: The graphiteWidth option has been removed | Breaking    | Breaking Change         |
+
 ## Sequence of Events
 
-1. Make changes in a feature branch
-2. Publish changes with conventional commit message to feature branch
+1. Make changes in the development branch
+2. Publish changes with conventional commit message to development branch
 3. Merge changes to staging branch as needed for testing.
 4. When ready, create pull request for merge to main.
 5. Merge the pull request to main (include semantic-release standard commit format)

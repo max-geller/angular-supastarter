@@ -18,6 +18,11 @@ th.mat-column-updated_by {
   text-wrap: nowrap;
 }
 
+td.mat-column-description,
+th.mat-column-description {
+  min-width: 250px;
+}
+
 td.mat-column-is_active,
 th.mat-column-is_active {
   text-align: center;

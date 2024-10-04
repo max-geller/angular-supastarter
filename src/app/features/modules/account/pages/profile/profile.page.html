@@ -1,42 +1,170 @@
-<div style="display: flex; gap: 1rem">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>User Profile</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
-        <input matInput type="text" name="search-items" />
-      </mat-form-field>
-      <div style="display: flex; flex-direction: row; gap: 1rem">
-        <mat-form-field appearance="outline">
-          <mat-label>Fist Name</mat-label>
-          <input matInput type="text" name="search-items" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Last Name</mat-label>
-          <input matInput type="text" name="search-items" />
-        </mat-form-field>
-      </div>
-    </mat-card-content>
-  </mat-card>
+<div class="profile-container">
+  <!-- Left Container: User Avatar and Tenant Info -->
+  <div class="left-container">
+    <mat-card>
+      <mat-card-content class="avatar-container-card">
+        <div class="avatar-container">
+          <!-- Show ngx-avatar if no avatar_url -->
+          <div *ngIf="!user?.avatar_url" class="avatar-wrapper">
+            <ngx-avatars
+              [name]="user?.first_name + ' ' + user?.last_name"
+              [size]="130"
+              [round]="true"
+              [bgColor]="getAvatarColor()"
+            ></ngx-avatars>
+          </div>
+          
+          <!-- Show uploaded avatar if avatar_url exists -->
+          <div
+            *ngIf="user?.avatar_url"
+            class="avatar-preview"
+            [style.backgroundImage]="'url(' + user?.avatar_url + ')'"
+          ></div>
+        </div>
+        <div class="avatar-actions">
+          <button mat-raised-button color="primary" (click)="fileInput.click()">
+            Upload
+          </button>
+          <input
+            #fileInput
+            type="file"
+            (change)="uploadAvatar($event)"
+            style="display: none"
+            accept="image/*"
+          />
+          <button mat-raised-button color="accent" (click)="generateAvatar()">
+            Change Avatar
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="tenant" class="tenant-info-card">
+      <mat-card-header> </mat-card-header>
+      <mat-card-content>
+        <div class="tenant-info-content">
+          <img
+            [src]="tenant.logo_url"
+            alt="Tenant Logo"
+            class="tenant-logo"
+            *ngIf="tenant.logo_url"
+          />
+          <h3>{{ tenant.name }}</h3>
+          <h4 *ngIf="userRole">{{ userRole }}</h4>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>User Avatar</mat-card-title>
-    </mat-card-header>
-    <mat-card-content style="display: flex; gap: 1rem">
-      <div
-        style="
-          height: 120px;
-          width: 120px;
-          border-radius: 50%;
-          background-color: grey;
-        "
-      ></div>
-      <div style="display: flex; gap: 1rem">
-        <button mat-flat-button>Upload Image</button>
-      </div>
-    </mat-card-content>
-  </mat-card>
+  <!-- Right Container: User Profile & Password -->
+  <div class="right-container">
+    <!-- User Profile -->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>User Profile</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input
+              matInput
+              formControlName="first_name"
+              placeholder="Enter your first name"
+            />
+            <mat-error
+              *ngIf="profileForm.get('first_name')?.hasError('required')"
+            >
+              First name is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input
+              matInput
+              formControlName="last_name"
+              placeholder="Enter your last name"
+            />
+            <mat-error
+              *ngIf="profileForm.get('last_name')?.hasError('required')"
+            >
+              Last name is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" readonly />
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="profileForm.invalid"
+          >
+            Save Profile
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Update Password -->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Update Password</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()">
+          <mat-form-field appearance="outline">
+            <mat-label>Current Password</mat-label>
+            <input matInput type="password" formControlName="currentPassword" />
+            <mat-error
+              *ngIf="passwordForm.get('currentPassword')?.hasError('required')"
+            >
+              Current password is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>New Password</mat-label>
+            <input matInput type="password" formControlName="newPassword" />
+            <mat-error
+              *ngIf="passwordForm.get('newPassword')?.hasError('required')"
+            >
+              New password is required
+            </mat-error>
+            <mat-error
+              *ngIf="passwordForm.get('newPassword')?.hasError('minlength')"
+            >
+              New password must be at least 6 characters long
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Confirm New Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword" />
+            <mat-error
+              *ngIf="passwordForm.get('confirmPassword')?.hasError('required')"
+            >
+              Confirm password is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-error *ngIf="passwordForm.hasError('passwordMismatch')">
+            Passwords do not match
+          </mat-error>
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="passwordForm.invalid || passwordForm.hasError('passwordMismatch')"
+          >
+            Update Password
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

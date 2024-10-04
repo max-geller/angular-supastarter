@@ -17,4 +17,6 @@ export interface UserInterface {
     created_at: string;
     updated_at: string;
     invited_by: string;
+    avatar_url: string;
+    avatar_color: string;
 }
