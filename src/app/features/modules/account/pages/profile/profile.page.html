@@ -10,21 +10,21 @@
               [name]="user?.first_name + ' ' + user?.last_name"
               [size]="130"
               [round]="true"
-              [bgColor]="getAvatarColor()"
+              [bgColor]="user?.avatar_color"
             ></ngx-avatars>
           </div>
-          
+
           <!-- Show uploaded avatar if avatar_url exists -->
-          <div
-            *ngIf="user?.avatar_url"
-            class="avatar-preview"
-            [style.backgroundImage]="'url(' + user?.avatar_url + ')'"
-          ></div>
+          <ngx-avatars *ngIf="user?.avatar_url"
+          [name]="user?.first_name + ' ' + user?.last_name"
+          [size]="130"
+          [round]="true"
+          [src]="'url(' + user?.avatar_url + ')'"
+        >
+        </ngx-avatars>
+
         </div>
         <div class="avatar-actions">
-          <button mat-raised-button color="primary" (click)="fileInput.click()">
-            Upload
-          </button>
           <input
             #fileInput
             type="file"
@@ -32,9 +32,7 @@
             style="display: none"
             accept="image/*"
           />
-          <button mat-raised-button color="accent" (click)="generateAvatar()">
-            Change Avatar
-          </button>
+          <button mat-raised-button (click)="openAvatarDialog()">Change Avatar</button>
         </div>
       </mat-card-content>
     </mat-card>
