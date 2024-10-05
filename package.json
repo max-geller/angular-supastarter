@@ -10,6 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "release": "semantic-release"
+    
   },
   "private": true,
   "dependencies": {
