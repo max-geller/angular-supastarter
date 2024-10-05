@@ -1,8 +1,52 @@
 # Angular 18 Starter
 
+
+![GitHub stars](https://img.shields.io/github/stars/yourusername/your-repo-name?style=social)
+![GitHub forks](https://img.shields.io/github/forks/yourusername/your-repo-name?style=social)
+![GitHub issues](https://img.shields.io/github/issues/yourusername/your-repo-name)
+![GitHub license](https://img.shields.io/github/license/yourusername/your-repo-name)
+
+A production-ready starter template for building multi-tenant applications with Angular 18 and Supabase.
+
+![Demo GIF](path/to/demo.gif)
+
 ## Description
 
 This project is a multi-tenant starter SaaS application using Angular 18, Material Design. This project is configured to be hosted on Netlify and uses Supabase as the database and authentication provider.
+
+
+## Features
+
+- 🚀 Angular 18 
+- 🎨 Angular Material 18 
+- 🗄️ Supabase Integration
+- 👥 Multi-tenancy support
+- 🔐 Authentication and Authorization
+- 🎨 Customizable theming
+- 📱 Responsive design
+
+## Quick Start
+
+1. Clone the repository
+2. Set up your Supabase project
+3. Configure environment variables
+4. Run database migrations
+5. Start the development server
+6. 
+For detailed instructions, see our [Setup Guide](link-to-setup-guide).
+
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
+
+
+## Support
+
+If you like this project, please give it a ⭐️ on GitHub!
+
+
+
 
 ## Stack
 
@@ -71,3 +115,8 @@ This project uses a shared database and schema for all tenants.
 ## Contact
 
 If you have any questions, please contact the project owner at [angular.supastarter@gmail.com](mailto:angular.supastarter@gmail.com).
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
