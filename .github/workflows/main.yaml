@@ -3,7 +3,7 @@ name: Staging Build and Deploy
 on:
   push:
     branches:
-      - development
+      - main
 
 # Set Permissions
 permissions:
@@ -32,7 +32,7 @@ jobs:
     #    working-directory: angular-starter/browser
         run: |
           npm ci
-          npm run build --configuration=development
+          npm run build --configuration=production
 
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
