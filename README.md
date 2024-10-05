@@ -75,7 +75,7 @@ Use the following commands to deploy the application to Netlify:
 
 ```bash
    'build command': npm run build
-    'publish directory': 'dist/angular-starter/browser
+    'publish directory': 'dist/angular-supastarter/browser
 ```
 
 ## Database
@@ -117,7 +117,7 @@ This project uses a shared database and schema for all tenants.
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
+We welcome contributions! Please see our [Project Wiki](https://github.com/max-geller/angular-supastarter/wiki) for more details.
 
 We use GitHub Projects to organize our work. Here's how you can get involved:
 
