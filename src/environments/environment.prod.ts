@@ -5,4 +5,8 @@ export const environment = {
   staging: false,
   development: false,
   showDevFooter: false,
+  supabaseCredentials: {
+    url: import.meta.env['NG_APP_SUPABASE_PROD_URL'],
+    key: import.meta.env['NG_APP_SUPABASE_PROD_KEY'],
+  },
 };
