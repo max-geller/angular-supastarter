@@ -5,9 +5,3 @@
 
 [build.environment]
   NODE_VERSION = "22" 
-
-[context.production.environment]
-  ANGULAR_ENV = "production"
-
-[context.staging.environment]
-  ANGULAR_ENV = "staging"

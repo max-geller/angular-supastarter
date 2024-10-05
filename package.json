@@ -1,5 +1,5 @@
 {
-  "name": "angular-starter",
+  "name": "angular-supastarter",
   "version": "0.0.1",
   "author": "Max Geller",
   "scripts": {
@@ -10,6 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "release": "semantic-release"
+    
   },
   "private": true,
   "dependencies": {

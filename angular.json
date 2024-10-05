@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-starter": {
+    "angular-supastarter": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@ngx-env/builder:application",
           "options": {
-            "outputPath": "dist/angular-starter",
+            "outputPath": "dist/angular-supastarter",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -91,13 +91,13 @@
           "builder": "@ngx-env/builder:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-starter:build:production"
+              "buildTarget": "angular-supastarter:build:production"
             },
             "development": {
-              "buildTarget": "angular-starter:build:development"
+              "buildTarget": "angular-supastarter:build:development"
             },
             "staging": {
-              "buildTarget": "angular-starter:build:staging"
+              "buildTarget": "angular-supastarter:build:staging"
             }
           },
           "defaultConfiguration": "development"
