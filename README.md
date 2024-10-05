@@ -68,3 +68,6 @@ This project uses a shared database and schema for all tenants.
 ### Roles and Permissions
 
 
+## Contact
+
+If you have any questions, please contact the project owner at [angular.supastarter@gmail.com](mailto:angular.supastarter@gmail.com).

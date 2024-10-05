@@ -26,7 +26,7 @@ Maintainers have the authority to remove, edit, or reject contributions (comment
 
 ## Enforcement
 
-If you experience or witness any abusive or unacceptable behavior, please report it to the project lead. We’ll review and investigate all complaints, and respond in a way that fits the situation. We’ll also make sure to keep the reporter’s information confidential.
+If you experience or witness any abusive or unacceptable behavior, please report it to the [project owner](mailto:angular.supastarter@gmail.com). We’ll review and investigate all complaints, and respond in a way that fits the situation. We’ll also make sure to keep the reporter’s information confidential.
 
 If a project maintainer doesn't enforce the Code of Conduct in good faith, they may face temporary or permanent consequences as decided by other leaders in the project.
 
