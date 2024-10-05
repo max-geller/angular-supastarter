@@ -22,6 +22,12 @@ A production-ready starter template for building multi-tenant applications with 
 ![Demo GIF](path/to/demo.gif)
 </p>
 
+Staging Site Status:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/733bf693-71a2-4080-99e6-a4742f883749/deploy-status)](https://app.netlify.com/sites/angular-supastarter-staging/deploys)
+
+Production Site Status:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a1317dfb-d375-47ab-8a9c-ab3120fc8b3d/deploy-status)](https://app.netlify.com/sites/angular-supastarter/deploys)
+
 ## Description
 
 This project is a multi-tenant starter SaaS application using Angular 18, Material Design. This project is configured to be hosted on Netlify and uses Supabase as the database and authentication provider.
