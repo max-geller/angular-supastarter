@@ -47,7 +47,7 @@ Angular provides a robust framework for building web applications, and Material 
 3. Configure environment variables
 4. Run database migrations
 5. Start the development server
-6. For detailed instructions, see our [Setup Guide](link-to-setup-guide).
+6. For detailed instructions, see our [Project Wiki](https://github.com/max-geller/angular-supastarter/wiki).
 
 ## Stack
 
