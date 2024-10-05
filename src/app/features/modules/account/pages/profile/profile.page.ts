@@ -36,6 +36,7 @@ import { TenantInterface } from '../../../../../core/models/tenant.model';
 
 // Import Third-Party Resources
 import { AvatarModule } from 'ngx-avatars';
+import { forkJoin } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -61,6 +62,7 @@ export class ProfilePage implements OnInit {
   tenant: TenantInterface | null = null;
   userRole: string | null = null;
   user: UserInterface | null = null;
+  isLoading: boolean = true; // Add this line
 
   constructor(
     private fb: FormBuilder,
@@ -75,9 +77,7 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.loadUserProfile();
-    this.loadTenantInfo();
-    this.loadUserRole();
+    this.loadUserData();
   }
 
   initForm() {
@@ -113,19 +113,40 @@ export class ProfilePage implements OnInit {
     return newPassword === confirmPassword ? null : { passwordMismatch: true };
   }
 
-  loadUserProfile() {
-    this.userService.getUserProfile().subscribe(
-      (profile: UserInterface) => {
-        this.user = profile;
+  loadUserData() {
+    this.isLoading = true;
+    const currentUserId = this.authService.getCurrentUser().user?.id;
+
+    if (!currentUserId) {
+      console.error('No user ID available');
+      this.isLoading = false;
+      this.cdr.markForCheck();
+      return;
+    }
+
+    forkJoin({
+      profile: this.userService.getUserProfile(),
+      tenant: this.tenantService.getUserTenant(currentUserId),
+      role: this.userService.getCurrentUserWithRole()
+    }).subscribe({
+      next: (data) => {
+        this.user = data.profile;
+        this.tenant = data.tenant;
+        this.userRole = data.role.role_name || null;
         this.profileForm.patchValue({
-          first_name: profile.first_name,
-          last_name: profile.last_name,
-          email: profile.email,
+          first_name: this.user.first_name,
+          last_name: this.user.last_name,
+          email: this.user.email,
         });
+        this.isLoading = false;
         this.cdr.markForCheck();
       },
-      (error) => console.error('Error loading user profile:', error)
-    );
+      error: (error) => {
+        console.error('Error loading user data:', error);
+        this.isLoading = false;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   getAvatarColor(): string {

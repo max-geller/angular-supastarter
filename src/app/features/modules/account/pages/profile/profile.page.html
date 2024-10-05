@@ -1,4 +1,4 @@
-<div class="profile-container">
+<div class="profile-container" *ngIf="!isLoading; else loadingTemplate">
   <!-- Left Container: User Avatar and Tenant Info -->
   <div class="left-container">
     <mat-card>
@@ -16,10 +16,9 @@
 
           <!-- Show uploaded avatar if avatar_url exists -->
           <ngx-avatars *ngIf="user?.avatar_url"
-          [name]="user?.first_name + ' ' + user?.last_name"
           [size]="130"
           [round]="true"
-          [src]="'url(' + user?.avatar_url + ')'"
+          [src]="user?.avatar_url"
         >
         </ngx-avatars>
 
@@ -166,3 +165,9 @@
     </mat-card>
   </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <div class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

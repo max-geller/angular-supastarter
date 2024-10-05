@@ -15,11 +15,10 @@
       [size]="130"
       [round]="true"
       [bgColor]="userAvatarColor"
+      [src]="currentUser?.avatar_url"
     ></ngx-avatars>
   </div>
   <div class="avatar-actions">
-    <div>Upload a new avatar</div>
-    <div>Recent Avatars</div>
     <mat-form-field appearance="outline">
       <mat-label>Select Color</mat-label>
       <mat-select (selectionChange)="updateAvatarColor($event.value)">
@@ -46,6 +45,8 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #fileInput>
+    <button mat-flat-button (click)="fileInput.click()">Upload Image</button>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>

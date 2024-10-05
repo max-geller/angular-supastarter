@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
   MatDialogTitle,
+  MatDialogRef,
 } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { AvatarModule } from 'ngx-avatars';
@@ -15,13 +16,12 @@ import { UserService } from './../../../../../../../core/services/user.service';
 import { AvatarService } from './../../../../../../../core/services/avatar.service';
 import { UserInterface } from './../../../../../../../core/models/user.model';
 import { ChangeDetectorRef } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   standalone: true,
   imports: [
     CommonModule,
-    MatButton,
+    MatButtonModule,
     MatDialogActions,
     MatDialogClose,
     MatDialogContent,
@@ -52,6 +52,7 @@ export class AvatarDialog implements OnInit {
     this.userService.getUserProfile().subscribe({
       next: (user) => {
         this.currentUser = user;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('Error loading user profile:', error);
@@ -69,28 +70,35 @@ export class AvatarDialog implements OnInit {
 
   updateAvatarColor(colorName: string) {
     if (this.currentUser) {
-      const colorObject = this.avatarColors.find(c => c.name === colorName);
-      if (colorObject) {
-        const originalColor = this.currentUser.avatar_color;
-        // Update the color immediately for instant feedback
-        this.currentUser.avatar_color = colorObject.color;
-        this.cdr.detectChanges();
-
-        this.userService.updateUserProfile({ avatar_color: colorObject.color }).subscribe({
-          next: (updatedUser) => {
-            this.currentUser = updatedUser;
+      this.avatarService.updateAvatarColor(this.currentUser.id, colorName).subscribe({
+        next: (color) => {
+          if (this.currentUser) {
+            this.currentUser.avatar_color = color;
             this.cdr.detectChanges();
-          },
-          error: (error) => {
-            console.error('Error updating avatar color:', error);
-            // Revert the color change if there's an error
-            if (this.currentUser) {
-              this.currentUser.avatar_color = originalColor;
-              this.cdr.detectChanges();
-            }
           }
-        });
-      }
+        },
+        error: (error) => {
+          console.error('Error updating avatar color:', error);
+        }
+      });
+    }
+  }
+
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.avatarService.uploadAvatar(file).subscribe({
+        next: (avatarUrl) => {
+          console.log('Avatar uploaded successfully:', avatarUrl);
+          if (this.currentUser) {
+            this.currentUser.avatar_url = avatarUrl;
+            this.cdr.detectChanges();
+          }
+        },
+        error: (error) => {
+          console.error('Error uploading avatar:', error);
+        }
+      });
     }
   }
 

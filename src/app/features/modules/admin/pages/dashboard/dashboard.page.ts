@@ -35,7 +35,7 @@ export class DashboardPage implements OnInit {
 
   ngOnInit(): void {
     this.logCurrentUser();
-   }
+  }
 
   openInNewTab(url: string): void {
     window.open(url, '_blank');
@@ -54,8 +54,6 @@ export class DashboardPage implements OnInit {
   }
 
   logCurrentUser(): void {
-    this.userService.getUserProfile().subscribe((user) => {
-      console.log(user);
-    });
+    this.userService.getUserProfile().subscribe((user) => {});
   }
 }
