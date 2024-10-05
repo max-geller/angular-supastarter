@@ -1,70 +1,66 @@
 export const avatarColors = [
   {
+    name: 'Rosewater',
+    color: '#dc8a78',
+  },
+  {
+    name: 'Flamingo',
+    color: '#dd7878',
+  },
+  {
+    name: 'Pink',
+    color: '#ea76cb',
+  },
+  {
+    name: 'Mauve',
+    color: '#8839ef',
+  },
+  {
     name: 'Red',
-    color: '#FF0000',
+    color: '#d20f39',
   },
   {
-    name: 'Green',
-    color: '#00FF00',
+    name: 'Maroon',
+    color: '#e64553',
   },
   {
-    name: 'Blue',
-    color: '#0000FF',
+    name: 'Peach',
+    color: '#fe640b',
   },
   {
     name: 'Yellow',
-    color: '#FFFF00',
+    color: '#df8e1d',
   },
   {
-    name: 'Purple',
-    color: '#800080',
+    name: 'Green',
+    color: '#40a02b',
   },
   {
-    name: 'Orange',
-    color: '#FFA500',
+    name: 'Teal',
+    color: '#179299',
   },
   {
-    name: 'Brown',
-    color: '#A52A2A',
+    name: 'Sky',
+    color: '#04a5e5',
+  },
+  {
+    name: 'Sapphire',
+    color: '#209fb5',
+  },
+  {
+    name: 'Blue',
+    color: '#1e66f5',
+  },
+  {
+    name: 'Lavender',
+    color: '#7287fd',
+  },
+  {
+    name: 'Charcoal',
+    color: '#4c4f69',
   },
   {
     name: 'Gray',
-    color: '#808080',
-  },
-  {
-    name: 'Light Green',
-    color: '#90EE90',
-  },
-  {
-    name: 'Light Blue',
-    color: '#ADD8E6',
-  },
-  {
-    name: 'Light Pink',
-    color: '#FFB6C1',
-  },
-  {
-    name: 'Light Yellow',
-    color: '#FFFFE0',
-  },
-  {
-    name: 'Light Purple',
-    color: '#E6E6FA',
-  },
-  {
-    name: 'Light Orange',
-    color: '#FFDAB9',
-  },
-  {
-    name: 'Light Red',
-    color: '#FFB6C1',
-  },
-  {
-    name: 'Light Brown',
-    color: '#F5DEB3',
-  },
-  {
-    name: 'Light Gray',
-    color: '#D3D3D3',
+    color: '#8c8fa1',
   },
 ];

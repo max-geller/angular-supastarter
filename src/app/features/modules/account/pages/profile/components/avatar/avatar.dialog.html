@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Update Avatar</h2>
+<mat-dialog-content style="display: flex; flex-direction: row; gap: 16px">
+  <div
+    class="preview-container"
+    style="
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-right: 1px solid #e0e0e0;
+      padding-right: 16px;
+    "
+  >
+    <ngx-avatars
+      [name]="userFullName"
+      [size]="130"
+      [round]="true"
+      [bgColor]="userAvatarColor"
+      [src]="currentUser?.avatar_url"
+    ></ngx-avatars>
+  </div>
+  <div class="avatar-actions">
+    <mat-form-field appearance="outline">
+      <mat-label>Select Color</mat-label>
+      <mat-select (selectionChange)="updateAvatarColor($event.value)">
+        <mat-option
+          *ngFor="let avatarColor of avatarColors"
+          [value]="avatarColor.name"
+        >
+          <div
+            class="option-color-container"
+            style="
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 8px;
+            "
+          >
+            <div
+              class="option-color-preview"
+              [style.background-color]="avatarColor.color"
+              style="width: 20px; height: 20px; border-radius: 50%"
+            ></div>
+            <div class="option-color-label">{{ avatarColor.name }}</div>
+          </div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #fileInput>
+    <button mat-flat-button (click)="fileInput.click()">Upload Image</button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" mat-button [mat-dialog-close]="undefined">
+    Cancel
+  </button>
+  <button type="button" mat-flat-button (click)="confirmAvatarChange()">Confirm</button>
+</mat-dialog-actions>

@@ -12,11 +12,16 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+
 // Import Angular Material Components
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+
+// Import Components
+import { AvatarDialog } from './components/avatar/avatar.dialog';
 
 // Import Services
 import { UserService } from '../../../../../core/services/user.service';
@@ -31,6 +36,7 @@ import { TenantInterface } from '../../../../../core/models/tenant.model';
 
 // Import Third-Party Resources
 import { AvatarModule } from 'ngx-avatars';
+import { forkJoin } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -41,8 +47,11 @@ import { AvatarModule } from 'ngx-avatars';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    MatDialogModule,
     AvatarModule,
-    HttpClientModule
+    AvatarDialog,
+    HttpClientModule,
+
   ],
   templateUrl: './profile.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,6 +62,7 @@ export class ProfilePage implements OnInit {
   tenant: TenantInterface | null = null;
   userRole: string | null = null;
   user: UserInterface | null = null;
+  isLoading: boolean = true; // Add this line
 
   constructor(
     private fb: FormBuilder,
@@ -61,14 +71,13 @@ export class ProfilePage implements OnInit {
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private toastService: ToastService,
-    private avatarService: AvatarService
+    private avatarService: AvatarService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.initForm();
-    this.loadUserProfile();
-    this.loadTenantInfo();
-    this.loadUserRole();
+    this.loadUserData();
   }
 
   initForm() {
@@ -78,11 +87,24 @@ export class ProfilePage implements OnInit {
       email: [{ value: '', disabled: true }],
     });
 
-    this.passwordForm = this.fb.group({
-      currentPassword: ['', Validators.required],
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
-    }, { validator: this.passwordMatchValidator });
+    this.passwordForm = this.fb.group(
+      {
+        currentPassword: ['', Validators.required],
+        newPassword: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+      },
+      { validator: this.passwordMatchValidator }
+    );
+  }
+
+  openAvatarDialog() {
+    const dialogRef = this.dialog.open(AvatarDialog);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.user = result;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   passwordMatchValidator(form: FormGroup) {
@@ -91,23 +113,47 @@ export class ProfilePage implements OnInit {
     return newPassword === confirmPassword ? null : { passwordMismatch: true };
   }
 
-  loadUserProfile() {
-    this.userService.getUserProfile().subscribe(
-      (profile: UserInterface) => {
-        this.user = profile;
+  loadUserData() {
+    this.isLoading = true;
+    const currentUserId = this.authService.getCurrentUser().user?.id;
+
+    if (!currentUserId) {
+      console.error('No user ID available');
+      this.isLoading = false;
+      this.cdr.markForCheck();
+      return;
+    }
+
+    forkJoin({
+      profile: this.userService.getUserProfile(),
+      tenant: this.tenantService.getUserTenant(currentUserId),
+      role: this.userService.getCurrentUserWithRole()
+    }).subscribe({
+      next: (data) => {
+        this.user = data.profile;
+        this.tenant = data.tenant;
+        this.userRole = data.role.role_name || null;
         this.profileForm.patchValue({
-          first_name: profile.first_name,
-          last_name: profile.last_name,
-          email: profile.email,
+          first_name: this.user.first_name,
+          last_name: this.user.last_name,
+          email: this.user.email,
         });
+        this.isLoading = false;
         this.cdr.markForCheck();
       },
-      (error) => console.error('Error loading user profile:', error)
-    );
+      error: (error) => {
+        console.error('Error loading user data:', error);
+        this.isLoading = false;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   getAvatarColor(): string {
-    return this.user?.avatar_color || this.avatarService.generateRandomColorFromList();
+    return (
+      this.user?.avatar_color ||
+      this.avatarService.generateRandomColorFromList()
+    );
   }
 
   uploadAvatar(event: Event) {
@@ -137,11 +183,9 @@ export class ProfilePage implements OnInit {
 
   loadTenantInfo() {
     const userId = this.authService.getCurrentUser().user?.id;
-    console.log('Current user ID:', userId);
     if (userId) {
       this.tenantService.getUserTenant(userId).subscribe(
         (tenant: TenantInterface) => {
-          console.log('Tenant data received:', tenant);
           this.tenant = tenant;
           this.cdr.markForCheck();
         },
@@ -189,15 +233,26 @@ export class ProfilePage implements OnInit {
       const currentPassword = this.passwordForm.get('currentPassword')?.value;
       const newPassword = this.passwordForm.get('newPassword')?.value;
 
-      this.authService.updateProfilePassword(currentPassword, newPassword)
+      this.authService
+        .updateProfilePassword(currentPassword, newPassword)
         .then(() => {
-          this.toastService.showToast('Password updated successfully', 3000, 'top', 'center');
+          this.toastService.showToast(
+            'Password updated successfully',
+            3000,
+            'top',
+            'center'
+          );
           this.passwordForm.reset();
           this.cdr.markForCheck();
         })
         .catch((error) => {
           console.error('Error updating password:', error);
-          this.toastService.showToast('Error updating password: ' + error.message, 5000, 'top', 'center');
+          this.toastService.showToast(
+            'Error updating password: ' + error.message,
+            5000,
+            'top',
+            'center'
+          );
         });
     }
   }

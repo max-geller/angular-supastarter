@@ -1,3 +1,10 @@
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
 .sessions-container {
   display: flex;
   height: 100vh;
@@ -12,7 +19,7 @@
   .left-container {
     flex: 1;
     display: flex;
-    background-color: #242424; // default background color
+    background-color: #242424; 
     height: 100%;
 
     @media (max-width: 750px) {
@@ -25,9 +32,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    max-width: 450px;
     background-color: #fff;
-    padding: 2rem;
 
     @media (max-width: 750px) {
       width: 100%;

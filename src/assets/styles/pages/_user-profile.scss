@@ -52,6 +52,7 @@
       height: 100%;
       border-radius: 50%;
       overflow: hidden;
+      z-index: 1; // Add this line
     }
 
     .avatar-preview {
@@ -60,6 +61,7 @@
       border-radius: 50%;
       background-size: cover;
       background-position: center;
+      z-index: 1; // Add this line
     }
 
     .avatar-actions {
@@ -89,6 +91,7 @@
 
   h4 {
     margin: 0;
+    font-weight: 400;
   }
 
   .tenant-info-content {
@@ -99,7 +102,7 @@
   }
 
   .tenant-logo {
-    max-height: 100px;
+    max-height: 50px;
     width: auto;
   }
 }
@@ -117,4 +120,9 @@
   width: 100% !important;
   height: 100% !important;
   font-size: 60px !important;
+}
+
+// Add this at the end of the file
+body, .profile-container {
+  background: #ffffff; // or your desired background color
 }

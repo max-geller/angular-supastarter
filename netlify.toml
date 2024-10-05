@@ -4,7 +4,7 @@
   status = 200
 
 [build.environment]
-  NODE_VERSION = "18"  # or whichever version you're using
+  NODE_VERSION = "22" 
 
 [context.production.environment]
   ANGULAR_ENV = "production"
