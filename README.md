@@ -2,7 +2,6 @@
 
 
 ![GitHub stars](https://img.shields.io/github/stars/max-geller/angular-supastarter?style=social)
-![GitHub forks](https://img.shields.io/github/forks/max-geller/angular-supastarter/?style=social)
 ![GitHub issues](https://img.shields.io/github/issues/max-geller/angular-supastarter)
 ![GitHub license](https://img.shields.io/github/license/max-geller/angular-supastarter)
 
@@ -40,28 +39,7 @@ Angular provides a robust framework for building web applications, and Material 
 For detailed instructions, see our [Setup Guide](link-to-setup-guide).
 
 
-## Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
-
-We use GitHub Projects to organize our work. Here's how you can get involved:
-
-1. Check our [Project Board](link-to-your-project-board).
-2. Look for issues labeled "good first issue" or "help wanted".
-3. Comment on an issue you'd like to work on.
-4. Fork the repository and create a branch for your work.
-5. Submit a pull request when you're ready for review.
-
-Our project board columns:
-- **To Do**: Approved tasks that are ready to be worked on.
-- **In Progress**: Tasks currently being worked on. Please assign yourself.
-- **Review**: Pull requests and tasks ready for review.
-- **Done**: Completed and merged tasks.
-
-
-## Support
-
-If you like this project, please give it a ⭐️ on GitHub!
 
 
 
@@ -128,6 +106,30 @@ This project uses a shared database and schema for all tenants.
 
 
 ### Roles and Permissions
+
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
+
+We use GitHub Projects to organize our work. Here's how you can get involved:
+
+1. Check our [Project Board]((https://github.com/users/max-geller/projects/40/views/1)).
+2. Look for issues labeled "good first issue" or "help wanted".
+3. Comment on an issue you'd like to work on.
+4. Fork the repository and create a branch for your work.
+5. Submit a pull request when you're ready for review.
+
+Our project board columns:
+- **To Do**: Approved tasks that are ready to be worked on.
+- **In Progress**: Tasks currently being worked on. Please assign yourself.
+- **Review**: Pull requests and tasks ready for review.
+- **Done**: Completed and merged tasks.
+
+
+## Support
+
+If you like this project, please give it a ⭐️ on GitHub!
 
 
 ## Contact
