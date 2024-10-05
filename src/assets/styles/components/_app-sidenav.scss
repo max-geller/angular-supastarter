@@ -1,6 +1,11 @@
 .sidenav-container {
   width: 200px !important;
   border-radius: 0px !important;
+
+  .mdc-list-item__primary-text {
+    padding-top: 0px !important;
+    font-weight: 400 !important;
+  }
 }
 
 mat-sidenav-container {
