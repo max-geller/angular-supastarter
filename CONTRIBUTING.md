@@ -6,6 +6,7 @@ First off, thank you for considering contributing to this project! It's people l
 
 - [Contributing to Multi-Tenant Angular 18 Starter with Supabase](#contributing-to-multi-tenant-angular-18-starter-with-supabase)
   - [Table of Contents](#table-of-contents)
+  - [Priorities](#priorities)
   - [Code of Conduct](#code-of-conduct)
   - [I Have a Question](#i-have-a-question)
   - [I Want To Contribute](#i-want-to-contribute)
@@ -24,6 +25,17 @@ First off, thank you for considering contributing to this project! It's people l
     - [TypeScript Styleguide](#typescript-styleguide)
     - [Documentation Styleguide](#documentation-styleguide)
   - [Join The Project Team](#join-the-project-team)
+
+## Priorities
+
+- Security
+- Performance
+- Bug Fixes
+- New Features
+- Documentation
+- Examples
+
+
 
 ## Code of Conduct
 
