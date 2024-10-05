@@ -28,8 +28,8 @@ jobs:
           registry-url: https://npm.pkg.github.com/
 
 # Install Dependencies and Build App 
-      - name: Build Angular App 🔧
-        working-directory: ~/browser
+      - name: Build Angular App 🔧 # Successful
+    #    working-directory: angular-starter/browser
         run: |
           npm ci
           npm run build --configuration=development
@@ -37,4 +37,4 @@ jobs:
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build # The folder the action should deploy.
+          folder: dist/browser # The folder the action should deploy.
