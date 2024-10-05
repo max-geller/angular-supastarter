@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
+
+// Import Supabase Client
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+
+// Import Environment
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SupabaseService {
-  private readonly supabaseUrl = import.meta.env['NG_APP_SUPABASE_URL'];
-  private readonly supabaseKey = import.meta.env['NG_APP_SUPABASE_KEY'];
+  private readonly supabaseUrl = environment.supabaseCredentials.url;
+  private readonly supabaseKey = environment.supabaseCredentials.key;
   private supabase: SupabaseClient | null = null;
 
   initialize(): void {
