@@ -64,7 +64,7 @@ export class AvatarService {
 
     const timestamp = new Date().getTime();
     const fileExtension = file.name.split('.').pop();
-    const filePath = `avatars/${userId}/${timestamp}.${fileExtension}`;
+    const filePath = `${userId}/${timestamp}.${fileExtension}`;
 
     return this.removeOldAvatar(userId).pipe(
       switchMap(() => 
@@ -121,20 +121,33 @@ export class AvatarService {
     return this.userService.getUserProfile().pipe(
       switchMap(user => {
         if (user.avatar_url) {
-          const oldFilePath = new URL(user.avatar_url).pathname.split('/').pop();
-          if (oldFilePath) {
-            return from(
-              this.supabaseService
-                .getClient()
-                .storage.from('avatars')
-                .remove([`${userId}/${oldFilePath}`])
-            ).pipe(
-              catchError(error => {
+          // Extract the file path from the full URL
+          const urlParts = user.avatar_url.split('/');
+          const bucketName = urlParts[urlParts.length - 2];
+          const fileName = urlParts[urlParts.length - 1];
+          const filePath = `${userId}/${fileName}`;
+
+          console.log('Attempting to remove file:', filePath); // Debug log
+
+          return from(
+            this.supabaseService
+              .getClient()
+              .storage
+              .from(bucketName)
+              .remove([filePath])
+          ).pipe(
+            map(({ data, error }) => {
+              if (error) {
                 console.error('Error removing old avatar:', error);
-                return of(null);
-              })
-            );
-          }
+                throw error;
+              }
+              console.log('Old avatar removed successfully:', data);
+            }),
+            catchError(error => {
+              console.error('Error removing old avatar:', error);
+              return of(null);
+            })
+          );
         }
         return of(null);
       }),
