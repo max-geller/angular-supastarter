@@ -1,8 +1,49 @@
 # Angular 18 Starter
 
+
+![GitHub stars](https://img.shields.io/github/stars/max-geller/angular-supastarter?style=social)
+![GitHub issues](https://img.shields.io/github/issues/max-geller/angular-supastarter)
+![GitHub license](https://img.shields.io/github/license/max-geller/angular-supastarter)
+
+A production-ready starter template for building multi-tenant applications with Angular 18 and Supabase.
+
+![Demo GIF](path/to/demo.gif)
+
+
 ## Description
 
 This project is a multi-tenant starter SaaS application using Angular 18, Material Design. This project is configured to be hosted on Netlify and uses Supabase as the database and authentication provider.
+
+## Purpose
+
+Angular provides a robust framework for building web applications, and Material Design provides a modern and responsive UI component library. This project aims to provide a starting point for building a multi-tenant application with Angular and Supabase by implementing a number of features that are commonly needed in such applications.This project is designed to be a starting point for building a multi-tenant Angular application with Angular and Supabase using the latest technologies and best practices.
+
+
+## Features
+
+- 🚀 Angular 18 
+- 🎨 Angular Material 18 
+- 🗄️ Supabase Integration
+- 👥 Multi-tenancy support
+- 🔐 Authentication and Authorization
+- 🎨 Customizable theming
+- 📱 Responsive design
+
+## Quick Start
+
+1. Clone the repository
+2. Set up your Supabase project
+3. Configure environment variables
+4. Run database migrations
+5. Start the development server
+6. 
+For detailed instructions, see our [Setup Guide](link-to-setup-guide).
+
+
+
+
+
+
 
 ## Stack
 
@@ -68,3 +109,35 @@ This project uses a shared database and schema for all tenants.
 ### Roles and Permissions
 
 
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
+
+We use GitHub Projects to organize our work. Here's how you can get involved:
+
+1. Check our [Project Board]((https://github.com/users/max-geller/projects/40/views/1)).
+2. Look for issues labeled "good first issue" or "help wanted".
+3. Comment on an issue you'd like to work on.
+4. Fork the repository and create a branch for your work.
+5. Submit a pull request when you're ready for review.
+
+Our project board columns:
+- **To Do**: Approved tasks that are ready to be worked on.
+- **In Progress**: Tasks currently being worked on. Please assign yourself.
+- **Review**: Pull requests and tasks ready for review.
+- **Done**: Completed and merged tasks.
+
+
+## Support
+
+If you like this project, please give it a ⭐️ on GitHub!
+
+
+## Contact
+
+If you have any questions, please contact the project owner at [angular.supastarter@gmail.com](mailto:angular.supastarter@gmail.com).
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -1,0 +1,28 @@
+name: Production Build and Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Build Angular app to prod
+        working-directory: angular-starter
+        run: npm install && npm run build --configuration=production
+
+      - name: Deploy to GitHub Pages (Production)
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: angular-starter/dist/browser
+          branch: prod
+          token: ${{ secrets.GH_TOKEN }}
