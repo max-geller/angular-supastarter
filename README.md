@@ -9,6 +9,7 @@ A production-ready starter template for building multi-tenant applications with 
 
 ![Demo GIF](path/to/demo.gif)
 
+
 ## Description
 
 This project is a multi-tenant starter SaaS application using Angular 18, Material Design. This project is configured to be hosted on Netlify and uses Supabase as the database and authentication provider.
