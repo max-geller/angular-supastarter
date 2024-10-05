@@ -1,10 +1,10 @@
 # Angular 18 Starter
 
 
-![GitHub stars](https://img.shields.io/github/stars/yourusername/your-repo-name?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/your-repo-name?style=social)
-![GitHub issues](https://img.shields.io/github/issues/yourusername/your-repo-name)
-![GitHub license](https://img.shields.io/github/license/yourusername/your-repo-name)
+![GitHub stars](https://img.shields.io/github/stars/max-geller/angular-supastarter?style=social)
+![GitHub forks](https://img.shields.io/github/forks/max-geller/angular-supastarter/?style=social)
+![GitHub issues](https://img.shields.io/github/issues/max-geller/angular-supastarter)
+![GitHub license](https://img.shields.io/github/license/max-geller/angular-supastarter)
 
 A production-ready starter template for building multi-tenant applications with Angular 18 and Supabase.
 
