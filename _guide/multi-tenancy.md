@@ -1,26 +1,27 @@
 When building a multi-tenant SaaS application using Angular 18 and Supabase with a single SQL database, there are several best practices and considerations to keep in mind. Here's some guidance based on your current setup and the concepts you've mentioned:
 
 1. Database Structure:
-   Using a single database with separate schemas for each tenant is a common approach for multi-tenancy.
-   Consider moving tenant-specific tables to separate schemas, while keeping shared tables (like 'tenants') in the public schema.
+   This project uses a single database with separate schemas for each tenant, which is a flexible approach for multi-tenancy.
+   Tenant-specific tables are to be created in separate schemas, while keeping shared tables (ie 'tenants') in the public schema.
 2. Row-Level Security (RLS):
-   Implement RLS policies in Supabase to ensure data isolation between tenants.
-   Create policies that filter data based on the tenant ID.
-3. Custom Claims:
+   RLS policies in Supabase are implemented to ensure data isolation between tenants.
+   This project has created policies that filter data based on the tenant ID.
+3. Custom Claims (not used in this project):
    Utilize custom claims in JWT tokens to store tenant-specific information.
    This can be used to enforce access control and data isolation at the application level.
 4. Authentication and Authorization:
-   Implement a robust authentication system using Supabase Auth.
-   Use role-based access control (RBAC) to manage permissions within each tenant.
+   The project uses Supabase Auth for secure authentication.
+   Role-based access control (RBAC) is used to manage permissions within each tenant.
 5. Tenant Isolation:
-   Ensure that users can only access data belonging to their tenant.
-   Implement middleware or guards in Angular to enforce tenant isolation.
+   Users can only access data belonging to their tenant.
+   This project has implemented guards in Angular to enforce tenant isolation.
 6. Performance Optimization:
-   Use appropriate indexing strategies for tenant-specific queries.
+   Indexing strategies have been emplyed for tenant-specific queries.
    Consider caching frequently accessed data to improve performance.
 7. Scalability:
-   Design your database schema and application architecture to support horizontal scaling.
-   Use connection pooling to manage database connections efficiently.
+   The database schema and application architecture have been designed to support horizontal scaling.
+   This project uses connection pooling to manage database connections efficiently.
+
    Here's an example of how you might structure your database and implement RLS:
 
 ```sql
