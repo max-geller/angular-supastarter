@@ -19,7 +19,11 @@
     ></ngx-avatars>
   </div>
   <div class="avatar-actions">
-    <mat-form-field appearance="outline">
+    <div style="display: flex; flex-direction: row; gap: 8px">
+      <button mat-flat-button (click)="fileInput.click()">Upload Image</button>
+      <button mat-flat-button (click)="useBasicAvatar()">Use Basic Avatar</button>
+    </div>
+    <mat-form-field appearance="outline" style="padding-top: 1rem">
       <mat-label>Select Color</mat-label>
       <mat-select (selectionChange)="updateAvatarColor($event.value)">
         <mat-option
@@ -45,13 +49,21 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <input type="file" (change)="onFileSelected($event)" accept="image/*" style="display: none" #fileInput>
-    <button mat-flat-button (click)="fileInput.click()">Upload Image</button>
+    <input
+      type="file"
+      (change)="onFileSelected($event)"
+      accept="image/*"
+      style="display: none"
+      #fileInput
+    />
+  
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button type="button" mat-button [mat-dialog-close]="undefined">
     Cancel
   </button>
-  <button type="button" mat-flat-button (click)="confirmAvatarChange()">Confirm</button>
+  <button type="button" mat-flat-button (click)="confirmAvatarChange()">
+    Confirm
+  </button>
 </mat-dialog-actions>
