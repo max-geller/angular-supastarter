@@ -14,6 +14,10 @@ A production-ready starter template for building multi-tenant applications with 
 
 This project is a multi-tenant starter SaaS application using Angular 18, Material Design. This project is configured to be hosted on Netlify and uses Supabase as the database and authentication provider.
 
+## Purpose
+
+Angular provides a robust framework for building web applications, and Material Design provides a modern and responsive UI component library. This project aims to provide a starting point for building a multi-tenant application with Angular and Supabase by implementing a number of features that are commonly needed in such applications.This project is designed to be a starting point for building a multi-tenant Angular application with Angular and Supabase using the latest technologies and best practices.
+
 
 ## Features
 
