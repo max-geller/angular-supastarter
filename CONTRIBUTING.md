@@ -1,6 +1,6 @@
 # Contributing to Multi-Tenant Angular 18 Starter with Supabase
 
-First off, thank you for considering contributing to this project! It's people like you that make this starter template a great tool for the Angular developercommunity.  
+First off, thank you for considering contributing to this project! It's people like you that make this starter template a great tool for the Angular developer community.  
 
 ## Table of Contents
 

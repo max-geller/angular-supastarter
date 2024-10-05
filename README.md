@@ -8,6 +8,8 @@
 ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-%233ECF8E.svg?style=for-the-badge&logo=supabase&logoColor=white)
 ![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
+![Angular Material](https://img.shields.io/badge/Angular_Material-%23000000.svg?style=for-the-badge&logo=angular&logoColor=white)
+
 
 A production-ready starter template for building multi-tenant applications with Angular 18 and Supabase.
 
