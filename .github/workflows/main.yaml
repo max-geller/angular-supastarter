@@ -29,7 +29,7 @@ jobs:
 
 # Install Dependencies and Build App 
       - name: Build Angular App 🔧
-    #    working-directory: angular-starter/browser
+        working-directory: ./browser
         run: |
           npm ci
           npm run build --configuration=development
