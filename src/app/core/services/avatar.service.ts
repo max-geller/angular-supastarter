@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { UserService } from './user.service';
 import { ToastService } from './toast.service';
-import { Observable, from, switchMap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, from, switchMap, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 import { avatarColors } from '../data/avatarColors';
@@ -54,7 +54,7 @@ export class AvatarService {
     return currentUser.user?.id || null;
   }
 
-  uploadAvatar( file: File): Observable<string> {
+  uploadAvatar(file: File): Observable<string> {
     const userId = this.getCurrentUserId();
     if (!userId) {
       return new Observable(observer => {
@@ -62,15 +62,19 @@ export class AvatarService {
       });
     }
 
+    const timestamp = new Date().getTime();
     const fileExtension = file.name.split('.').pop();
-    const filePath = `avatars/${userId}.${fileExtension}`;
+    const filePath = `${userId}/${timestamp}.${fileExtension}`;
 
-    return from(
-      this.supabaseService
-        .getClient()
-        .storage.from('avatars')
-        .upload(filePath, file, { upsert: true })
-    ).pipe(
+    return this.removeOldAvatar(userId).pipe(
+      switchMap(() => 
+        from(
+          this.supabaseService
+            .getClient()
+            .storage.from('avatars')
+            .upload(filePath, file)
+        )
+      ),
       map(({ data, error }) => {
         if (error) throw error;
         const avatarUrl = this.supabaseService
@@ -97,5 +101,57 @@ export class AvatarService {
 
   getAvatarColorsList() {
     return this.avatarColors;
+  }
+
+  removeAvatar(userId: string): Observable<void> {
+    return this.removeOldAvatar(userId).pipe(
+      switchMap(() => this.userService.updateUserProfile({ avatar_url: null })),
+      map(() => {
+        this.toastService.showToast(
+          'Avatar removed successfully',
+          3000,
+          'top',
+          'center'
+        );
+      })
+    );
+  }
+
+  private removeOldAvatar(userId: string): Observable<void> {
+    return this.userService.getUserProfile().pipe(
+      switchMap(user => {
+        if (user.avatar_url) {
+          // Extract the file path from the full URL
+          const urlParts = user.avatar_url.split('/');
+          const bucketName = urlParts[urlParts.length - 2];
+          const fileName = urlParts[urlParts.length - 1];
+          const filePath = `${userId}/${fileName}`;
+
+          console.log('Attempting to remove file:', filePath); // Debug log
+
+          return from(
+            this.supabaseService
+              .getClient()
+              .storage
+              .from(bucketName)
+              .remove([filePath])
+          ).pipe(
+            map(({ data, error }) => {
+              if (error) {
+                console.error('Error removing old avatar:', error);
+                throw error;
+              }
+              console.log('Old avatar removed successfully:', data);
+            }),
+            catchError(error => {
+              console.error('Error removing old avatar:', error);
+              return of(null);
+            })
+          );
+        }
+        return of(null);
+      }),
+      map(() => {})
+    );
   }
 }

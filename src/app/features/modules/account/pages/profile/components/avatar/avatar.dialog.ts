@@ -102,6 +102,22 @@ export class AvatarDialog implements OnInit {
     }
   }
 
+  useBasicAvatar() {
+    if (this.currentUser) {
+      this.avatarService.removeAvatar(this.currentUser.id).subscribe({
+        next: () => {
+          if (this.currentUser) {
+            this.currentUser.avatar_url = null;
+            this.cdr.detectChanges();
+          }
+        },
+        error: (error) => {
+          console.error('Error removing avatar:', error);
+        }
+      });
+    }
+  }
+
   confirmAvatarChange() {
     this.dialogRef.close(this.currentUser);
   }

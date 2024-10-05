@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatSpinner } from '@angular/material/progress-spinner';
 
 // Import Components
 import { AvatarDialog } from './components/avatar/avatar.dialog';
@@ -51,6 +52,7 @@ import { forkJoin } from 'rxjs';
     AvatarModule,
     AvatarDialog,
     HttpClientModule,
+    MatSpinner,
 
   ],
   templateUrl: './profile.page.html',
