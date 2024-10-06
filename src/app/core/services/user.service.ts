@@ -35,6 +35,16 @@ export class UserService {
       })
     );
   }
+
+  getUserSettings(user: UserInterface) {
+    return this.supabaseService
+      .getClient()
+      .from('user_settings')
+      .select('*')
+      .eq('user_id', user.id)
+      .single();
+  }
+
   registerUser(
     userId: string,
     userData: Partial<UserInterface>,
@@ -197,5 +207,5 @@ export class UserService {
     );
   }
 
-  uploadAvatar(file: File): void {}
+
 }

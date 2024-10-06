@@ -1,8 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+
+
+// Import RxJS Resources
+import { BehaviorSubject } from 'rxjs';
+
+// Import Services
 import { AuthService } from '../auth.service';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { UserService } from '../user.service';
+
+// Import Interfaces
+import { UserInterface } from '../../../core/models/user.model';
+
 
 @Injectable({
   providedIn: 'root',
@@ -11,26 +20,30 @@ export class ThemeService {
   private document = inject(DOCUMENT);
   private authService = inject(AuthService);
 
-  private systemTheme = new BehaviorSubject<'light' | 'dark'>('light');
   private currentTheme = new BehaviorSubject<'light' | 'dark'>('light');
 
-  constructor() {
+  constructor(private userService: UserService) {
     this.authService.signOut$.subscribe(() => {
-      this.resetToDefaultTheme();
     });
   }
 
   async initializeTheme() {
-    const user = this.authService.getCurrentUser();
-    if (user) {
-    } else {
-      this.resetToDefaultTheme(); // Use this instead of directly applying systemTheme
-    }
-    this.initThemeObservable();
-  }
+// Create Theme Observable
 
-  private initThemeObservable() {
-    combineLatest();
+
+    // If No User is Logged In, Set Theme Observable to Light
+    if (!this.authService.getCurrentUser().user) {
+      this.applyTheme('light');
+      return;
+    }
+
+
+    // Get User's Theme From user_settings table, 'theme' column
+   
+ 
+    // Set The Theme Observable to the User's Theme value
+
+
   }
 
   private applyTheme(theme: 'light' | 'dark') {
@@ -40,18 +53,18 @@ export class ThemeService {
     } else {
       this.document.documentElement.classList.remove('dark');
     }
+
   }
 
-  getCurrentTheme(): Observable<'light' | 'dark'> {
-    return this.currentTheme.asObservable();
+  updateTheme() {
+    // Update Theme in user_settings table
+
+    // Update theme observable
   }
 
-  setTheme(theme: 'light' | 'dark' | 'system') {
-    const currentUser = this.authService.getCurrentUser();
+  private initThemeObservable() {
+    // 
   }
 
-  resetToDefaultTheme() {
-    this.applyTheme(this.systemTheme.getValue());
-    this.currentTheme.next(this.systemTheme.getValue());
-  }
+
 }

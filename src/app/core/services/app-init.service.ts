@@ -22,9 +22,5 @@ export class AppInitService {
 
     // Initialize Theme
     await this.themeService.initializeTheme();
-
-    // Obtain User Role
-
-    // Obtain Basic User Information
   }
 }

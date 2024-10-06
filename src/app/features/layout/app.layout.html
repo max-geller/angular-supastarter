@@ -1,7 +1,7 @@
 <div class="layout-container">
   <app-navbar (toggleSidenav)="sidenav.toggle()"></app-navbar>
   <mat-divider></mat-divider>
-  <nav class="module-tab-group">
+  <nav class="module-tab-group" >
     <ng-container *ngIf="(currentModuleMenuItems$ | async) as menuItems">
       <button
         matRipple
