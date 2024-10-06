@@ -82,52 +82,7 @@ export const mainMenu = [
   {
     name: 'Documentation',
     route: '/features/docs',
-    menuItems: [
-      {
-        name: 'Home',
-        route: '/features/docs/home',
-      },
-      {
-        name: 'Getting Started',
-        route: '/features/docs/getting-started',
-      },
-      {
-        name: 'Architecture',
-        route: '/features/docs/architecture',
-      },
-      {
-        name: 'Multi-Tenancy Appraoch',
-        route: '/features/docs/multi-tenancy',
-      },
-      {
-        name: 'Supabase Integration',
-        route: '/features/docs/supabase',
-      },
-      {
-        name: 'Angular Components',
-        route: '/features/docs/auth',
-      },
-      {
-        name: 'Customization Guide',
-        route: '/features/docs/authz',
-      },
-      {
-        name: 'Deployment',
-        route: '/features/docs/deployment',
-      },
-      {
-        name: 'Conributing',
-        route: '/features/docs/contributing',
-      },
-      {
-        name: 'Troubleshooting',
-        route: '/features/docs/troubleshooting',
-      },
-      {
-        name: 'Changelog',
-        route: '/features/docs/changelog',
-      },
-    ],
+    menuItems: [],
   },
 ];
 
