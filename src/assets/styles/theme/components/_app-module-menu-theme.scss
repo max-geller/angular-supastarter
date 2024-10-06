@@ -11,7 +11,7 @@
   // If Theme is Dark:
   @if mat.get-theme-type($theme) == dark {
     .module-tab-group {
-      background-color: inherit !important;
+      background-color: mat.get-theme-color($theme, tertiary, 10) !important;
       .module-tab {
         color: mat.get-theme-color($theme, primary, 95);
         &:hover {
@@ -28,7 +28,7 @@
   } @else {
     // If Theme is Light:
     .module-tab-group {
-      background-color: inherit !important;
+      background-color: mat.get-theme-color($theme, surface-bright) !important;
       .module-tab {
         color: mat.get-theme-color($theme, primary, 0);
         &:hover {
