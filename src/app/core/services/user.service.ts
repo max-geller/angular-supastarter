@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { map, switchMap, catchError } from 'rxjs/operators';
 
 // Import Services
 import { SupabaseService } from './supabase.service';
@@ -36,13 +36,60 @@ export class UserService {
     );
   }
 
-  getUserSettings(user: UserInterface) {
-    return this.supabaseService
-      .getClient()
-      .from('user_settings')
-      .select('*')
-      .eq('user_id', user.id)
-      .single();
+  getUserSettings(user: UserInterface): Observable<any> {
+    return from(
+      this.supabaseService
+        .getClient()
+        .from('user_settings')
+        .select('*')
+        .eq('user_id', user.id)
+        .single()
+    );
+  }
+
+  getUserSettingsById(userId: string): Observable<{ theme: string } | null> {
+    return from(
+      this.supabaseService
+        .getClient()
+        .from('user_settings')
+        .select('theme')
+        .eq('user_id', userId)
+        .single()
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data as { theme: string } | null;
+      })
+    );
+  }
+
+  updateUserSettings(userId: string, settings: Partial<{ theme: string }>): Observable<any> {
+    return this.getUserSettingsById(userId).pipe(
+      switchMap((existingSettings) => {
+        if (existingSettings) {
+          // Update existing record
+          return from(
+            this.supabaseService
+              .getClient()
+              .from('user_settings')
+              .update(settings)
+              .eq('user_id', userId)
+          );
+        } else {
+          // Insert new record
+          return from(
+            this.supabaseService
+              .getClient()
+              .from('user_settings')
+              .insert({ user_id: userId, ...settings })
+          );
+        }
+      }),
+      catchError((error) => {
+        console.error('Error updating user settings:', error);
+        return of(null);
+      })
+    );
   }
 
   registerUser(

@@ -1,15 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-
-// Import RxJS Resources
-import { BehaviorSubject } from 'rxjs';
-
-// Import Services
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
-
-// Import Interfaces
+import { ToastService } from '../toast.service';
 import { UserInterface } from '../../../core/models/user.model';
+import { User } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root',
@@ -17,29 +13,48 @@ import { UserInterface } from '../../../core/models/user.model';
 export class ThemeService {
   private document = inject(DOCUMENT);
   private authService = inject(AuthService);
+  private userService = inject(UserService);
+  private toastService = inject(ToastService);
 
-  private currentTheme = new BehaviorSubject<'light' | 'dark'>('light');
+  private currentTheme = new BehaviorSubject<'light' | 'dark' | 'system'>('light');
 
-  constructor(private userService: UserService) {
-    this.authService.signOut$.subscribe(() => {});
+  constructor() {
+    this.authService.signOut$.subscribe(() => {
+      this.applyTheme('light', false);
+    });
   }
 
   async initializeTheme() {
-    // Create Theme Observable
-
-    // If No User is Logged In, Set Theme Observable to Light
-    if (!this.authService.getCurrentUser().user) {
-      this.applyTheme('light');
+    const currentUser = this.authService.getCurrentUser().user;
+    if (!currentUser) {
+      this.applyTheme('light', false);
       return;
     }
 
-    // Get User's Theme From user_settings table, 'theme' column
-
-    // Set The Theme Observable to the User's Theme value
+    try {
+      const userSettings = await this.userService.getUserSettingsById(currentUser.id).toPromise();
+      const theme = userSettings?.theme || 'light';
+      this.applyTheme(theme as 'light' | 'dark' | 'system', false);
+    } catch (error) {
+      console.error('Error fetching user settings:', error);
+      this.applyTheme('light', false);
+    }
   }
 
-  private applyTheme(theme: 'light' | 'dark') {
+  private applyTheme(theme: 'light' | 'dark' | 'system', showToast: boolean = true) {
     this.currentTheme.next(theme);
+    if (theme === 'system') {
+      this.applySystemTheme();
+    } else {
+      this.applySpecificTheme(theme);
+    }
+
+    if (showToast) {
+      this.toastService.showToast(`Theme updated to ${theme} mode`);
+    }
+  }
+
+  private applySpecificTheme(theme: 'light' | 'dark') {
     if (theme === 'dark') {
       this.document.documentElement.classList.add('dark');
     } else {
@@ -47,13 +62,29 @@ export class ThemeService {
     }
   }
 
-  updateTheme() {
-    // Update Theme in user_settings table
-    // Update theme observable
-    // Push change to the application
+  private applySystemTheme() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    this.applySpecificTheme(prefersDark ? 'dark' : 'light');
   }
 
-  private initThemeObservable() {
-    //
+  updateTheme(theme: 'light' | 'dark' | 'system') {
+    const currentUser = this.authService.getCurrentUser().user;
+    if (currentUser) {
+      this.userService.updateUserSettings(currentUser.id, { theme }).subscribe(
+        () => {
+          this.applyTheme(theme, true);
+        },
+        (error) => {
+          console.error('Error updating theme:', error);
+          this.toastService.showToast('Error updating theme. Please try again.');
+        }
+      );
+    } else {
+      this.applyTheme(theme, true);
+    }
+  }
+
+  getCurrentTheme(): Observable<'light' | 'dark' | 'system'> {
+    return this.currentTheme.asObservable();
   }
 }

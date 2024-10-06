@@ -1,10 +1,7 @@
 <div class="page-container">
   <h2 class="page-title">User Settings</h2>
 
-  <div
-    class="settings-container"
-    style="display: flex; flex-direction: column; gap: 1rem"
-  >
+  <div class="settings-container" style="display: flex; flex-direction: column; gap: 1rem">
     <mat-card>
       <mat-card-header>
         <mat-card-title>Settings</mat-card-title>
@@ -12,9 +9,10 @@
       <mat-card-content>
         <mat-form-field appearance="outline">
           <mat-label>Theme</mat-label>
-          <mat-select>
+          <mat-select [ngModel]="currentTheme$ | async" (ngModelChange)="onThemeChange($event)">
             <mat-option value="light">Light</mat-option>
             <mat-option value="dark">Dark</mat-option>
+            <mat-option value="system">System</mat-option>
           </mat-select>
         </mat-form-field>
 
