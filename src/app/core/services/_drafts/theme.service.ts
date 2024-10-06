@@ -1,11 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+
+// Import RxJS Resources
 import { BehaviorSubject, Observable } from 'rxjs';
+
+// Import Services
 import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
 import { ToastService } from '../toast.service';
-import { UserInterface } from '../../../core/models/user.model';
-import { User } from '@supabase/supabase-js';
 
 @Injectable({
   providedIn: 'root',

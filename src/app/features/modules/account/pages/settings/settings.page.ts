@@ -3,9 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
-// Import RxJS Operators
-import { combineLatest, map } from 'rxjs';
-
 // Import Angular Material Components
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
