@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of, from } from 'rxjs';
-import { switchMap, catchError } from 'rxjs/operators';
+import { switchMap, catchError, map } from 'rxjs/operators';
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
 
@@ -14,6 +14,8 @@ export class DefaultModuleService {
     private userService: UserService,
     private authService: AuthService
   ) {}
+
+ 
 
   updateDefaultModule(module: string): Observable<void> {
     const userId = this.authService.getCurrentUser().user?.id;

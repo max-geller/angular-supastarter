@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import {
   AuthChangeEvent,
   AuthSession,
   Session,
   User,
 } from '@supabase/supabase-js';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SupabaseService } from './supabase.service';
 import { EventEmitter } from '@angular/core';
+import { SupabaseService } from './supabase.service';
+import { UserService } from './user.service';
+import { UserSettingsInterface } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +20,13 @@ export class AuthService {
   private _session = new BehaviorSubject<AuthSession | null>(null);
   private hasShownWelcomeMessage = false;
   public signOut$ = new EventEmitter<void>();
+  private userService: UserService | null = null;
 
-  constructor(private supabaseService: SupabaseService) {}
+  constructor(
+    private supabaseService: SupabaseService,
+    private router: Router,
+    private injector: Injector
+  ) {}
 
   getCurrentUser(): { user: User | null; email: string | null } {
     const session = this._session.getValue();
@@ -31,6 +39,22 @@ export class AuthService {
   getCurrentUserProvider(): Observable<string | null> {
     return this._session.pipe(
       map((session) => session?.user?.app_metadata?.provider ?? null)
+    );
+  }
+
+  getUserDefaultModule(): Observable<string> {
+    const userId = this.getCurrentUser().user?.id;
+    if (!userId) {
+      return new Observable<string>(observer => {
+        observer.next('dashboard');
+        observer.complete();
+      });
+    }
+    if (!this.userService) {
+      this.userService = this.injector.get(UserService);
+    }
+    return this.userService.getUserSettings(userId).pipe(
+      map((settings: UserSettingsInterface | null) => settings?.default_module || 'dashboard')
     );
   }
 
@@ -78,6 +102,8 @@ export class AuthService {
         }
         throw error;
       }
+
+      // Update last_login
       const { error: updateError } = await this.supabaseService
         .getClient()
         .from('users')
@@ -87,6 +113,18 @@ export class AuthService {
       if (updateError) {
         console.error('Error updating last_login:', updateError);
       }
+
+      // Get UserService instance lazily
+      if (!this.userService) {
+        this.userService = this.injector.get(UserService);
+      }
+
+      // Get the default module for the user
+      this.userService.getUserSettings(data.user?.id!).subscribe((settings: UserSettingsInterface | null) => {
+        const defaultModule = settings?.default_module || 'dashboard';
+        // Navigate to the default module
+        this.router.navigate([defaultModule]);
+      });
 
       return data;
     } catch (error) {
@@ -131,9 +169,15 @@ export class AuthService {
     return data;
   }
 
-  async updateProfilePassword(currentPassword: string, newPassword: string): Promise<void> {
+  async updateProfilePassword(
+    currentPassword: string,
+    newPassword: string
+  ): Promise<void> {
     try {
-      const { data: { user }, error: signInError } = await this.supabaseService.getClient().auth.signInWithPassword({
+      const {
+        data: { user },
+        error: signInError,
+      } = await this.supabaseService.getClient().auth.signInWithPassword({
         email: this.getCurrentUser().email!,
         password: currentPassword,
       });
@@ -142,7 +186,9 @@ export class AuthService {
         throw new Error('Current password is incorrect');
       }
 
-      const { error: updateError } = await this.supabaseService.getClient().auth.updateUser({ password: newPassword });
+      const { error: updateError } = await this.supabaseService
+        .getClient()
+        .auth.updateUser({ password: newPassword });
 
       if (updateError) {
         throw updateError;
