@@ -92,6 +92,10 @@ export const userMenu = [
     route: '/features/account/profile',
   },
   {
+    name: 'Teams',
+    route: '/features/teams',
+  },
+  {
     name: 'Settings',
     route: '/features/account/settings',
   },

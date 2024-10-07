@@ -27,6 +27,14 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./modules/admin/admin.routes').then((m) => m.routes),
   },
-    { path: 'docs', loadComponent: () => import('./modules/docs/docs.page').then((m) => m.DocsPage) },
-    { path: 'docs', loadChildren: () => import('./modules/docs/docs.routes').then((m) => m.routes) },
+  {
+    path: 'docs',
+    loadChildren: () =>
+      import('./modules/docs/docs.routes').then((m) => m.routes),
+  },
+  {
+    path: 'teams',
+    loadChildren: () =>
+      import('./modules/teams/teams.routes').then((m) => m.routes),
+  },
 ];
