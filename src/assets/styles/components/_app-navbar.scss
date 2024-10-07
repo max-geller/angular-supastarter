@@ -14,7 +14,12 @@
   .mdc-floating-label {
     font-size: 0.75rem !important;
   }
+  .sidenav-button {
+    display: none !important; 
+  }
 }
+
+
 
 .toolbar-container {
   display: flex;
@@ -70,6 +75,16 @@
   top: 4px;
   right: 4px;
   z-index: 1000;
+}
+
+@media (max-width: 780px) {
+
+  .logo-horizontal {
+    display: none !important;
+  }
+  .logo-square {
+    display: inline-block !important;
+  }
 }
 
 @media (max-width: 480px) {

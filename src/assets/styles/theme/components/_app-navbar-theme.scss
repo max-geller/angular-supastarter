@@ -12,13 +12,19 @@
   // If Theme is Dark:
   @if mat.get-theme-type($theme) == dark {
 
-    .logo {
+    .logo-horizontal {
+      filter: invert(100%);
+    }
+    .logo-square {
       filter: invert(100%);
     }
   } @else {
     // If Theme is Light:
 
-    .logo {
+    .logo-horizontal {
+      filter: invert(0%);
+    }
+    .logo-square {
       filter: invert(0%);
     }
   }
