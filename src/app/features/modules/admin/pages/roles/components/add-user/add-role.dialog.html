@@ -1,24 +1,21 @@
 <h2 mat-dialog-title>Add New Role</h2>
-<form>
-<mat-dialog-content>
-<mat-form-field appearance="outline">
-  <mat-label>Role Name</mat-label>
-  <input type="text" matInput>
-</mat-form-field>
+<form [formGroup]="roleForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Role Name</mat-label>
+      <input type="text" matInput formControlName="name">
+    </mat-form-field>
 
-<mat-form-field appearance="outline">
-  <mat-label>Role Description</mat-label>
-  <input type="text" matInput>
-</mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Role Description</mat-label>
+      <input type="text" matInput formControlName="description">
+    </mat-form-field>
 
-<mat-checkbox>
-  <mat-label>Is Active</mat-label>
-  <input type="checkbox" matInput>
-</mat-checkbox>
+    <mat-checkbox formControlName="is_active">Is Active</mat-checkbox>
 
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button type="button" mat-button >Cancel</button>
-  <button type="button" mat-flat-button >OK</button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="button" mat-button (click)="onCancel()">Cancel</button>
+    <button type="submit" mat-flat-button color="primary" [disabled]="roleForm.invalid">Add Role</button>
+  </mat-dialog-actions>
 </form>

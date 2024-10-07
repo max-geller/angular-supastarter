@@ -81,7 +81,7 @@
 </div>
 <div class="table-footer">
   <div class="table-footer-actions">
-    <button mat-flat-button>Add New Role</button>
+    <button mat-flat-button (click)="openAddRoleDialog()">Add New Role</button>
   </div>
 <mat-paginator
   [pageSizeOptions]="[5, 10, 20]"
