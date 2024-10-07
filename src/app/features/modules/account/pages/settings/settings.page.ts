@@ -44,6 +44,7 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
     this.currentTheme$ = this.themeService.getCurrentTheme();
     this.currentTimezone$ = this.timezoneService.getCurrentTimezone();
+    this.setDefaultTimezoneIfNotSet();
   }
 
   onThemeChange(theme: 'light' | 'dark' | 'system') {
@@ -52,5 +53,14 @@ export class SettingsPage implements OnInit {
 
   onTimezoneChange(timezone: string) {
     this.timezoneService.setTimezone(timezone);
+  }
+
+  private setDefaultTimezoneIfNotSet() {
+    const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    this.currentTimezone$.subscribe(currentTimezone => {
+      if (!currentTimezone || currentTimezone === 'UTC') {
+        this.timezoneService.setTimezone(localTimezone);
+      }
+    });
   }
 }

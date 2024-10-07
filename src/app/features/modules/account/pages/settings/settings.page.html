@@ -19,12 +19,31 @@
         <mat-form-field appearance="outline">
           <mat-label>Timezone</mat-label>
           <mat-select [ngModel]="currentTimezone$ | async" (ngModelChange)="onTimezoneChange($event)">
-            <mat-option value="America/Los_Angeles">Pacific Time (PT)</mat-option>
-            <mat-option value="America/Denver">Mountain Time (MT)</mat-option>
-            <mat-option value="America/Chicago">Central Time (CT)</mat-option>
-            <mat-option value="America/New_York">Eastern Time (ET)</mat-option>
-            <mat-option value="UTC">Coordinated Universal Time (UTC)</mat-option>
-            <!-- Add more timezone options as needed -->
+            <mat-optgroup label="United States">
+              <mat-option value="America/New_York">America/New_York (Eastern Time)</mat-option>
+              <mat-option value="America/Chicago">America/Chicago (Central Time)</mat-option>
+              <mat-option value="America/Denver">America/Denver (Mountain Time)</mat-option>
+              <mat-option value="America/Phoenix">America/Phoenix (Arizona Time)</mat-option>
+              <mat-option value="America/Los_Angeles">America/Los_Angeles (Pacific Time)</mat-option>
+              <mat-option value="America/Anchorage">America/Anchorage (Alaska Time)</mat-option>
+              <mat-option value="Pacific/Honolulu">Pacific/Honolulu (Hawaii-Aleutian Time)</mat-option>
+              <mat-option value="America/Indiana/Indianapolis">America/Indiana/Indianapolis (Indiana Eastern Time)</mat-option>
+              <mat-option value="America/Indiana/Tell_City">America/Indiana/Tell_City (Indiana Central Time)</mat-option>
+              <mat-option value="America/Puerto_Rico">America/Puerto_Rico (Atlantic Standard Time)</mat-option>
+            </mat-optgroup>
+            <mat-optgroup label="Canada">
+              <mat-option value="America/St_Johns">America/St_Johns (Newfoundland Time)</mat-option>
+              <mat-option value="America/Halifax">America/Halifax (Atlantic Time)</mat-option>
+              <mat-option value="America/Toronto">America/Toronto (Eastern Time)</mat-option>
+              <mat-option value="America/Winnipeg">America/Winnipeg (Central Time)</mat-option>
+              <mat-option value="America/Edmonton">America/Edmonton (Mountain Time)</mat-option>
+              <mat-option value="America/Vancouver">America/Vancouver (Pacific Time)</mat-option>
+            </mat-optgroup>
+            <mat-optgroup label="Ireland and UK">
+              <mat-option value="Europe/Dublin">Europe/Dublin (Ireland Time)</mat-option>
+              <mat-option value="Europe/London">Europe/London (UK Time)</mat-option>
+            </mat-optgroup>
+            <mat-option value="UTC">UTC (Coordinated Universal Time)</mat-option>
           </mat-select>
         </mat-form-field>
 

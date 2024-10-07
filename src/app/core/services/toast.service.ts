@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -22,17 +22,17 @@ export class ToastService {
     this.snackBar.open(message, 'Close', config);
   }
 
-  showTimezoneWarning(
+  showTimezoneDiscrepancy(
     message: string,
     verticalPosition: MatSnackBarVerticalPosition = 'top',
     horizontalPosition: MatSnackBarHorizontalPosition = 'right'
-  ): void {
+  ): MatSnackBarRef<TextOnlySnackBar> {
     const config: MatSnackBarConfig = {
-  
       verticalPosition,
       horizontalPosition,
+      duration: 0, // Set duration to 0 to keep it open until user interaction
     };
 
-    this.snackBar.open(message, 'Close', config);
+    return this.snackBar.open(message, 'Update', config);
   }
 }
