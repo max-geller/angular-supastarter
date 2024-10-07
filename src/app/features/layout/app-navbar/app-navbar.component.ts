@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { HttpClientModule } from '@angular/common/http';
 // Import Services
 import { AuthService } from '../../../core/services/auth.service';
 import { CurrentModuleService } from '../../../core/services/current-module.service';
@@ -45,6 +45,7 @@ import { userMenu } from '../../../core/data/menuItems';
     MatMenuModule,
     MatSidenavModule,
     MatDividerModule,
+    HttpClientModule
   ],
   templateUrl: './app-navbar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -3,6 +3,7 @@
 
 // Import Theme-Specific Files
 @use "./theme/app.theme" as app-theme;
+@use "./theme/components/app-navbar-theme" as navbar-theme;
 @use "./theme/components/app-sidenav-theme" as sidenav-theme;
 @use "./theme/components/app-module-menu-theme" as module-menu-theme;
 @use "./theme/components/dropdown-theme" as dropdown-theme;
@@ -149,6 +150,7 @@ $dark-theme: mat.define-theme(
 html {
   @include mat.all-component-themes($light-theme);
   @include app-theme.theme($light-theme);
+  @include navbar-theme.theme($light-theme);
   @include sidenav-theme.theme($light-theme);
   @include module-menu-theme.theme($light-theme);
   @include dropdown-theme.theme($light-theme);
@@ -160,6 +162,7 @@ html {
   &.dark {
     @include mat.all-component-colors($dark-theme);
     @include app-theme.theme($dark-theme);
+    @include navbar-theme.theme($dark-theme);
     @include sidenav-theme.theme($dark-theme);
     @include module-menu-theme.theme($dark-theme);
     @include dropdown-theme.theme($dark-theme);

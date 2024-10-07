@@ -1,5 +1,25 @@
 @use "@angular/material" as mat;
 
+
 // Configure Material Theme
 @mixin color($theme) {
+}
+
+@mixin theme($theme) {
+  @if mat.theme-has($theme, color) {
+    @include color($theme);
+  }
+  // If Theme is Dark:
+  @if mat.get-theme-type($theme) == dark {
+
+    .logo {
+      filter: invert(100%);
+    }
+  } @else {
+    // If Theme is Light:
+
+    .logo {
+      filter: invert(0%);
+    }
+  }
 }
