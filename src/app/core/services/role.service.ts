@@ -52,4 +52,19 @@ export class RoleService {
       })
     );
   }
+
+  updateRole(role: RoleInterface): Observable<RoleInterface> {
+    return from(
+      this.supabaseService.getClient()
+        .from('roles')
+        .update(role)
+        .eq('id', role.id)
+        .single()
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data as RoleInterface;
+      })
+    );
+  }
 }

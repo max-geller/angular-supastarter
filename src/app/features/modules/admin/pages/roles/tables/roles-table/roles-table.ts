@@ -26,8 +26,9 @@ import { RoleService } from '../../../../../../../core/services/role.service';
 // Import Models
 import { RoleInterface } from '../../../../../../../core/models/role.model';
 
-// Import AddRoleDialog
+// Import Components
 import { AddRoleDialog } from '../../components/add-user/add-role.dialog';
+import { EditRoleDialog } from '../../components/edit-role/edit-role.dialog';
 
 @Component({
   selector: 'admin-roles-table',
@@ -104,7 +105,16 @@ export class RolesTableComponent implements AfterViewInit {
   }
 
   editRole(role: RoleInterface) {
-    // Implement edit role functionality
+    const dialogRef = this.dialog.open(EditRoleDialog, {
+      width: '400px',
+      data: role
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.loadRoles();
+      }
+    });
   }
 
   deleteRole(role: RoleInterface) {
