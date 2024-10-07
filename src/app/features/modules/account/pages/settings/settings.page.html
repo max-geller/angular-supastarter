@@ -18,11 +18,13 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Timezone</mat-label>
-          <mat-select>
-            <mat-option value="PST">Pacific Standard Time (PST)</mat-option>
-            <mat-option value="MST">Mountain Standard Time (MST)</mat-option>
-            <mat-option value="CST">Central Standard Time (CST)</mat-option>
-            <mat-option value="EST">Eastern Standard Time (EST)</mat-option>
+          <mat-select [ngModel]="currentTimezone$ | async" (ngModelChange)="onTimezoneChange($event)">
+            <mat-option value="America/Los_Angeles">Pacific Time (PT)</mat-option>
+            <mat-option value="America/Denver">Mountain Time (MT)</mat-option>
+            <mat-option value="America/Chicago">Central Time (CT)</mat-option>
+            <mat-option value="America/New_York">Eastern Time (ET)</mat-option>
+            <mat-option value="UTC">Coordinated Universal Time (UTC)</mat-option>
+            <!-- Add more timezone options as needed -->
           </mat-select>
         </mat-form-field>
 

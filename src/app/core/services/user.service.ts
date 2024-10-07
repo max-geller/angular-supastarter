@@ -47,23 +47,23 @@ export class UserService {
     );
   }
 
-  getUserSettingsById(userId: string): Observable<{ theme: string } | null> {
+  getUserSettingsById(userId: string): Observable<{ theme: string; timezone: string } | null> {
     return from(
       this.supabaseService
         .getClient()
         .from('user_settings')
-        .select('theme')
+        .select('theme, timezone')
         .eq('user_id', userId)
         .single()
     ).pipe(
       map(({ data, error }) => {
         if (error) throw error;
-        return data as { theme: string } | null;
+        return data as { theme: string; timezone: string } | null;
       })
     );
   }
 
-  updateUserSettings(userId: string, settings: Partial<{ theme: string }>): Observable<any> {
+  updateUserSettings(userId: string, settings: Partial<{ theme: string; timezone: string }>): Observable<any> {
     return this.getUserSettingsById(userId).pipe(
       switchMap((existingSettings) => {
         if (existingSettings) {
@@ -254,5 +254,7 @@ export class UserService {
     );
   }
 
-
+  getCurrentUserId(): string | null {
+    return this.authService.getCurrentUser().user?.id || null;
+  }
 }

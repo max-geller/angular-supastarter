@@ -14,6 +14,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 // Import Services
 import { ThemeService } from '../../../../../core/services/theme.service';
+import { TimezoneService } from '../../../../../core/services/_drafts/timezone.service';
+import { ToastService } from '../../../../../core/services/toast.service';
 
 @Component({
   standalone: true,
@@ -33,13 +35,22 @@ import { ThemeService } from '../../../../../core/services/theme.service';
 })
 export class SettingsPage implements OnInit {
   private themeService = inject(ThemeService);
+  private timezoneService = inject(TimezoneService);
+  private toastService = inject(ToastService);
+
   currentTheme$!: Observable<'light' | 'dark' | 'system'>;
+  currentTimezone$!: Observable<string>;
 
   ngOnInit() {
     this.currentTheme$ = this.themeService.getCurrentTheme();
+    this.currentTimezone$ = this.timezoneService.getCurrentTimezone();
   }
 
   onThemeChange(theme: 'light' | 'dark' | 'system') {
     this.themeService.updateTheme(theme);
+  }
+
+  onTimezoneChange(timezone: string) {
+    this.timezoneService.setTimezone(timezone);
   }
 }

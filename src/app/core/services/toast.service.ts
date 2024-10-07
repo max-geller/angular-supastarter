@@ -21,4 +21,18 @@ export class ToastService {
 
     this.snackBar.open(message, 'Close', config);
   }
+
+  showTimezoneWarning(
+    message: string,
+    verticalPosition: MatSnackBarVerticalPosition = 'top',
+    horizontalPosition: MatSnackBarHorizontalPosition = 'right'
+  ): void {
+    const config: MatSnackBarConfig = {
+  
+      verticalPosition,
+      horizontalPosition,
+    };
+
+    this.snackBar.open(message, 'Close', config);
+  }
 }
