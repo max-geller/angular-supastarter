@@ -90,7 +90,6 @@ export class RolesTableComponent implements AfterViewInit {
   loadRoles() {
     this.roleService.getAllRoles().subscribe({
       next: (roles) => {
-        console.log('Roles received:', roles);
         this.dataSource.data = roles;
         this.cdr.detectChanges();
       },
@@ -124,8 +123,8 @@ export class RolesTableComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.refreshRoles();
+      if (result === true) {
+        this.loadRoles();
       }
     });
   }

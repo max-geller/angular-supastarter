@@ -45,7 +45,7 @@ export class AddRoleDialog {
     if (this.roleForm.valid) {
       this.roleService.addRole(this.roleForm.value).subscribe({
         next: (role) => {
-          this.dialogRef.close(role);
+          this.dialogRef.close(true);
         },
         error: (error) => {
           console.error('Error adding role:', error);
