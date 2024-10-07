@@ -5,6 +5,7 @@ export interface UserInterface {
     first_name?: string;
     last_name?: string;
     email: string;
+    title?: string;
     tenant_id: string;
     tenant_name?: string;
     last_login?: string;

@@ -48,6 +48,7 @@ export class EditUserDialog {
     this.editUserForm = this.fb.group({
       first_name: [data.first_name, Validators.required],
       last_name: [data.last_name, Validators.required],
+      title: [data.title],
       is_active: [data.is_active],
     });
   }

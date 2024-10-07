@@ -58,6 +58,7 @@ export class UsersTableComponent implements AfterViewInit {
     'role_name',
     'first_name',
     'last_name',
+    'title',
     'last_login',
     'created_at',
     'is_active',

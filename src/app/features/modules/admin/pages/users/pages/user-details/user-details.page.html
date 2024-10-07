@@ -18,6 +18,11 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Role</mat-label>
       <mat-select formControlName="role_id">
         <mat-option *ngFor="let role of roles" [value]="role.id">

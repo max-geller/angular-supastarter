@@ -61,6 +61,7 @@ export class UserDetailsPage implements OnInit {
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      title: [''],
       role_id: ['', Validators.required],
       is_active: [true, Validators.required],
     });
