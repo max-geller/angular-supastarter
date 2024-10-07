@@ -87,7 +87,6 @@ export class TenantsTableComponent implements AfterViewInit {
   loadTenants() {
     this.adminService.getAllTenants().subscribe({
       next: (tenants) => {
-        console.log('Tenants received:', tenants);
         this.dataSource.data = tenants;
         this.cdr.detectChanges();
       },
