@@ -17,6 +17,11 @@ export const routes: Routes = [
       import('./pages/settings/settings.page').then((m) => m.SettingsPage),
   },
   {
+    path: 'teams',
+    loadChildren: () =>
+      import('./pages/teams/teams.routes').then((m) => m.routes),
+  },
+  {
     path: 'notifications',
     loadComponent: () =>
       import('./pages/notifications/notifications.page').then(

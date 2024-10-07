@@ -26,7 +26,6 @@ export const mainMenu = [
       },
     ],
   },
-
   {
     name: 'Account',
     route: '/features/account',
@@ -34,6 +33,10 @@ export const mainMenu = [
       {
         name: 'Profile',
         route: '/features/account/profile',
+      },
+      {
+        name: 'Teams',
+        route: '/features/account/teams',
       },
       {
         name: 'Notifications',
@@ -93,7 +96,7 @@ export const userMenu = [
   },
   {
     name: 'Teams',
-    route: '/features/teams',
+    route: '/features/account/teams',
   },
   {
     name: 'Settings',

@@ -32,9 +32,4 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./modules/docs/docs.routes').then((m) => m.routes),
   },
-  {
-    path: 'teams',
-    loadChildren: () =>
-      import('./modules/teams/teams.routes').then((m) => m.routes),
-  },
 ];
