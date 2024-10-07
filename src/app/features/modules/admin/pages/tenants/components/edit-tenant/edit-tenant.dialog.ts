@@ -1,44 +1,47 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Inject } from '@angular/core';
+import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+// Import Angular Material Components
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
-// Import Services
+// Import Services    
+import { TenantService } from '../../../../../../../core/services/tenant.service';
 import { ToastService } from '../../../../../../../core/services/toast.service';
-import { AdminService } from '../../../../../../../core/services/admin.service';
 
-// Import Models
+// Import Models  
 import { TenantInterface } from '../../../../../../../core/models/tenant.model';
 
-
 @Component({
-  selector: 'app-edit-tenant-dialog',
   standalone: true,
   imports: [
     CommonModule,
-    MatDialogModule,
     ReactiveFormsModule,
+    FormsModule,
+    MatDialogModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   templateUrl: './edit-tenant.dialog.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditTenantDialog {
+  private fb = inject(FormBuilder);
+  private tenantService = inject(TenantService);
+  private dialogRef = inject(MatDialogRef<EditTenantDialog>);
+  private toastService = inject(ToastService);
+
   editTenantForm: FormGroup;
 
-  constructor(
-    private dialogRef: MatDialogRef<EditTenantDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: TenantInterface,
-    private fb: FormBuilder,
-    private adminService: AdminService,
-    private toastService: ToastService
-  ) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: TenantInterface) {
     this.editTenantForm = this.fb.group({
       name: [data.name, Validators.required],
       logo_url: [data.logo_url],
@@ -48,25 +51,24 @@ export class EditTenantDialog {
 
   onSubmit() {
     if (this.editTenantForm.valid) {
-      const updatedTenant: Partial<TenantInterface> = {
-        ...this.editTenantForm.value,
-        id: this.data.id
+      const updatedTenant: TenantInterface = {
+        ...this.data,
+        ...this.editTenantForm.value
       };
-
-      this.adminService.updateTenant(updatedTenant).subscribe({
-        next: () => {
-          this.toastService.showToast('Tenant Details Updated');
+      this.tenantService.updateTenant(updatedTenant).subscribe({
+        next: (tenant) => {
+          this.toastService.showToast('Tenant updated successfully', 3000, 'top', 'right');
           this.dialogRef.close(true);
         },
         error: (error) => {
+          this.toastService.showToast('Error updating tenant', 3000, 'top', 'right');
           console.error('Error updating tenant:', error);
-          this.toastService.showToast('Error updating tenant. Please try again.');
         }
       });
     }
   }
 
   onCancel() {
-    this.dialogRef.close(false);
+    this.dialogRef.close();
   }
 }

@@ -57,4 +57,23 @@ export class TenantService {
         })
       );
   }
+
+  updateTenant(tenant: TenantInterface): Observable<TenantInterface> {
+    return from(
+      this.supabase.getClient()
+        .from('tenants')
+        .update(tenant)
+        .eq('id', tenant.id)
+        .single()
+    ).pipe(
+      map((response) => {
+        if (response.error) throw response.error;
+        return response.data as TenantInterface;
+      }),
+      catchError((error) => {
+        console.error('Error updating tenant:', error);
+        throw error;
+      })
+    );
+  }
 }

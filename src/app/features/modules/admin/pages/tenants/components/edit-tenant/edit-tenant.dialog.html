@@ -1,24 +1,20 @@
 <h2>Edit Tenant</h2>
 <mat-dialog-content>
   <form [formGroup]="editTenantForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Tenant Name</mat-label>
       <input matInput formControlName="name" required />
       <mat-error *ngIf="editTenantForm.get('name')?.hasError('required')">
         Tenant name is required
       </mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Logo URL</mat-label>
       <input matInput formControlName="logo_url" />
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Status</mat-label>
-      <mat-select formControlName="is_active">
-        <mat-option [value]="true">Active</mat-option>
-        <mat-option [value]="false">Inactive</mat-option>
-      </mat-select>
-    </mat-form-field>
+
+    <mat-checkbox formControlName="is_active">Is Active</mat-checkbox>
+   
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
