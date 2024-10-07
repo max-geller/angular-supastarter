@@ -7,7 +7,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SupabaseService {
   private readonly supabaseUrl = environment.supabaseCredentials.url;
@@ -25,10 +25,10 @@ export class SupabaseService {
 
   getClient(): SupabaseClient {
     if (!this.supabase) {
-      throw new Error('Supabase client not initialized. Please ensure the service is initialized before use.');
+      throw new Error(
+        'Supabase client not initialized. Please ensure the service is initialized before use.'
+      );
     }
     return this.supabase;
   }
-
-  
 }

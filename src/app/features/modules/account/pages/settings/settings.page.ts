@@ -55,7 +55,7 @@ export class SettingsPage implements OnInit {
     this.currentTimezone$ = this.timezoneService.getCurrentTimezone();
     this.setDefaultTimezoneIfNotSet();
     this.currentDefaultModule$ = this.userService.getUserSettings(this.authService.getCurrentUser().user!.id)
-      .pipe(map(settings => settings?.default_module || 'admin'));
+      .pipe(map(settings => settings?.default_module || 'dashboard'));
   }
 
   onThemeChange(theme: 'light' | 'dark' | 'system') {
