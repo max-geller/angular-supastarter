@@ -15,38 +15,20 @@ export class DefaultModuleService {
     private authService: AuthService
   ) {}
 
-  navigateToDefaultModule(): Observable<boolean> {
-    const userId = this.authService.getCurrentUser().user?.id;
-    if (!userId) {
-      return of(false);
-    }
-
-    return this.userService.getUserSettings(userId).pipe(
-      switchMap((settings) => {
-        const defaultModule = settings?.default_module || 'features/template';
-        // Convert the Promise to an Observable
-        return from(this.router.navigate([defaultModule]));
-      }),
-      catchError((error) => {
-        console.error('Error navigating to default module:', error);
-        // Convert the Promise to an Observable
-        return from(this.router.navigate(['features/admin']));
-      })
-    );
-  }
-
   updateDefaultModule(module: string): Observable<void> {
     const userId = this.authService.getCurrentUser().user?.id;
     if (!userId) {
       return of(undefined);
     }
 
-    return this.userService.updateUserSettings(userId, { default_module: module }).pipe(
-      switchMap(() => of(undefined)),
-      catchError((error) => {
-        console.error('Error updating default module:', error);
-        return of(undefined);
-      })
-    );
+    return this.userService
+      .updateUserSettings(userId, { default_module: module })
+      .pipe(
+        switchMap(() => of(undefined)),
+        catchError((error) => {
+          console.error('Error updating default module:', error);
+          return of(undefined);
+        })
+      );
   }
 }

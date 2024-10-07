@@ -1,9 +1,8 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
-import { isDevMode } from '@angular/core';
+import { isDevMode, APP_INITIALIZER } from '@angular/core';
 import { provideServiceWorker } from '@angular/service-worker';
-import { APP_INITIALIZER } from '@angular/core';
 import { environment } from './environments/environment';
 
 
