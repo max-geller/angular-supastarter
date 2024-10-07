@@ -16,6 +16,15 @@
         0px
         4px
         mat.get-theme-color($theme, tertiary, 20) !important;
+
+      &.danger-card {
+        //   border-color: mat.get-theme-color($theme, error, 60) !important;
+        box-shadow: 0px
+          0px
+          4px
+          mat.get-theme-color($theme, error, 30) !important;
+      }
+
       &:hover {
         border-width: 1px !important;
         margin: -1px !important;
@@ -31,6 +40,15 @@
         0px
         2px
         mat.get-theme-color($theme, tertiary, 90) !important;
+
+      &.danger-card {
+        border-color: mat.get-theme-color($theme, error, 60) !important;
+        .mdc-button--unelevated {
+          background-color: mat.get-theme-color($theme, error, 40) !important;
+          color: mat.get-theme-color($theme, error, 95) !important;
+        }
+      }
+
       &:hover {
         border-width: 1px !important;
         margin: -1px !important;

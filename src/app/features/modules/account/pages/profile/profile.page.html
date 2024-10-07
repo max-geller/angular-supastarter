@@ -15,13 +15,13 @@
           </div>
 
           <!-- Show uploaded avatar if avatar_url exists -->
-          <ngx-avatars *ngIf="user?.avatar_url"
-          [size]="130"
-          [round]="true"
-          [src]="user?.avatar_url"
-        >
-        </ngx-avatars>
-
+          <ngx-avatars
+            *ngIf="user?.avatar_url"
+            [size]="130"
+            [round]="true"
+            [src]="user?.avatar_url"
+          >
+          </ngx-avatars>
         </div>
         <div class="avatar-actions">
           <input
@@ -31,12 +31,13 @@
             style="display: none"
             accept="image/*"
           />
-          <button mat-raised-button (click)="openAvatarDialog()">Change Avatar</button>
+          <button mat-raised-button (click)="openAvatarDialog()">
+            Change Avatar
+          </button>
         </div>
       </mat-card-content>
     </mat-card>
     <mat-card *ngIf="tenant" class="tenant-info-card">
-      <mat-card-header> </mat-card-header>
       <mat-card-content>
         <div class="tenant-info-content">
           <img
@@ -47,6 +48,21 @@
           />
           <h3>{{ tenant.name }}</h3>
           <h4 *ngIf="userRole">{{ userRole }}</h4>
+          <div style="font-size: 12px">Joined 9/28/2024</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="teams-info-card">
+      <mat-card-header>
+        <mat-card-title>My Teams</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="team-info-content">
+          <button mat-button>Development</button>
+          <button mat-button>Estimating</button>
+          <button mat-button>Project Management</button>
+          <button mat-button>Preconstruction</button>
         </div>
       </mat-card-content>
     </mat-card>
@@ -96,11 +112,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
-            <input
-              matInput
-              placeholder="ex: Project Manager"
-            />
-       
+            <input matInput placeholder="ex: Project Manager" />
           </mat-form-field>
 
           <button
