@@ -52,4 +52,5 @@ export const routes: Routes = [
       import('./pages/tenants/tenants.page').then((m) => m.TenantsPage),
   },
     { path: 'user-details', loadComponent: () => import('./pages/users/pages/user-details/user-details.page').then((m) => m.UserDetailsPage) },
+    { path: 'billing', loadComponent: () => import('./pages/billing/billing.page').then((m) => m.BillingPage) },
 ];

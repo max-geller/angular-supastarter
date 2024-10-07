@@ -69,6 +69,10 @@ export const mainMenu = [
         route: '/features/admin/roles',
       },
       {
+        name: 'Billing',
+        route: '/features/admin/billing',
+      },
+      {
         name: 'Activity',
         route: '/features/admin/activity',
       },
