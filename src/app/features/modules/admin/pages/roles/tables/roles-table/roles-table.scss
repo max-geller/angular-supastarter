@@ -37,3 +37,10 @@ th.mat-column-is_active {
   max-width: 100%;
   overflow: auto;
 }
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
