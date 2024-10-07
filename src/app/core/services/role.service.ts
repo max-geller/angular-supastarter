@@ -23,4 +23,18 @@ export class RoleService {
       })
     );
   }
+
+  addRole(role: Partial<RoleInterface>): Observable<RoleInterface> {
+    return from(
+      this.supabaseService.getClient()
+        .from('roles')
+        .insert(role)
+        .single()
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data as RoleInterface;
+      })
+    );
+  }
 }
