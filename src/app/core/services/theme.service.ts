@@ -5,9 +5,9 @@ import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 // Import Services
-import { AuthService } from '../auth.service';
-import { UserService } from '../user.service';
-import { ToastService } from '../toast.service';
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root',

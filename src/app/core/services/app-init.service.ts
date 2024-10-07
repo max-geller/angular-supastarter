@@ -3,7 +3,7 @@ import { SupabaseService } from './supabase.service';
 
 // Import Services
 import { AuthService } from './auth.service';
-import { ThemeService } from './_drafts/theme.service';
+import { ThemeService } from './theme.service';
 
 @Injectable({
   providedIn: 'root',

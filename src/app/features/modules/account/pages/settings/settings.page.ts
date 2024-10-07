@@ -13,7 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 // Import Services
-import { ThemeService } from '../../../../../core/services/_drafts/theme.service';
+import { ThemeService } from '../../../../../core/services/theme.service';
 
 @Component({
   standalone: true,
