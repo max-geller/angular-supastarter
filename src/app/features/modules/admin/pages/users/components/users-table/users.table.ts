@@ -7,6 +7,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 // Import Angular Material Components
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
@@ -30,6 +31,9 @@ import { UserInterface } from '../../../../../../../core/models/user.model';
 // Import Components
 import { EditUserDialog } from '../edit-user/edit-user.dialog';
 
+// Import Third Party Modules
+import { AvatarModule } from 'ngx-avatars';
+
 @Component({
   selector: 'admin-users-table',
   standalone: true,
@@ -46,6 +50,8 @@ import { EditUserDialog } from '../edit-user/edit-user.dialog';
     MatMenuModule,
     MatCardModule,
     RouterModule,
+    AvatarModule,
+    HttpClientModule,
   ],
   templateUrl: './users.table.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,11 +59,12 @@ import { EditUserDialog } from '../edit-user/edit-user.dialog';
 export class UsersTableComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'edit',
+    'avatar',
+    'first_name',
+    'last_name',
     'email',
     'tenant_name',
     'role_name',
-    'first_name',
-    'last_name',
     'title',
     'last_login',
     'created_at',
