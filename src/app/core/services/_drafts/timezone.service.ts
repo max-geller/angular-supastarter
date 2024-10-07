@@ -60,7 +60,7 @@ export class TimezoneService {
 
   private setDefaultTimezone(): void {
     const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    this.currentTimezone.next(localTimezone);
+    this.currentTimezone.next(this.getFallbackTimezone(localTimezone));
   }
 
   formatToUserTimezone(date: Date): string {
@@ -84,7 +84,26 @@ export class TimezoneService {
       'right'
     );
     this.snackBarRef.onAction().subscribe(() => {
-      this.setTimezone(newTimezone);
+      this.setTimezone(this.getFallbackTimezone(newTimezone));
     });
+  }
+
+  getFallbackTimezone(timezone: string): string {
+    const availableTimezones = [
+      'America/New_York', 'America/Chicago', 'America/Denver', 'America/Phoenix',
+      'America/Los_Angeles', 'America/Anchorage', 'Pacific/Honolulu',
+      'America/Indiana/Indianapolis', 'America/Indiana/Tell_City', 'America/Puerto_Rico',
+      'America/St_Johns', 'America/Halifax', 'America/Toronto', 'America/Winnipeg',
+      'America/Edmonton', 'America/Vancouver', 'Europe/Dublin', 'Europe/London', 'UTC'
+    ];
+
+    if (availableTimezones.includes(timezone)) {
+      return timezone;
+    }
+
+    // Fallback logic: You might want to implement a more sophisticated mapping here
+    if (timezone.startsWith('America/')) return 'America/New_York';
+    if (timezone.startsWith('Europe/')) return 'Europe/London';
+    return 'UTC';
   }
 }

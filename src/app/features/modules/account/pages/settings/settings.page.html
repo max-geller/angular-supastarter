@@ -90,3 +90,7 @@
     </mat-card>
   </div>
 </div>
+
+<p *ngIf="detectedTimezone !== (currentTimezone$ | async)">
+  Your detected timezone ({{ detectedTimezone }}) is not in the list. The closest available timezone has been selected.
+</p>

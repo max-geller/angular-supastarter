@@ -40,6 +40,7 @@ export class SettingsPage implements OnInit {
 
   currentTheme$!: Observable<'light' | 'dark' | 'system'>;
   currentTimezone$!: Observable<string>;
+  detectedTimezone: string = '';
 
   ngOnInit() {
     this.currentTheme$ = this.themeService.getCurrentTheme();
@@ -56,10 +57,11 @@ export class SettingsPage implements OnInit {
   }
 
   private setDefaultTimezoneIfNotSet() {
-    const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    this.detectedTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const fallbackTimezone = this.timezoneService.getFallbackTimezone(this.detectedTimezone);
     this.currentTimezone$.subscribe(currentTimezone => {
       if (!currentTimezone || currentTimezone === 'UTC') {
-        this.timezoneService.setTimezone(localTimezone);
+        this.timezoneService.setTimezone(fallbackTimezone);
       }
     });
   }
