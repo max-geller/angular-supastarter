@@ -86,6 +86,7 @@ export class ProfilePage implements OnInit {
     this.profileForm = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
+      title: [''],
       email: [{ value: '', disabled: true }],
     });
 
@@ -139,6 +140,7 @@ export class ProfilePage implements OnInit {
           first_name: this.user.first_name,
           last_name: this.user.last_name,
           email: this.user.email,
+          title: this.user.title,
         });
         this.isLoading = false;
         this.cdr.markForCheck();
