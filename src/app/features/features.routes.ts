@@ -2,11 +2,6 @@ import type { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  },
-  {
     path: 'account',
     loadChildren: () =>
       import('./modules/account/account.routes').then((m) => m.routes),

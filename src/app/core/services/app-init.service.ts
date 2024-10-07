@@ -1,10 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from './supabase.service';
-
-// Import Services
 import { AuthService } from './auth.service';
 import { ThemeService } from './theme.service';
 import { TimezoneService } from './_drafts/timezone.service';
+import { DefaultModuleService } from './default-module.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +13,7 @@ export class AppInitService {
   private authService = inject(AuthService);
   private themeService = inject(ThemeService);
   private timezoneService = inject(TimezoneService);
+  private defaultModuleService = inject(DefaultModuleService);
 
   constructor() {}
 
@@ -29,5 +29,8 @@ export class AppInitService {
 
     // Initialize Timezone
     await this.timezoneService.loadUserTimezone();
+
+    // Navigate to default module
+    this.defaultModuleService.navigateToDefaultModule().subscribe();
   }
 }

@@ -1,7 +1,10 @@
 <div class="page-container">
   <h2 class="page-title">User Settings</h2>
 
-  <div class="settings-container" style="display: flex; flex-direction: column; gap: 1rem">
+  <div
+    class="settings-container"
+    style="display: flex; flex-direction: column; gap: 1rem"
+  >
     <mat-card>
       <mat-card-header>
         <mat-card-title>Settings</mat-card-title>
@@ -9,7 +12,10 @@
       <mat-card-content>
         <mat-form-field appearance="outline">
           <mat-label>Theme</mat-label>
-          <mat-select [ngModel]="currentTheme$ | async" (ngModelChange)="onThemeChange($event)">
+          <mat-select
+            [ngModel]="currentTheme$ | async"
+            (ngModelChange)="onThemeChange($event)"
+          >
             <mat-option value="light">Light</mat-option>
             <mat-option value="dark">Dark</mat-option>
             <mat-option value="system">System</mat-option>
@@ -18,52 +24,97 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Timezone</mat-label>
-          <mat-select [ngModel]="currentTimezone$ | async" (ngModelChange)="onTimezoneChange($event)">
+          <mat-select
+            [ngModel]="currentTimezone$ | async"
+            (ngModelChange)="onTimezoneChange($event)"
+          >
             <mat-optgroup label="United States">
-              <mat-option value="America/New_York">America/New_York (Eastern Time)</mat-option>
-              <mat-option value="America/Chicago">America/Chicago (Central Time)</mat-option>
-              <mat-option value="America/Denver">America/Denver (Mountain Time)</mat-option>
-              <mat-option value="America/Phoenix">America/Phoenix (Arizona Time)</mat-option>
-              <mat-option value="America/Los_Angeles">America/Los_Angeles (Pacific Time)</mat-option>
-              <mat-option value="America/Anchorage">America/Anchorage (Alaska Time)</mat-option>
-              <mat-option value="Pacific/Honolulu">Pacific/Honolulu (Hawaii-Aleutian Time)</mat-option>
-              <mat-option value="America/Indiana/Indianapolis">America/Indiana/Indianapolis (Indiana Eastern Time)</mat-option>
-              <mat-option value="America/Indiana/Tell_City">America/Indiana/Tell_City (Indiana Central Time)</mat-option>
-              <mat-option value="America/Puerto_Rico">America/Puerto_Rico (Atlantic Standard Time)</mat-option>
+              <mat-option value="America/New_York"
+                >America/New_York (Eastern Time)</mat-option
+              >
+              <mat-option value="America/Chicago"
+                >America/Chicago (Central Time)</mat-option
+              >
+              <mat-option value="America/Denver"
+                >America/Denver (Mountain Time)</mat-option
+              >
+              <mat-option value="America/Phoenix"
+                >America/Phoenix (Arizona Time)</mat-option
+              >
+              <mat-option value="America/Los_Angeles"
+                >America/Los_Angeles (Pacific Time)</mat-option
+              >
+              <mat-option value="America/Anchorage"
+                >America/Anchorage (Alaska Time)</mat-option
+              >
+              <mat-option value="Pacific/Honolulu"
+                >Pacific/Honolulu (Hawaii-Aleutian Time)</mat-option
+              >
+              <mat-option value="America/Indiana/Indianapolis"
+                >America/Indiana/Indianapolis (Indiana Eastern Time)</mat-option
+              >
+              <mat-option value="America/Indiana/Tell_City"
+                >America/Indiana/Tell_City (Indiana Central Time)</mat-option
+              >
+              <mat-option value="America/Puerto_Rico"
+                >America/Puerto_Rico (Atlantic Standard Time)</mat-option
+              >
             </mat-optgroup>
             <mat-optgroup label="Canada">
-              <mat-option value="America/St_Johns">America/St_Johns (Newfoundland Time)</mat-option>
-              <mat-option value="America/Halifax">America/Halifax (Atlantic Time)</mat-option>
-              <mat-option value="America/Toronto">America/Toronto (Eastern Time)</mat-option>
-              <mat-option value="America/Winnipeg">America/Winnipeg (Central Time)</mat-option>
-              <mat-option value="America/Edmonton">America/Edmonton (Mountain Time)</mat-option>
-              <mat-option value="America/Vancouver">America/Vancouver (Pacific Time)</mat-option>
+              <mat-option value="America/St_Johns"
+                >America/St_Johns (Newfoundland Time)</mat-option
+              >
+              <mat-option value="America/Halifax"
+                >America/Halifax (Atlantic Time)</mat-option
+              >
+              <mat-option value="America/Toronto"
+                >America/Toronto (Eastern Time)</mat-option
+              >
+              <mat-option value="America/Winnipeg"
+                >America/Winnipeg (Central Time)</mat-option
+              >
+              <mat-option value="America/Edmonton"
+                >America/Edmonton (Mountain Time)</mat-option
+              >
+              <mat-option value="America/Vancouver"
+                >America/Vancouver (Pacific Time)</mat-option
+              >
             </mat-optgroup>
             <mat-optgroup label="Ireland and UK">
-              <mat-option value="Europe/Dublin">Europe/Dublin (Ireland Time)</mat-option>
-              <mat-option value="Europe/London">Europe/London (UK Time)</mat-option>
+              <mat-option value="Europe/Dublin"
+                >Europe/Dublin (Ireland Time)</mat-option
+              >
+              <mat-option value="Europe/London"
+                >Europe/London (UK Time)</mat-option
+              >
             </mat-optgroup>
-            <mat-option value="UTC">UTC (Coordinated Universal Time)</mat-option>
+            <mat-option value="UTC"
+              >UTC (Coordinated Universal Time)</mat-option
+            >
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Default Module</mat-label>
-          <mat-select>
-            <mat-option value="admin">Admin</mat-option>
-            <mat-option value="template">Template</mat-option>
-            <mat-option value="docs">Documentation</mat-option>
+          <mat-select
+            [ngModel]="currentDefaultModule$ | async"
+            (ngModelChange)="onDefaultModuleChange($event)"
+          >
+          <mat-option value="features/dashboard">Dashboard</mat-option>
+            <mat-option value="features/admin">Admin</mat-option>
+            <mat-option value="features/template">Template</mat-option>
+            <mat-option value="features/docs">Documentation</mat-option>
           </mat-select>
         </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Language</mat-label>
+          <mat-select>
+            <mat-option value="english-us">English (US)</mat-option>
+          </mat-select> </mat-form-field
+        >s
       </mat-card-content>
     </mat-card>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Language</mat-label>
-      <mat-select>
-        <mat-option value="english-us">English (US)</mat-option>
-      </mat-select>
-    </mat-form-field>
 
     <mat-card>
       <mat-card-header>
@@ -92,5 +143,6 @@
 </div>
 
 <p *ngIf="detectedTimezone !== (currentTimezone$ | async)">
-  Your detected timezone ({{ detectedTimezone }}) is not in the list. The closest available timezone has been selected.
+  Your detected timezone ({{ detectedTimezone }}) is not in the list. The
+  closest available timezone has been selected.
 </p>

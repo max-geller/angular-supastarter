@@ -21,3 +21,12 @@ export interface UserInterface {
     avatar_url: string | null;
     avatar_color: string;
 }
+
+export interface UserSettingsInterface {
+    id: string;
+    user_id: string;
+    theme: string;
+    timezone: string;
+    language: string;
+    default_module: string;
+}

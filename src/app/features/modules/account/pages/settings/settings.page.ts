@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 // Import Angular Material Components
@@ -13,9 +13,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 // Import Services
+import { AuthService } from '../../../../../core/services/auth.service';
 import { ThemeService } from '../../../../../core/services/theme.service';
 import { TimezoneService } from '../../../../../core/services/_drafts/timezone.service';
 import { ToastService } from '../../../../../core/services/toast.service';
+import { UserService } from '../../../../../core/services/user.service';
+import { DefaultModuleService } from '../../../../../core/services/default-module.service';
+
 
 @Component({
   standalone: true,
@@ -35,17 +39,23 @@ import { ToastService } from '../../../../../core/services/toast.service';
 })
 export class SettingsPage implements OnInit {
   private themeService = inject(ThemeService);
+  private authService = inject(AuthService);
   private timezoneService = inject(TimezoneService);
   private toastService = inject(ToastService);
+  private defaultModuleService = inject(DefaultModuleService);
+  private userService = inject(UserService);
 
   currentTheme$!: Observable<'light' | 'dark' | 'system'>;
   currentTimezone$!: Observable<string>;
   detectedTimezone: string = '';
+  currentDefaultModule$!: Observable<string>;
 
   ngOnInit() {
     this.currentTheme$ = this.themeService.getCurrentTheme();
     this.currentTimezone$ = this.timezoneService.getCurrentTimezone();
     this.setDefaultTimezoneIfNotSet();
+    this.currentDefaultModule$ = this.userService.getUserSettings(this.authService.getCurrentUser().user!.id)
+      .pipe(map(settings => settings?.default_module || 'admin'));
   }
 
   onThemeChange(theme: 'light' | 'dark' | 'system') {
@@ -64,5 +74,9 @@ export class SettingsPage implements OnInit {
         this.timezoneService.setTimezone(fallbackTimezone);
       }
     });
+  }
+
+  onDefaultModuleChange(module: string) {
+    this.defaultModuleService.updateDefaultModule(module).subscribe();
   }
 }

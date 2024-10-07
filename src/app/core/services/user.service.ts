@@ -9,6 +9,7 @@ import { TenantService } from './tenant.service';
 
 // Import Models
 import { UserInterface } from '../models/user.model';
+import { UserSettingsInterface } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -36,16 +37,8 @@ export class UserService {
     );
   }
 
-  getUserSettings(user: UserInterface): Observable<any> {
-    return from(
-      this.supabaseService
-        .getClient()
-        .from('user_settings')
-        .select('*')
-        .eq('user_id', user.id)
-        .single()
-    );
-  }
+
+  
 
   getUserSettingsById(userId: string): Observable<{ theme: string; timezone: string } | null> {
     return from(
@@ -63,8 +56,24 @@ export class UserService {
     );
   }
 
-  updateUserSettings(userId: string, settings: Partial<{ theme: string; timezone: string }>): Observable<any> {
-    return this.getUserSettingsById(userId).pipe(
+  getUserSettings(userId: string): Observable<UserSettingsInterface | null> {
+    return from(
+      this.supabaseService
+        .getClient()
+        .from('user_settings')
+        .select('*')
+        .eq('user_id', userId)
+        .single()
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data as UserSettingsInterface | null;
+      })
+    );
+  }
+
+  updateUserSettings(userId: string, settings: Partial<UserSettingsInterface>): Observable<UserSettingsInterface> {
+    return this.getUserSettings(userId).pipe(
       switchMap((existingSettings) => {
         if (existingSettings) {
           // Update existing record
@@ -74,6 +83,8 @@ export class UserService {
               .from('user_settings')
               .update(settings)
               .eq('user_id', userId)
+              .select()
+              .single()
           );
         } else {
           // Insert new record
@@ -82,12 +93,14 @@ export class UserService {
               .getClient()
               .from('user_settings')
               .insert({ user_id: userId, ...settings })
+              .select()
+              .single()
           );
         }
       }),
-      catchError((error) => {
-        console.error('Error updating user settings:', error);
-        return of(null);
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data as UserSettingsInterface;
       })
     );
   }
