@@ -15,7 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 // Import Services
 import { AuthService } from '../../../../../core/services/auth.service';
 import { ThemeService } from '../../../../../core/services/theme.service';
-import { TimezoneService } from '../../../../../core/services/_drafts/timezone.service';
+import { TimezoneService } from '../../../../../core/services/timezone.service';
 import { ToastService } from '../../../../../core/services/toast.service';
 import { UserService } from '../../../../../core/services/user.service';
 import { DefaultModuleService } from '../../../../../core/services/default-module.service';

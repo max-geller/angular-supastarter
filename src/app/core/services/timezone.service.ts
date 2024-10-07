@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { UserService } from './../../services/user.service';
-import { ToastService } from './../../services/toast.service';
+import { UserService } from './user.service';
+import { ToastService } from './toast.service';
 import { MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 
 @Injectable({

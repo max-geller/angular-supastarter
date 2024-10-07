@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { AuthService } from './auth.service';
 import { ThemeService } from './theme.service';
-import { TimezoneService } from './_drafts/timezone.service';
+import { TimezoneService } from './timezone.service';
 import { DefaultModuleService } from './default-module.service';
 
 @Injectable({
