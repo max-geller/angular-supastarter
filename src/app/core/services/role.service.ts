@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { SupabaseService } from './supabase.service';
 import { RoleInterface } from '../models/role.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,20 @@ export class RoleService {
       map(({ data, error }) => {
         if (error) throw error;
         return data as RoleInterface;
+      })
+    );
+  }
+
+  deleteRole(id: number): Observable<void> {
+    return from(
+      this.supabaseService.getClient()
+        .from('roles')
+        .delete()
+        .eq('id', id)
+    ).pipe(
+      map(() => {}),
+      catchError((error) => {
+        throw error;
       })
     );
   }

@@ -112,7 +112,16 @@ export class RolesTableComponent implements AfterViewInit {
       .openAdvancedConfirmDialog(role.name, 'role')
       .subscribe((confirmed) => {
         if (confirmed) {
-          // Implement delete role functionality
+          this.roleService.deleteRole(role.id).subscribe({
+            next: () => {
+              this.toastService.showToast('Role deleted successfully', 3000, 'top', 'right');
+              this.loadRoles();
+            },
+            error: (error) => {
+              this.toastService.showToast('Error deleting role', 3000, 'top', 'right');
+              console.error('Error deleting role:', error);
+            }
+          });
         }
       });
   }
