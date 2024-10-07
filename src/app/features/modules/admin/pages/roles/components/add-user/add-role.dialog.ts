@@ -16,6 +16,7 @@ import { ToastService } from '../../../../../../../core/services/toast.service';
 
 @Component({
   standalone: true,
+  selector: 'admin-add-role-dialog',
   imports: [
     CommonModule,
     MatButtonModule,

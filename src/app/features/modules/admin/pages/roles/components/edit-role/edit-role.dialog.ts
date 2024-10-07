@@ -19,6 +19,7 @@ import { RoleInterface } from '../../../../../../../core/models/role.model';
 
 @Component({
   standalone: true,
+  selector: 'admin-edit-role-dialog',
   imports: [
     CommonModule,
     MatButtonModule,
