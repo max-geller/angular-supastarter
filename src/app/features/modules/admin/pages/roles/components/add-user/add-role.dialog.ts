@@ -45,9 +45,11 @@ export class AddRoleDialog {
     if (this.roleForm.valid) {
       this.roleService.addRole(this.roleForm.value).subscribe({
         next: (role) => {
+          this.toastService.showToast('Role added successfully', 3000, 'top', 'right');
           this.dialogRef.close(true);
         },
         error: (error) => {
+          this.toastService.showToast('Error adding role', 3000, 'top', 'right');
           console.error('Error adding role:', error);
         }
       });
