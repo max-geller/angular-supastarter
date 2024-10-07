@@ -1,1 +1,78 @@
-<h2 class="page-title">Application Settings</h2>
+<div class="page-container">
+    <h2 class="page-title">Application Settings</h2>
+  
+    <div
+      class="settings-container"
+      style="display: flex; flex-direction: column; gap: 1rem"
+    >
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Settings</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field appearance="outline">
+            <mat-label>Color Palette</mat-label>
+            <mat-select
+            >
+              <mat-option value="light">Azure</mat-option>
+              <mat-option value="dark">Violet</mat-option>
+              <mat-option value="system">Green</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Typography</mat-label>
+            <mat-select>
+                <mat-option value="roboto">Roboto</mat-option>
+                <mat-option value="heebo">Heebo</mat-option>
+                <mat-option value="inter">Inter</mat-option>
+                <mat-option value="lato">Lato</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Default Module</mat-label>
+            <mat-select>
+            <mat-option value="features/dashboard">Dashboard</mat-option>
+              <mat-option value="features/admin">Admin</mat-option>
+              <mat-option value="features/template">Template</mat-option>
+              <mat-option value="features/docs">Documentation</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Language</mat-label>
+            <mat-select>
+              <mat-option value="english-us">English (US)</mat-option>
+            </mat-select> </mat-form-field
+          >
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Notifications</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="display: flex; flex-direction: column; gap: 1rem">
+            <h4>Email Notifications:</h4>
+            <mat-checkbox>When New Users Join</mat-checkbox>
+            <mat-checkbox>When a New Project is Created</mat-checkbox>
+            <mat-checkbox>Comments on Posts</mat-checkbox>
+            <mat-checkbox>Condition #4</mat-checkbox>
+            <mat-checkbox>Condition #5</mat-checkbox>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="danger-card">
+        <mat-card-header>
+          <mat-card-title>Danger Zone</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-flat-button>Delete Account</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  
