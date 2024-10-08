@@ -1,0 +1,29 @@
+<ng-container *ngIf="role$ | async as role">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title
+        style="font-size: 1.5rem !important; font-weight: bold !important"
+        >{{ role.name }}</mat-card-title
+      >
+      <mat-card-subtitle
+        style="font-size: 1rem !important; font-weight: normal !important"
+        >{{ role.description }}</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <h3>Permissions</h3>
+      <div *ngFor="let permission of role.role_permissions">
+        <mat-checkbox
+        >
+          {{ permission.name }}
+        </mat-checkbox>
+        <p>{{ permission.description }}</p>
+
+  
+
+
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

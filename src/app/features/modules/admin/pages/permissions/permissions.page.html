@@ -1,1 +1,16 @@
-<h2 class="page-title">Manage Permissions</h2>
+<div class="page-container">
+  <h2 class="page-title">Manage Permissions</h2>
+
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let role of roles$ | async" [routerLink]="[role.id]" routerLinkActive="active">
+          {{ role.name }}
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

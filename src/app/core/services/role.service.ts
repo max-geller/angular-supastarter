@@ -21,6 +21,7 @@ export class RoleService {
       map(({ data, error }) => {
         if (error) throw error;
         return data as RoleInterface[];
+ 
       })
     );
   }
@@ -59,6 +60,21 @@ export class RoleService {
         .from('roles')
         .update(role)
         .eq('id', role.id)
+        .single()
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw error;
+        return data as RoleInterface;
+      })
+    );
+  }
+
+  getRoleById(id: number): Observable<RoleInterface> {
+    return from(
+      this.supabaseService.getClient()
+        .from('roles')
+        .select('*, role_permissions(*)')
+        .eq('id', id)
         .single()
     ).pipe(
       map(({ data, error }) => {

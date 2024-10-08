@@ -10,4 +10,17 @@ export interface RoleInterface {
   updated_at: string;
   created_by: string;
   updated_by: string;
+  role_permissions: RolePermissionInterface[];
+}
+
+export interface RolePermissionInterface {
+  id: number;
+  role_id: number;
+  permission_id: number;
+  name: string;
+  description: string;
+  created_at: string;
+  updated_at: string;
+  created_by: string;
+  updated_by: string;
 }

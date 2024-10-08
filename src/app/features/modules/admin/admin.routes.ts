@@ -51,5 +51,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/tenants/tenants.page').then((m) => m.TenantsPage),
   },
-    { path: 'user-details', loadComponent: () => import('./pages/users/pages/user-details/user-details.page').then((m) => m.UserDetailsPage) },
+  {
+    path: 'user-details',
+    loadComponent: () =>
+      import('./pages/users/pages/user-details/user-details.page').then(
+        (m) => m.UserDetailsPage
+      ),
+  },
+  {
+    path: 'permissions',
+    loadChildren: () =>
+      import('./pages/permissions/permissions.routes').then((m) => m.routes),
+  },
 ];
