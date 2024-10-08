@@ -55,6 +55,7 @@ export class InviteTenantDialog {
     this.inviteTenantForm = this.fb.group({
       name: ['', Validators.required],
       logo_url: [''],
+      email: ['', Validators.required],
     });
   }
 

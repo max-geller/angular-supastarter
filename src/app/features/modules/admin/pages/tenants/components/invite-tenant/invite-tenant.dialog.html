@@ -12,6 +12,13 @@
       <mat-label>Logo URL</mat-label>
       <input matInput formControlName="logo_url" />
     </mat-form-field>
+    <mat-form-field appearance="outline"> 
+      <mat-label>Tenant AdminEmail</mat-label>
+      <input matInput formControlName="email" required />
+      <mat-error *ngIf="inviteTenantForm.get('email')?.hasError('required')">
+        Email is required
+      </mat-error>
+    </mat-form-field>
     <mat-dialog-actions>
       <button mat-flat-button color="warn" type="button" (click)="onCancel()">
         Cancel
@@ -22,7 +29,7 @@
         type="submit"
         [disabled]="inviteTenantForm.invalid"
       >
-        Add Tenant
+        Invite Tenant
       </button>
     </mat-dialog-actions>
   </form>
