@@ -63,4 +63,5 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/permissions/permissions.routes').then((m) => m.routes),
   },
+    { path: 'billing', loadComponent: () => import('./pages/billing/billing.page').then((m) => m.BillingPage) },
 ];

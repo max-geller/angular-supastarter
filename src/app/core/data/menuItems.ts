@@ -39,6 +39,10 @@ export const mainMenu = [
         route: '/features/account/notifications',
       },
       {
+        name: 'Billing',
+        route: '/features/account/billing',
+      },
+      {
         name: 'User Settings ',
         route: '/features/account/settings',
       },
@@ -67,6 +71,10 @@ export const mainMenu = [
       {
         name: 'Activity',
         route: '/features/admin/activity',
+      },
+      {
+        name: 'Billing',
+        route: '/features/admin/billing',
       },
       {
         name: 'Permissions',

@@ -28,4 +28,5 @@ export const routes: Routes = [
         (m) => m.NotificationsPage
       ),
   },
+    { path: 'billing', loadComponent: () => import('./pages/billing/billing.page').then((m) => m.BillingPage) },
 ];
