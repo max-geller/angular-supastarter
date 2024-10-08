@@ -96,10 +96,14 @@ export class AdminService {
       map((response) => {
         if (response.error) {
           throw new Error(response.error.message);
+
         }
       }),
       catchError((error) => {
         console.error('Error deleting tenant:', error);
+        this.toastService.showToast(
+          'Error deleting tenant', 3000
+        );
         throw error;
       })
     );

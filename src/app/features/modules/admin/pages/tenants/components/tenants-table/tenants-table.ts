@@ -120,14 +120,12 @@ export class TenantsTableComponent implements AfterViewInit {
         if (confirmed) {
           this.adminService.deleteTenant(tenant.id).subscribe({
             next: () => {
-              this.toastService.showToast('Tenant deleted successfully');
+              this.toastService.showToast('Tenant deleted successfully', 3000);
               this.refreshTenants();
             },
             error: (error) => {
               console.error('Error deleting tenant:', error);
-              this.toastService.showToast(
-                'Error deleting tenant. Please try again.'
-              );
+              this.toastService.showToast('Error deleting tenant. Please try again.', 3000);
             },
           });
         }
