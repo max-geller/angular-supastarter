@@ -125,7 +125,7 @@ $light-theme: mat.define-theme(
       brand-family: "Roboto, sans-serif",
     ),
     density: (
-      scale: -5,
+      scale: -1,
     ),
   )
 );
@@ -142,7 +142,7 @@ $dark-theme: mat.define-theme(
       brand-family: "Roboto, sans-serif",
     ),
     density: (
-      scale: -5,
+      scale: -1,
     ),
   )
 );

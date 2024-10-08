@@ -11,15 +11,25 @@
   height: 3.2rem !important;
   align-items: end !important;
   padding-bottom: 0.35rem !important;
-  .mdc-floating-label {
-    font-size: 0.75rem !important;
-  }
-  .sidenav-button {
-    display: none !important; 
+  .left-container {
+    padding-top: 10px !important;
+    margin-bottom: -8px !important;
+    .mdc-floating-label {
+      font-size: 0.75rem !important;
+    }
+    .mat-mdc-select-value {
+      font-size: 1rem !important;
+      padding-top: 2px !important;
+    }
+    .mdc-notched-outline {
+      height: 35px !important;
+      margin-top: 10px !important;
+    }
+    .sidenav-button {
+      display: none !important;
+    }
   }
 }
-
-
 
 .toolbar-container {
   display: flex;
@@ -79,7 +89,6 @@
 }
 
 @media (max-width: 780px) {
-
   .logo-horizontal {
     display: none !important;
   }
