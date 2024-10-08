@@ -13,6 +13,7 @@
     .mdc-button--unelevated {
       background-color: mat.get-theme-color($theme, primary, 20) !important;
       color: mat.get-theme-color($theme, tertiary, 90) !important;
+
     }
     .user-name-button {
       color: mat.get-theme-color($theme, tertiary, 95) !important;
@@ -28,6 +29,7 @@
         background-color: mat.get-theme-color($theme, primary, 95) !important;
         color: mat.get-theme-color($theme, primary, 80) !important;
       }
+
     }
     .user-name-button {
       color: mat.get-theme-color($theme, tertiary, 30) !important;

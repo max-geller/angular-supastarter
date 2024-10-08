@@ -1,0 +1,18 @@
+.mat-drawer {
+  width: 200px;
+  background-color: #f0f0f0;
+  border-radius: 0px;
+
+}
+
+.example-container {
+  height: 550px;
+}
+
+mat-list-item {
+  height: 40px !important;
+  border-radius: 0px;
+  .mat-list-item-content {
+    border-radius: 0px !important;
+  }
+}

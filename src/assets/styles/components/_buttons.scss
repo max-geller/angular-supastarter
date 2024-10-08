@@ -1,5 +1,9 @@
 .mdc-button {
-  border-radius: 2px !important;
+  border-radius: 0px !important;
+  white-space: nowrap !important;
+
+  // Set Button Padding for All Button Styles
+  padding: 16px 20px !important;
 }
 
 .user-name-button {
@@ -7,3 +11,4 @@
   font-size: 1.0rem;
   padding: 0px 10px;
 }
+

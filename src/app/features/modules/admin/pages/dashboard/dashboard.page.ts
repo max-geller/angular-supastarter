@@ -10,7 +10,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-
 // Import Services
 import { UserService } from '../../../../../core/services/user.service';
 
@@ -42,15 +41,15 @@ export class DashboardPage implements OnInit {
   }
 
   openStaging(): void {
-    window.open('https://angular-18-staging.netlify.app/', '_blank');
+    window.open('https://angular-supastarter-staging.netlify.app/', '_blank');
   }
 
   openProduction(): void {
-    window.open('https://angular-18.netlify.app/', '_blank');
+    window.open('https://angular-supastarter.netlify.app/', '_blank');
   }
 
   openRepository(): void {
-    window.open('https://github.com/max-geller/angular-18-starter', '_blank');
+    window.open('https://github.com/max-geller/angular-supastarter', '_blank');
   }
 
   logCurrentUser(): void {
