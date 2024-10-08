@@ -31,7 +31,7 @@
             style="display: none"
             accept="image/*"
           />
-          <button mat-raised-button (click)="openAvatarDialog()">
+          <button mat-flat-button (click)="openAvatarDialog()">
             Change Avatar
           </button>
         </div>
@@ -58,11 +58,11 @@
         <mat-card-title>My Teams</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div class="team-info-content">
-          <button mat-button>Development</button>
-          <button mat-button>Estimating</button>
-          <button mat-button>Project Management</button>
-          <button mat-button>Preconstruction</button>
+        <div class="team-info-content" style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <button mat-raised-button>Development</button>
+          <button mat-raised-button>Estimating</button>
+          <button mat-raised-button>Project Management</button>
+          <button mat-raised-button>Preconstruction</button>
         </div>
       </mat-card-content>
     </mat-card>
