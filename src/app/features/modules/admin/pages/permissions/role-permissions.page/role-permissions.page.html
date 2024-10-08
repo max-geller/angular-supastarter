@@ -13,10 +13,54 @@
       </mat-card-header>
       <mat-card-content>
         <h3>Permissions</h3>
+
+        <mat-accordion multi>
+          <!-- Mat Panel Should Be Open By Default-->
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title> Application Permissions </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+              <mat-checkbox>Can Access Tenant Billing</mat-checkbox>
+              <p>Description</p>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Tenant Management Permissions </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+              <mat-checkbox>Can Access Tenant Billing</mat-checkbox>
+              <p>Description</p>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Database Permissions </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+              <mat-checkbox>Can Access Tenant Billing</mat-checkbox>
+              <p>Description</p>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Module Permissions </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+              <mat-checkbox>Can Access Tenant Billing</mat-checkbox>
+              <p>Description</p>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <!-- TODO: Finish this 
         <div *ngFor="let permission of role.role_permissions">
           <mat-checkbox> {{ permission.name }} </mat-checkbox>
           <p>{{ permission.description }}</p>
         </div>
+-->
       </mat-card-content>
     </mat-card>
   </ng-container>
