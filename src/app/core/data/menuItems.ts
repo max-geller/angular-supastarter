@@ -9,10 +9,6 @@ export const mainMenu = [
     route: '/features/template',
     menuItems: [
       {
-        name: 'Pages',
-        route: '/features/template/pages',
-      },
-      {
         name: 'Components',
         route: '/features/template/components',
       },

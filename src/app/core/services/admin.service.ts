@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable, from, switchMap, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-
 // Import Services
 import { SupabaseService } from './supabase.service';
 import { UserService } from './user.service';
-
+import { ToastService } from './toast.service';
 // Import Models
 import { TenantInterface } from '../models/tenant.model';
 import { UserInterface } from '../models/user.model';
@@ -17,7 +16,11 @@ import { UserInterface } from '../models/user.model';
   providedIn: 'root',
 })
 export class AdminService {
-  constructor(private supabase: SupabaseService, private userService: UserService) {}
+  constructor(
+    private supabase: SupabaseService,
+    private userService: UserService,
+    private toastService: ToastService
+  ) {}
 
   getAllTenants(): Observable<TenantInterface[]> {
     return from(
@@ -93,10 +96,14 @@ export class AdminService {
       map((response) => {
         if (response.error) {
           throw new Error(response.error.message);
+
         }
       }),
       catchError((error) => {
         console.error('Error deleting tenant:', error);
+        this.toastService.showToast(
+          'Error deleting tenant', 3000
+        );
         throw error;
       })
     );
@@ -148,7 +155,9 @@ export class AdminService {
   inviteUser(email: string, tenantId: string): Observable<string> {
     const redirectTo = `/sessions/register`;
     return from(
-      this.supabase.getClient().auth.admin.inviteUserByEmail(email, { redirectTo })
+      this.supabase
+        .getClient()
+        .auth.admin.inviteUserByEmail(email, { redirectTo })
     ).pipe(
       switchMap((response) => {
         if (response.error) {
@@ -157,23 +166,87 @@ export class AdminService {
         }
         if (response.data && response.data.user && response.data.user.id) {
           const userId = response.data.user.id;
-          console.log('User ID:', userId);
-          console.log('Email:', email);
-          console.log('Tenant ID:', tenantId);
+
           return from(
-            this.supabase.getClient()
+            this.supabase
+              .getClient()
               .from('users')
-              .upsert({ id: userId, email: email, tenant_id: tenantId }, { onConflict: 'id' })
+              .upsert(
+                { id: userId, email: email, tenant_id: tenantId },
+                { onConflict: 'id' }
+              )
           ).pipe(
             map((upsertResponse) => {
               if (upsertResponse.error) {
-                console.error('Error upserting user data:', upsertResponse.error);
+                console.error(
+                  'Error upserting user data:',
+                  upsertResponse.error
+                );
                 throw new Error(upsertResponse.error.message);
               }
+              this.toastService.showToast(
+                'User invited successfully', 3000
+              );
               return userId;
             })
           );
         } else {
+          throw new Error('User ID not found in the response');
+        }
+      }),
+      catchError((error) => {
+        this.toastService.showToast(
+          'Error inviting user', 3000
+        );
+        console.error('Error inviting user:', error);
+        throw error;
+      })
+    );
+  }
+
+  inviteTenant(email: string, tenantId: string): Observable<string> {
+    const redirectTo = `/sessions/register`;
+    return from(
+      this.supabase
+        .getClient()
+        .auth.admin.inviteUserByEmail(email, { redirectTo })
+    ).pipe(
+      switchMap((response) => {
+        if (response.error) {
+          console.error('Supabase error:', response.error);
+          throw new Error(response.error.message);
+        }
+        if (response.data && response.data.user && response.data.user.id) {
+          const userId = response.data.user.id;
+
+          return from(
+            this.supabase
+              .getClient()
+              .from('users')
+              .upsert(
+                // Automatically assign the role of TenantAdmin
+                { id: userId, email: email, tenant_id: tenantId, role_id: 2 },
+                { onConflict: 'id' }
+              )
+          ).pipe(
+            map((upsertResponse) => {
+              if (upsertResponse.error) {
+                console.error(
+                  'Error upserting user data:',
+                  upsertResponse.error
+                );
+                throw new Error(upsertResponse.error.message);
+              }
+              this.toastService.showToast(
+                'Tenant invited successfully', 3000
+              );
+              return userId;
+            })
+          );
+        } else {
+          this.toastService.showToast(
+            'Error inviting tenant', 3000
+          );
           throw new Error('User ID not found in the response');
         }
       }),
@@ -184,4 +257,3 @@ export class AdminService {
     );
   }
 }
-

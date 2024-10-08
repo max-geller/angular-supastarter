@@ -11,8 +11,8 @@
   @if mat.get-theme-type($theme) == dark {
     // Mat Flat Button:
     .mdc-button--unelevated {
-      background-color: mat.get-theme-color($theme, primary, 10) !important;
-      color: mat.get-theme-color($theme, tertiary, 100) !important;
+      background-color: mat.get-theme-color($theme, primary, 20) !important;
+      color: mat.get-theme-color($theme, tertiary, 90) !important;
     }
     .user-name-button {
       color: mat.get-theme-color($theme, tertiary, 95) !important;

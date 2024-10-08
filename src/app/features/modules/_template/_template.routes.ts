@@ -3,7 +3,7 @@ import type { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'pages',
+    redirectTo: 'components',
     pathMatch: 'full',
   },
   {
@@ -17,11 +17,6 @@ export const routes: Routes = [
     path: 'settings',
     loadComponent: () =>
       import('./pages/settings/settings.page').then((m) => m.SettingsPage),
-  },
-  {
-    path: 'pages',
-    loadComponent: () =>
-      import('./pages/pages/pages.page').then((m) => m.PagesPage),
   },
   {
     path: 'colors',
